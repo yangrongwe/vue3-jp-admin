@@ -1,0 +1,10 @@
+@import './variables.scss';
+.v-text-field {
+  .v-field--focused .v-field__outline {
+    color: $primary !important;
+    --v-field-border-width: 1px !important;
+  }
+}
+.v-list-item__spacer {
+  width: 15px !important;
+}

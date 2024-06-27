@@ -1,0 +1,4 @@
+@import './public.scss';
+@import '@mdi/font/css/materialdesignicons.css';
+@import './tailwind.css';
+@import './vuetify.scss';
