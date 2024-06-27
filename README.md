@@ -1,1 +1,1 @@
-Jp-adminはオープンソースで無料かつ開箱するためのバックグラウンド管理システムテンプレートである。ECMAScriptモジュール(ESM)仕様を完全に用いてコードを作成·組織し，最新のVue 3，Vite，Vuetify 3，TypeScript，Pinia，Tailwindcssなどの主流技術開発を用いた.
+Jp-adminはオープンソースで無料かつボックスを開くための管理システムテンプレートである。ECMAScriptモジュール(ESM)仕様を完全に用いてコードを作成·組織し，最新のVue 3，Vite，Vuetify 3，TypeScript，Pinia，Tailwindcssなどの主流技術開発を用いた.
