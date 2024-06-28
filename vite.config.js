@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+// import vueJsx from '@vitejs/plugin-vue-jsx';
 import path from 'path';
 import { viteMockServe } from 'vite-plugin-mock';
 
@@ -7,6 +8,7 @@ import { viteMockServe } from 'vite-plugin-mock';
 export default defineConfig({
   plugins: [
     vue(),
+
     viteMockServe({
       mockPath: 'mock',
       localEnabled: true,

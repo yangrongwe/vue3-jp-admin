@@ -13,20 +13,14 @@ router.beforeEach((to, from, next) => {
 
   if (authStore.isAuthenticated) {
     if (to.path === '/login') {
-      next({ path: '/' });
+      next();
     } else {
-      const hasRoles = authStore.roles && authStore.roles.length > 0;
-      if (hasRoles) {
+      const role = authStore.role;
+      if (to.meta.roles.indexOf(role) > -1) {
         next();
       } else {
-        try {
-          const roles = authStore.roles;
-          authStore.addDynamicRoutes(roles, router); // 确保传递 router 实例
-          next({ ...to, replace: true });
-        } catch (error) {
-          authStore.logout();
-          next(`/login?redirect=${to.path}`);
-        }
+        // 权没有访问权限
+        alert('没有访问权限');
       }
     }
   } else {

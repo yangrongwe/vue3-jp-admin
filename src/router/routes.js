@@ -1,5 +1,4 @@
 import Login from '@/views/Login.vue';
-import Dashboard from '@/views/Dashboard.vue';
 
 export const constantRoutes = [
   {
@@ -11,11 +10,18 @@ export const constantRoutes = [
   {
     path: '/',
     component: import('@/components/JpLayout/index.vue'),
+    redirect: '/dashboard',
     children: [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        component: Dashboard,
+        component: import('@/views/Dashboard.vue'),
+        meta: { roles: ['admin', 'user'] },
+      },
+      {
+        path: '/user/:id',
+        name: 'User',
+        component: import('@/views/Dashboard.vue'),
       },
       // 其他子路由
     ],
