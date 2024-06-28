@@ -19,6 +19,7 @@
     "resolveJsonModule": true,
     "noUnusedLocals": true, // 将未使用的局部变量视为错误
     "noUnusedParameters": true, // 将未使用的参数视为错误
+    "maxTsServerMemory": 4096,
     "lib": ["ESNext", "DOM"],
     "paths": {
       "@/*": ["src/*"],
