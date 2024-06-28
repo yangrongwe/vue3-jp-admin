@@ -1,7 +1,8 @@
 type menu = {
   title: string;
   icon: string;
-  route: string;
+  route?: string;
+  expanded?: boolean;
   children?: Array<subMenu>;
 };
 
@@ -11,4 +12,4 @@ type subMenu = {
   route: string;
 };
 
-export default menu;
+export type { menu, subMenu };

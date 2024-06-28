@@ -24,7 +24,7 @@ const loading = ref(false);
 const authStore = useAuthStore();
 const login = () => {
   const user = { name: 'John Doe' };
-  const roles = ['admin'];
+  const roles = 'admin';
   authStore.login(user, roles);
   router.push('/');
 };

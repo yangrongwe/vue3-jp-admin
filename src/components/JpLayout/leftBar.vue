@@ -65,7 +65,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type menu from './type.ts';
+import type { menu } from './type.ts';
 
 const rail = ref(false);
 // メニューのデフォルト展開項目
@@ -74,14 +74,14 @@ const router = useRouter();
 
 const menuItems = ref<Array<menu>>([
   {
-    title: '/Dashboard',
+    title: 'Dashboard',
     icon: 'mdi-view-dashboard',
     route: '/dashboard',
   },
   {
     title: 'Management',
     icon: 'mdi-folder',
-    expanded: false,
+    expanded: true,
     children: [
       { title: 'Users', icon: 'mdi-account', route: '/users' },
       { title: 'Settings', icon: 'mdi-cog', route: '/settings' },
