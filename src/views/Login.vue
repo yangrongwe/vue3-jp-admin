@@ -26,7 +26,7 @@ const login = () => {
   const user = { name: 'John Doe' };
   const roles = 'admin';
   authStore.login(user, roles);
-  router.push('/');
+  router.push('/dashboard');
 };
 const formOptions = reactive<JpFormOptions>({
   type: 'vuetify',

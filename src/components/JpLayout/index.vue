@@ -1,20 +1,17 @@
 <template>
   <v-app>
-    <left-bar></left-bar>
-    <v-app-bar color="app-bar-primary">
-      <v-toolbar-title>My App</v-toolbar-title>
-    </v-app-bar>
-    <v-main>
-      <router-view></router-view>
-    </v-main>
+    <jp-left-bar></jp-left-bar>
+    <jp-header-bar></jp-header-bar>
+    <jp-main></jp-main>
   </v-app>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import LeftBar from './leftBar.vue';
-
+import JpLeftBar from './JpLeftBar.vue';
+import JpHeaderBar from './JpHeaderBar.vue';
+import JpMain from './JpMain.vue';
 const drawer = ref(true);
 const router = useRouter();
 
