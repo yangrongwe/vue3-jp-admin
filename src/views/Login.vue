@@ -1,8 +1,8 @@
 <template>
   <div
-    class="tw-bg-[url('@/assets/login/bg.jpg')] tw-bg-cover tw-h-full tw-pt-52"
+    class="tw-bg-[url('@/assets/login/bg.jpg')] tw-bg-cover tw-h-screen tw-w-full tw-flex tw-justify-center tw-items-center"
   >
-    <v-card class="tw-w-[440px] tw-mx-auto login-card" elevation="2">
+    <v-card class="tw-w-[440px] tw-mx-auto  login-card " elevation="2">
       <jp-form :form-options="formOptions"></jp-form>
     </v-card>
   </div>
