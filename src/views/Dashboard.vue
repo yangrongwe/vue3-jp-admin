@@ -1,13 +1,13 @@
 <template>
-  <div class="dashboard">
-    <h1 class="text-3xl font-bold underline">Dashboard Page</h1>
-  </div>
+  <jp-main-area>
+    <div class="dashboard">
+      <h1 class="text-3xl font-bold underline">Dashboard Page</h1>
+    </div>
+</jp-main-area>
 </template>
 
-<script>
-export default {
-  name: 'Dashboard',
-};
+<script setup lang="ts">
+  import JpMainArea from "@/components/JpLayout/JpMainArea.vue"
 </script>
 
 <style scoped>

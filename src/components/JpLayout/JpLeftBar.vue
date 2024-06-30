@@ -2,7 +2,7 @@
   <v-navigation-drawer
     color="navigation-drawer-background"
     :rail="rail"
-    permanent
+    :permanent = "!mobile"
   >
     <v-list>
       <v-list-item
@@ -66,6 +66,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { menu } from './type.ts';
+import { useDisplay } from 'vuetify';
+const { mobile,name } = useDisplay();
 
 const rail = ref(false);
 // メニューのデフォルト展開項目

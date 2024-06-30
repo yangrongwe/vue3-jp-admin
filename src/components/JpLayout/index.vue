@@ -2,7 +2,6 @@
   <v-app>
     <jp-left-bar></jp-left-bar>
     <jp-header-bar></jp-header-bar>
-
     <jp-main></jp-main>
     <jp-footer-bar></jp-footer-bar>
   </v-app>
