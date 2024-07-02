@@ -24,6 +24,7 @@ async function loadModules() {
   // 添加 layout 路由，并将 childrenRoutes 作为其子路由
   routes.push({
     path: '/',
+    redirect:'/dashboard',
     component: () => import('@/components/JpLayout/index.vue'),
     children: childrenRoutes
   });
@@ -53,6 +54,7 @@ router.beforeEach((to, from, next) => {
       } else {
         // 权没有访问权限
         alert('没有访问权限');
+        next(false);
       }
     }
   } else {
