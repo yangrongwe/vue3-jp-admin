@@ -1,16 +1,18 @@
-import { MockMethod } from 'vite-plugin-mock';
+import { MockMethod, MockConfig } from 'vite-plugin-mock'
 
 export default [
   {
-    url: '/api/user',
-    method: 'get',
+    url: '/mock/userLogin',
+    method: 'post',
     response: () => {
       return {
-        code: 0,
         data: {
           name: 'John Doe',
           age: 25,
         },
+        errorCode:null,
+        errorMessage:'账户不存在'
+
       };
     },
   },
