@@ -19,6 +19,7 @@ async function loadModules() {
   });
 
   await Promise.all(promises);
+  localStorage.setItem("menuRoutes",JSON.stringify(childrenRoutes))
 
   // 添加 layout 路由，并将 childrenRoutes 作为其子路由
   routes.push({
@@ -45,8 +46,9 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login') {
       next();
     } else {
-      const role = authStore.role;
-      if (to.meta.roles?.indexOf(role) > -1) {
+      const role = authStore.role as string;
+      const roles = to.meta.roles as string[];
+      if (roles?.indexOf(role) > -1) {
         next();
       } else {
         // 权没有访问权限

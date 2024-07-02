@@ -1,5 +1,5 @@
 type menu = {
-  title: string;
+  name: string;
   icon: string;
   route?: string;
   expanded?: boolean;
@@ -9,7 +9,8 @@ type menu = {
 type subMenu = {
   title: string;
   icon: string;
-  route: string;
+  name: string;
+  unShow?:boolean;
 };
 
 export type { menu, subMenu };

@@ -29,7 +29,7 @@ const login = async () => {
     account:"admin",
     password:"123456"
   })
- 
+
   const user = { name: 'John Doe' };
   const roles = 'admin';
   authStore.login(user, roles);
