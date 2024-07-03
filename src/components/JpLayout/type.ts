@@ -1,6 +1,5 @@
 type menu = {
   name: string;
-
   path?: string;
   expanded?: boolean;
   meta?:routeMeta,
@@ -9,7 +8,6 @@ type menu = {
 
 type subMenu = {
   title: string;
-
   name: string;
   path: string;
   meta?:routeMeta,
