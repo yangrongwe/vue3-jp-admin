@@ -1,16 +1,25 @@
 type menu = {
   name: string;
-  icon: string;
-  route?: string;
+
+  path?: string;
   expanded?: boolean;
+  meta?:routeMeta,
   children?: Array<subMenu>;
 };
 
 type subMenu = {
   title: string;
-  icon: string;
+
   name: string;
-  unShow?:boolean;
+  path: string;
+  meta?:routeMeta,
 };
 
-export type { menu, subMenu };
+type routeMeta = {
+  icon?: string;
+  unShow?:boolean;
+  roles?:Array<string>;
+  rank?:number;
+}
+
+export type { menu, subMenu,routeMeta };

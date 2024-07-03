@@ -4,20 +4,18 @@ const userRoutes: RouteRecordRaw[] = [
   {
     path: '/user',
     name: 'user',
-    icon:'mdi-view-dashboard',
-    meta: { roles: ['admin', 'user'] },
+    meta: {rank:2,   icon:'mdi-view-dashboard',roles: ['admin', 'user']},
     children:[
       {
         path: '/profile',
         name: 'UserProfile',
-        icon:'mdi-view-dashboard',
+        meta: {   icon:'mdi-view-dashboard',unShow:true,roles:['guest']},
         component: () => import('@/views/user/Profile.vue'),
       },
       {
         path: '/list',
         name: 'UserList',
-        icon:'mdi-view-dashboard',
-        unShow:true,
+        meta: {   icon:'mdi-view-dashboard',unShow:false,roles:['admin']},
         component: () => import('@/views/user/UserList.vue'),
       }
     ]

@@ -22,32 +22,40 @@
     >
       <template v-for="menuItem in menuItems">
         <v-list-item
-          :prepend-icon="menuItem.icon"
+          v-if="!menuItem.children && !menuItem.meta.unShow"
+          :prepend-icon="menuItem.meta.icon"
           :title="menuItem.name"
           :value="menuItem.name"
           color="primary"
-          v-if="!menuItem.children"
+          @click="router.push(menuItem.path)"
         ></v-list-item>
 
-        <v-list-group :value="menuItem.name" v-else>
-          <template v-slot:activator="{ props }">
-            <v-list-item
-              v-bind="props"
-              :prepend-icon="menuItem.icon"
-              :title="menuItem.name"
-              @click.stop="rail = false"
-            ></v-list-item>
-          </template>
-          <template v-for="(subMenuItem, i) in menuItem.children" :key="i">
-            <v-list-item
-              style="padding-left: 45px !important"
-              v-if="!subMenuItem.unShow"
-              :prepend-icon="subMenuItem.icon"
-              :title="subMenuItem.name"
-              :value="subMenuItem.name"
-            ></v-list-item
-          ></template>
-        </v-list-group>
+        <template v-else>
+          <v-list-group
+            :value="menuItem.name"
+           v-if="menuItem.children && menuItem.children.length !=0"
+          >
+            <template v-slot:activator="{ props }">
+              <v-list-item
+                v-bind="props"
+                :prepend-icon="menuItem.meta.icon"
+                :title="menuItem.name"
+                v-if="!menuItem.meta.unShow"
+                @click.stop="rail = false"
+              ></v-list-item>
+            </template>
+            <template v-for="(subMenuItem, i) in menuItem.children" :key="i">
+              <v-list-item
+                v-if="!subMenuItem.meta.unShow"
+                class="sub-menu-pl"
+                :prepend-icon="subMenuItem.meta.icon"
+                :title="subMenuItem.name"
+                :value="subMenuItem.name"
+                @click="router.push(menuItem.path)"
+              ></v-list-item
+            ></template>
+          </v-list-group>
+        </template>
       </template>
     </v-list>
 
@@ -63,7 +71,7 @@
   </v-navigation-drawer>
 </template>
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { menu } from './type.ts';
 import { useDisplay } from 'vuetify';
@@ -75,30 +83,11 @@ const rail = ref(false);
 // メニューのデフォルト展開項目
 const expandedMenuItem = ref<string[]>([]);
 const router = useRouter();
-
-// const menuItems = ref<Array<menu>>([
-//   {
-//     title: 'Dashboard',
-//     icon: 'mdi-view-dashboard',
-//     route: '/dashboard',
-//   },
-//   {
-//     title: 'Management',
-//     icon: 'mdi-folder',
-//     expanded: true,
-//     children: [
-//       { title: 'Users', icon: 'mdi-account', route: '/users' },
-//       { title: 'Settings', icon: 'mdi-cog', route: '/settings' },
-//     ],
-//   },
-// ]);
-const menuRoutes = JSON.parse(localStorage.getItem('menuRoutes'));
-const menuItems = [] as Array<menu>;
-menuRoutes.forEach((element) => {
-  menuItems.push({
-    ...element,
-    icon: 'mdi-view-dashboard',
-  });
-});
-console.log('menuRoutes', JSON.parse(localStorage.getItem('menuRoutes')));
+const menuItems = authStore.filteredMenuRoutes;
+console.log('menuItems', menuItems);
 </script>
+<style lang="scss" scoped>
+.sub-menu-pl {
+  padding-left: 46px !important;
+}
+</style>

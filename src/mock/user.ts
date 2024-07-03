@@ -6,10 +6,14 @@ export default [
     method: 'post',
     response: () => {
       return {
-        data: {
-          name: 'John Doe',
-          age: 25,
-        },
+      
+          user:{
+            name: 'John Doe',
+            age: 25,
+            role:'admin'
+          },
+        
+      
         errorCode:null,
         errorMessage:'账户不存在'
 

@@ -1,30 +1,39 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
 
+function filterRoutesByRole(routes, role: string) {
+  return routes
+    .filter(route => !route.meta.roles || route.meta.roles.includes(role))
+    .map(route => {
+      if (route.children) {
+        route.children = filterRoutesByRole(route.children, role);
+      }
+      return route;
+    });
+}
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     isAuthenticated: false as boolean,
     user: null,
-    role: null,
     menuRoutes: [] as RouteRecordRaw[],
   }),
   // 持久化 自动放到localstorage中
   persist: true,
   actions: {
-    login(user, role) {
+    login(user) {
       this.isAuthenticated = true;
       this.user = user;
-      this.role = role;
+      this.menuRoutes = JSON.parse(localStorage.getItem('menuRoutes'));
     },
     logout() {
       this.isAuthenticated = false;
       this.user = null;
-      this.role = null;
+      this.menuRoutes = [];
     },
-    setMenuRoutes(routes: RouteRecordRaw[]) {
-    
-      this.menuRoutes = routes;
-      console.log( " this.menuRoutes ",this.menuRoutes )
+  },
+  getters: {
+    filteredMenuRoutes: (state) => {
+      return filterRoutesByRole(state.menuRoutes, state.user.role);
     },
   },
 });

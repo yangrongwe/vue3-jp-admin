@@ -30,9 +30,7 @@ const login = async () => {
     password:"123456"
   })
 
-  const user = { name: 'John Doe' };
-  const roles = 'admin';
-  authStore.login(user, roles);
+  authStore.login(response.user);
   router.push('/dashboard');
 };
 const formOptions = reactive<JpFormOptions>({

@@ -1,7 +1,9 @@
-import { createRouter, createWebHistory,RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
 
-const modules = import.meta.glob<{ default: RouteRecordRaw[] }>('./modules/*.ts');
+const modules = import.meta.glob<{ default: RouteRecordRaw[] }>(
+  './modules/*.ts'
+);
 let routes: RouteRecordRaw[] = [];
 
 async function loadModules() {
@@ -19,14 +21,22 @@ async function loadModules() {
   });
 
   await Promise.all(promises);
-  localStorage.setItem("menuRoutes",JSON.stringify(childrenRoutes))
+
+  // 根据 rank 排序 childrenRoutes
+  childrenRoutes.sort((a, b) => {
+    const rankA = a.meta?.rank || 0;
+    const rankB = b.meta?.rank || 0;
+    return rankA - rankB;
+  });
+
+  localStorage.setItem('menuRoutes', JSON.stringify(childrenRoutes));
 
   // 添加 layout 路由，并将 childrenRoutes 作为其子路由
   routes.push({
     path: '/',
-    redirect:'/dashboard',
+    redirect: '/dashboard',
     component: () => import('@/components/JpLayout/index.vue'),
-    children: childrenRoutes
+    children: childrenRoutes,
   });
 }
 
@@ -43,11 +53,10 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
 
   if (authStore.isAuthenticated) {
-  
     if (to.path === '/login') {
       next();
     } else {
-      const role = authStore.role as string;
+      const role = authStore.user.role as string;
       const roles = to.meta.roles as string[];
       if (roles?.indexOf(role) > -1) {
         next();
@@ -59,7 +68,6 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (whiteList.includes(to.path)) {
-      
       next();
     } else {
       next(`/login?redirect=${to.path}`);
