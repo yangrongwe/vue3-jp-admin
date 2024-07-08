@@ -1,7 +1,15 @@
 <template>
   <v-app-bar color="app-bar-primary">
     <template v-slot:prepend>
-      <v-app-bar-nav-icon v-if="mobile"></v-app-bar-nav-icon>
+      <div v-if="mobile">
+        <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-btn icon="mdi mdi-format-list-bulleted" v-bind="props"> </v-btn>
+          </template>
+
+          <menu-list></menu-list>
+        </v-menu>
+      </div>
     </template>
 
     <!-- <v-app-bar-title> -->
@@ -23,12 +31,8 @@
   </v-app-bar>
 </template>
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
 import { useDisplay } from 'vuetify';
-const { mobile,name } = useDisplay();
+import MenuList from './menu/index.vue';
 
-onMounted(() => {
-  console.log(mobile.value,name.value); // false
-});
-
+const { mobile } = useDisplay();
 </script>
