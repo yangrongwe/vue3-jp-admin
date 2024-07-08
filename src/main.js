@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+<<<<<<< HEAD
 import './styles/index.css';
 import App from './App.vue';
 
@@ -16,6 +17,20 @@ const pinia = createPinia();
 
 app.config.globalProperties.$apiService = apiService;
 app.config.globalProperties.$t = i18n.global.t;
+=======
+import App from './App.vue';
+
+import router from './router';
+import vuetify from './plugins/vuetify/index.ts';
+import pinia from './plugins/pinia/index.ts';
+import i18n from './plugins/i18n.ts';
+import VXETable from 'vxe-table';
+
+import './styles/index.css';
+import 'vxe-table/lib/style.css';
+
+const app = createApp(App);
+>>>>>>> jp_dev
 
 app.use(pinia);
 app.use(router);

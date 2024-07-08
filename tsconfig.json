@@ -17,6 +17,11 @@
     "baseUrl": ".",
     "allowJs": false,
     "resolveJsonModule": true,
+<<<<<<< HEAD
+=======
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+>>>>>>> jp_dev
     "lib": ["ESNext", "DOM"],
     "paths": {
       "@/*": ["src/*"],

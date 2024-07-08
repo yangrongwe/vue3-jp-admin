@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { MockMethod } from 'vite-plugin-mock';
 
 export default [
@@ -11,6 +12,27 @@ export default [
           name: 'John Doe',
           age: 25,
         },
+=======
+import { MockMethod, MockConfig } from 'vite-plugin-mock'
+
+export default [
+  {
+    url: '/mock/userLogin',
+    method: 'post',
+    response: () => {
+      return {
+      
+          user:{
+            name: 'John Doe',
+            age: 25,
+            role:'admin'
+          },
+        
+      
+        errorCode:null,
+        errorMessage:'账户不存在'
+
+>>>>>>> jp_dev
       };
     },
   },

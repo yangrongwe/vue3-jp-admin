@@ -1,5 +1,6 @@
 <template>
   <v-app>
+<<<<<<< HEAD
     <v-navigation-drawer
       v-model="drawer"
       color="navigation-drawer-background"
@@ -61,12 +62,19 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+=======
+    <jp-left-bar></jp-left-bar>
+    <jp-header-bar></jp-header-bar>
+    <jp-main></jp-main>
+    <jp-footer-bar></jp-footer-bar>
+>>>>>>> jp_dev
   </v-app>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+<<<<<<< HEAD
 
 const drawer = ref(true);
 const rail = ref(true);
@@ -94,6 +102,14 @@ const menuItems = ref([
     ],
   },
 ]);
+=======
+import JpLeftBar from './JpLeftBar.vue';
+import JpHeaderBar from './JpHeaderBar.vue';
+import JpFooterBar from './JpFooterBar.vue';
+import JpMain from './JpMain.vue';
+const drawer = ref(true);
+const router = useRouter();
+>>>>>>> jp_dev
 
 const toggleExpand = (item) => {
   item.expanded = !item.expanded;
