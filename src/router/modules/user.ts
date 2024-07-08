@@ -1,10 +1,11 @@
 import { RouteRecordRaw } from 'vue-router';
+import { user } from '../rank';
 
 const userRoutes: RouteRecordRaw[] = [
   {
     path: '/user',
     name: 'user',
-    meta: { rank: 2, icon: 'mdi-view-dashboard', roles: ['admin', 'user'] },
+    meta: { rank: user, icon: 'mdi-view-dashboard', roles: ['admin', 'user'] },
     component: () => import('@/components/EmptyComponent.vue'),
     redirect: '/user/list',
     children: [
