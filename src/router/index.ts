@@ -58,14 +58,13 @@ router.beforeEach((to, from, next) => {
     } else {
       const role = authStore.user.role as string;
       const roles = to.meta.roles as string[];
-      // if (roles?.indexOf(role) > -1) {
-      //   next();
-      // } else {
-      //   // 权没有访问权限
-      //   alert('没有访问权限');
-      //   next(false);
-      // }
-      next();
+      if (roles?.indexOf(role) > -1) {
+        next();
+      } else {
+        // 权没有访问权限
+        alert('没有访问权限');
+        next(false);
+      }
     }
   } else {
     if (whiteList.includes(to.path)) {

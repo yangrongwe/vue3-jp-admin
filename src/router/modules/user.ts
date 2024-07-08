@@ -11,7 +11,7 @@ const userRoutes: RouteRecordRaw[] = [
       {
         path: 'profile',
         name: 'UserProfile',
-        meta: { icon: 'mdi-view-dashboard', unShow: false, roles: ['admin'] },
+        meta: { icon: 'mdi-view-dashboard', unShow: true, roles: ['guest'] },
         component: () => import('@/views/user/Profile.vue'),
       },
       {
