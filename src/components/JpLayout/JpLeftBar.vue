@@ -33,7 +33,7 @@
         <template v-else>
           <v-list-group
             :value="menuItem.name"
-           v-if="menuItem.children && menuItem.children.length !=0"
+            v-if="menuItem.children && menuItem.children.length != 0"
           >
             <template v-slot:activator="{ props }">
               <v-list-item
@@ -51,7 +51,7 @@
                 :prepend-icon="subMenuItem.meta.icon"
                 :title="subMenuItem.name"
                 :value="subMenuItem.name"
-                @click="router.push(menuItem.path)"
+                @click="router.push(menuItem.path + '/' + subMenuItem.path)"
               ></v-list-item
             ></template>
           </v-list-group>
