@@ -24,8 +24,8 @@ async function loadModules() {
 
   // 根据 rank 排序 childrenRoutes
   childrenRoutes.sort((a, b) => {
-    const rankA:number = a.meta?.rank as number || 0;
-    const rankB:number  = b.meta?.rank as number || 0;
+    const rankA: number = (a.meta?.rank as number) || 0;
+    const rankB: number = (b.meta?.rank as number) || 0;
     return rankA - rankB;
   });
 
