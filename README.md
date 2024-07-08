@@ -1,6 +1,6 @@
-# プロジェクト名
+# vue-jp-admin
 
-プロジェクト概要：プロジェクトの機能と技術スタックの簡単な紹介。
+プロジェクト概要：vue-jp-adminは、オープンソースで無料で、即座に使用可能なミドルオフィスおよび管理システムのテンプレートです。すべてのコードはECMAScriptモジュール（ESM）規格に基づいて書かれ、最新のVue3、Vite、Vuetify、VxeTable、TypeScript、Pinia、Tailwind CSSなどの主要技術を使用して開発されています。
 
 ## 技術スタック
 
@@ -28,7 +28,7 @@ pnpm i
 pnpm run serve
 ```
 
-# 連絡先(技術支援)
+## 連絡先(技術支援)
 
 メール: yangrongwei1996@gmail.com
 WeChat: 13196848849
