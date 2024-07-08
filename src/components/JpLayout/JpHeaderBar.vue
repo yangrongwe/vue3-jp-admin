@@ -2,7 +2,7 @@
   <v-app-bar color="app-bar-primary">
     <template v-slot:prepend>
       <div v-if="mobile">
-        <v-menu>
+        <v-menu width="200">
           <template v-slot:activator="{ props }">
             <v-btn icon="mdi mdi-format-list-bulleted" v-bind="props"> </v-btn>
           </template>
