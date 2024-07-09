@@ -1,11 +1,11 @@
 <template>
-  <v-form v-bind="$attrs" class="tw-px-12 tw-pt-8 tw-py-12">
+  <v-form v-bind="$attrs" class="tw-px-12 tw-pt-1 tw-py-12">
     <template v-for="item in formOptions.formItems">
       <div v-if="item.itemType == 'image'">
         <v-img
           :width="item.width"
           :src="item.imagePath"
-          class="tw-mx-auto tw-mt-5"
+          class="tw-mx-auto"
         ></v-img>
       </div>
       <div

@@ -32,5 +32,5 @@ import { ref } from 'vue';
 import MenuList from './menu/index.vue';
 import { useDisplay } from 'vuetify';
 const { mobile } = useDisplay();
-const rail = ref(false);
+const rail = ref<boolean>(false);
 </script>

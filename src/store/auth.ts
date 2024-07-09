@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
-
+import { User } from '@/types/index';
 function filterRoutesByRole(routes, role: string) {
   return routes
-    .filter(route => !route.meta.roles || route.meta.roles.includes(role))
-    .map(route => {
+    .filter((route) => !route.meta.roles || route.meta.roles.includes(role))
+    .map((route) => {
       if (route.children) {
         route.children = filterRoutesByRole(route.children, role);
       }
@@ -14,7 +14,7 @@ function filterRoutesByRole(routes, role: string) {
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     isAuthenticated: false as boolean,
-    user: null,
+    user: null as User,
     menuRoutes: [] as RouteRecordRaw[],
   }),
   // 持久化 自动放到localstorage中

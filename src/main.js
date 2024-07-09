@@ -4,7 +4,7 @@ import App from './App.vue';
 import router from './router';
 import vuetify from './plugins/vuetify/index.ts';
 import pinia from './plugins/pinia/index.ts';
-import i18n from './plugins/i18n.ts';
+import i18n from './plugins/i18n/i18n.ts';
 import VXETable from 'vxe-table';
 
 import './styles/index.css';

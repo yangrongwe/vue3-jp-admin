@@ -1,4 +1,9 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios';
+import axios, {
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError,
+  AxiosRequestConfig,
+} from 'axios';
 
 class ApiService {
   private axiosInstance: AxiosInstance;
@@ -14,11 +19,11 @@ class ApiService {
     this.setupInterceptors();
   }
 
-  // 配置拦截器
+  // インターセプターを設定する
   private setupInterceptors() {
     this.axiosInstance.interceptors.request.use(
       (config) => {
-        // 在发送请求之前做些什么，例如加入 token
+        // リクエストを送信する前に、トークンなどを追加する
         const token = this.getToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
@@ -26,41 +31,48 @@ class ApiService {
         return config;
       },
       (error: AxiosError) => {
-        // 处理请求错误
+        // リクエストエラーを処理する
         return Promise.reject(error);
       }
     );
 
     this.axiosInstance.interceptors.response.use(
       (response: AxiosResponse) => {
-        // 检查响应数据
+        // レスポンスデータをチェックする
         if (response.data && response.data.errorCode) {
-          // 假设业务错误信息包含在 response.data.errorCode 和 response.data.errorMessage 中
+          // ビジネスエラー情報が response.data.errorCode と response.data.errorMessage に含まれると仮定する
           const businessError = {
             code: response.data.errorCode,
             message: response.data.errorMessage,
           };
           return Promise.reject(businessError);
         }
-        return response; // 确保返回完整的响应对象
+        return response; // 完全なレスポンスオブジェクトを返す
       },
       (error: AxiosError) => {
-        // 处理响应错误
+        // レスポンスエラーを処理する
         this.handleError(error);
         return Promise.reject(error);
       }
     );
   }
 
-  // 获取 Token 方法（假设 token 保存在 localStorage 中）
+  // トークンを取得するメソッド（トークンは localStorage に保存されていると仮定する）
   private getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  // GET 请求方法
-  public async get<T>(url: string, params?: any, config?: AxiosRequestConfig): Promise<T> {
+  // GET リクエストメソッド
+  public async get<T>(
+    url: string,
+    params?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.get<T>(url, { params, ...config });
+      const response: AxiosResponse<T> = await this.axiosInstance.get<T>(url, {
+        params,
+        ...config,
+      });
       return response.data;
     } catch (error) {
       this.handleError(error);
@@ -68,10 +80,18 @@ class ApiService {
     }
   }
 
-  // POST 请求方法
-  public async post<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<T> {
+  // POST リクエストメソッド
+  public async post<T>(
+    url: string,
+    data: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.post<T>(url, data, config);
+      const response: AxiosResponse<T> = await this.axiosInstance.post<T>(
+        url,
+        data,
+        config
+      );
       return response.data;
     } catch (error) {
       this.handleError(error);
@@ -79,10 +99,18 @@ class ApiService {
     }
   }
 
-  // PUT 请求方法
-  public async put<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<T> {
+  // PUT リクエストメソッド
+  public async put<T>(
+    url: string,
+    data: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.put<T>(url, data, config);
+      const response: AxiosResponse<T> = await this.axiosInstance.put<T>(
+        url,
+        data,
+        config
+      );
       return response.data;
     } catch (error) {
       this.handleError(error);
@@ -90,10 +118,13 @@ class ApiService {
     }
   }
 
-  // DELETE 请求方法
+  // DELETE リクエストメソッド
   public async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.delete<T>(url, config);
+      const response: AxiosResponse<T> = await this.axiosInstance.delete<T>(
+        url,
+        config
+      );
       return response.data;
     } catch (error) {
       this.handleError(error);
@@ -101,27 +132,27 @@ class ApiService {
     }
   }
 
-  // 处理错误方法
+  // エラーを処理するメソッド
   private handleError(error: AxiosError | any): void {
     if (axios.isAxiosError(error)) {
-      console.error('请求错误:', error.message);
+      console.error('リクエストエラー:', error.message);
       if (error.response) {
-        console.error('状态码:', error.response.status);
-        console.error('响应数据:', error.response.data);
+        console.error('ステータスコード:', error.response.status);
+        console.error('レスポンスデータ:', error.response.data);
       }
     } else if (error && error.code && error.message) {
-      // 处理业务错误
-      console.error('业务错误代码:', error.code);
-      console.error('业务错误信息:', error.message);
-      alert(`错误代码: ${error.code}, 错误信息: ${error.message}`);
+      // ビジネスエラーを処理する
+      console.error('ビジネスエラーコード:', error.code);
+      console.error('ビジネスエラーメッセージ:', error.message);
+      alert(`エラーコード: ${error.code}, エラーメッセージ: ${error.message}`);
     } else {
-      console.error('未知错误:', error);
+      console.error('未知のエラー:', error);
     }
   }
 }
 
-// 创建一个单例对象，以便在整个应用程序中共享同一个实例
-const baseURL = ''; // 请根据实际情况设置 baseURL
+// アプリケーション全体で同じインスタンスを共有するためにシングルトンオブジェクトを作成する
+const baseURL = ''; // 実際の状況に応じて baseURL を設定してください
 const apiService = new ApiService(baseURL);
 
 export default apiService;

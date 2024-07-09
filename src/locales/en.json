@@ -1,3 +1,11 @@
 {
+  "title": {
+    "dashboard": "Dashboard",
+    "user": {
+      "manage": "UserManage",
+      "list": "UserList",
+      "profile": "UserProfile"
+    }
+  },
   "greeting": "Hello!"
 }
