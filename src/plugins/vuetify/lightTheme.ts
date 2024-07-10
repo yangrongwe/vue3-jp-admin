@@ -19,6 +19,9 @@ const lightTheme: ThemeDefinition = {
     info: '#409eff',
     success: '#4CAF50',
     warning: '#FB8C00',
+    // 主界面tab颜色
+    'tab-color': '#409eff',
+    'tab-slider-color': '#409eff',
   },
   variables: {
     'border-color': '#000000',
