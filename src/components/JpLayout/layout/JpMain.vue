@@ -7,15 +7,10 @@
         align-tabs="left"
         color="tab-color"
         slider-color="tab-slider-color"
-        style="height: 35px"
-        class="tw-mb-3"
+        class="tw-mb-3 custom-tabs"
       >
         <template v-for="(item, index) in tabs" :key="index">
-          <v-tab
-            :value="item.value"
-            class="tw-mr-2 tw-bg-gray-200"
-            style="height: 35px"
-          >
+          <v-tab :value="item.value" class="tw-mr-2 tw-bg-gray-200 custom-tabs">
             <div class="tw-h-full tw-flex tw-justify-center tw-content-center">
               <div class="tw-mr-2">{{ item.title }}</div>
               <v-icon icon="mdi mdi-close"></v-icon>
@@ -29,28 +24,17 @@
   </v-main>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-const tab = ref<string>(null);
-const tabs = reactive([
-  {
-    value: '1',
-    title: 'tab01',
-  },
-  {
-    value: '2',
-    title: 'tab02',
-  },
-  {
-    value: '3',
-    title: 'tab03',
-  },
-  {
-    value: '4',
-    title: 'tab04',
-  },
-  {
-    value: '5',
-    title: 'tab05',
-  },
-]);
+import { computed } from 'vue';
+import { useTabsStore } from '@/store/tabs';
+const tabsStore = useTabsStore();
+const tab = computed({
+  get: () => tabsStore.selectedTab,
+  set: (value) => tabsStore.setSelectedTab(value),
+});
+const tabs = computed(() => tabsStore.getTabs);
 </script>
+<style lang="scss">
+.custom-tabs {
+  height: 35px !important;
+}
+</style>
