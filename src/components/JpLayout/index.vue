@@ -10,10 +10,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import JpLeftBar from './JpLeftBar.vue';
-import JpHeaderBar from './JpHeaderBar.vue';
-import JpFooterBar from './JpFooterBar.vue';
-import JpMain from './JpMain.vue';
+import JpLeftBar from './layout/JpLeftBar.vue';
+import JpHeaderBar from './layout/JpHeaderBar.vue';
+import JpFooterBar from './layout/JpFooterBar.vue';
+import JpMain from './layout/JpMain.vue';
 const drawer = ref(true);
 const router = useRouter();
 

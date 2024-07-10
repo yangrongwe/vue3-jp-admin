@@ -32,7 +32,7 @@
 </template>
 <script setup lang="ts">
 import { useDisplay } from 'vuetify';
-import MenuList from './menu/index.vue';
+import MenuList from '../menu/index.vue';
 
 const { mobile } = useDisplay();
 </script>

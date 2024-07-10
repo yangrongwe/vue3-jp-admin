@@ -29,7 +29,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import MenuList from './menu/index.vue';
+import MenuList from '../menu/index.vue';
 import { useDisplay } from 'vuetify';
 const { mobile } = useDisplay();
 const rail = ref<boolean>(false);

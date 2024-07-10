@@ -36,10 +36,10 @@ const items = reactive([
     disabled: false,
     href: 'breadcrumbs_link_1',
   },
-]);</script>
+]);
+</script>
 <style lang="scss">
-  .jp-main-area{
-    padding: 6px 24px !important;
-  }
+.jp-main-area {
+  padding: 6px 24px !important;
+}
 </style>
-
