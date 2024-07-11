@@ -17,7 +17,6 @@ export const useAuthStore = defineStore('auth', {
     user: null as User,
     menuRoutes: [] as RouteRecordRaw[],
   }),
-  // 持久化 自动放到localstorage中
   persist: true,
   actions: {
     login(user) {

@@ -14,7 +14,7 @@ export const useTabsStore = defineStore('tabs', {
     ] as Tab[],
     selectedTab: '/dashboard' as string,
   }),
-
+  persist: true,
   actions: {
     setTabs(title: string, path: string) {
       if (!this.tabs.some((tab) => tab.value === path)) {

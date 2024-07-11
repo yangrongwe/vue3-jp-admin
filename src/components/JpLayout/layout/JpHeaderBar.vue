@@ -10,18 +10,15 @@
           <menu-list></menu-list>
         </v-menu>
       </div>
+      <v-breadcrumbs :items="breadcrumbs">
+        <template v-slot:title="{ item }">
+          {{ item.title }}
+        </template>
+      </v-breadcrumbs>
     </template>
-
-    <!-- <v-app-bar-title> -->
-    <!-- <v-breadcrumbs :items="items">
-    <template v-slot:title="{ item }">
-      {{ item.title.toUpperCase() }}
-    </template>
-  </v-breadcrumbs> -->
-    <!-- </v-app-bar-title> -->
 
     <template v-slot:default>
-      <div>123003-とんかつ一番（いちぱん）</div>
+      <div v-if="!mobile">123003-とんかつ一番（いちぱん）</div>
     </template>
 
     <template v-slot:append>
@@ -40,15 +37,17 @@
           show-arrows
           align-tabs="left"
           color="tab-color"
+          bg-color="tab-bg-color"
           slider-color="tab-slider-color"
           class="custom-tabs"
+          selected-class="tab-selected-bg-color"
         >
           <!-- すべてのタブを反復処理してレンダリング -->
           <template v-for="(item, index) in tabs" :key="index">
             <!-- 個々のタブ -->
             <v-tab
               :value="item.value"
-              class="custom-tabs tw-border-r-[1px]"
+              class="custom-tabs"
               @click="navigateTo(item.value)"
             >
               <!-- タブのコンテンツ -->
@@ -71,12 +70,13 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify';
 import MenuList from '../menu/index.vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useTabsStore } from '@/store/tabs';
 import { computed } from 'vue';
 
 const tabsStore = useTabsStore(); // カスタムのタブストアを使用
 const router = useRouter(); // Vue Router を使用
+const route = useRoute(); // 現在のルートを取得
 
 const tab = computed({
   get: () => tabsStore.selectedTab, // 現在選択中のタブを取得
@@ -99,12 +99,26 @@ const removeTab = (path: string) => {
     router.push(tabsStore.selectedTab); // 現在のタブが削除され、タブがまだある場合、次のタブに移動
   }
 };
-
+// 現在のルートパスに基づいてパンくずリストを生成する
+const breadcrumbs = computed(() => {
+  const items = route.matched
+    .filter((matchedRoute) => matchedRoute.path !== '/')
+    .map((matchedRoute) => {
+      return {
+        title: matchedRoute.meta.title || matchedRoute.name,
+        // to: { name: matchedRoute.name },
+      };
+    });
+  return items;
+});
 const { mobile } = useDisplay();
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .custom-tabs {
   height: 40px !important;
+}
+.tab-selected-bg-color {
+  background-color: rgba(var(--v-theme-tab-selected-bg-color)) !important;
 }
 </style>
