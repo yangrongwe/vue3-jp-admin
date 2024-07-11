@@ -1,8 +1,8 @@
 <template>
   <!-- メインコンテンツ領域 -->
-  <v-main class="tw-h-full" :style="{ '--v-layout-bottom': '0px' }">
+  <v-main class="tw-bg-slate-100">
     <!-- コンテンツコンテナ -->
-    <div class="tw-px-6 tw-pt-6 tw-pb-24 tw-bg-slate-100 tw-h-full">
+    <div class="tw-px-6 tw-pt-6">
       <!-- Vuetify の Tabs コンポーネント -->
       <v-tabs
         v-model="tab"
@@ -10,7 +10,7 @@
         align-tabs="left"
         color="tab-color"
         slider-color="tab-slider-color"
-        class="tw-mb-3 custom-tabs"
+        class="tw-mb-3 custom-tabs tw-pl-2"
       >
         <!-- すべてのタブを反復処理してレンダリング -->
         <template v-for="(item, index) in tabs" :key="index">
@@ -34,6 +34,7 @@
 
       <!-- Vue Router のビュー コンテナ -->
       <router-view></router-view>
+      <jp-footer-bar></jp-footer-bar>
     </div>
   </v-main>
 </template>
@@ -42,6 +43,7 @@
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useTabsStore } from '@/store/tabs';
+import JpFooterBar from './JpFooterBar.vue';
 
 const tabsStore = useTabsStore(); // カスタムのタブストアを使用
 const router = useRouter(); // Vue Router を使用

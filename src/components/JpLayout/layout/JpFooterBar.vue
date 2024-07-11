@@ -1,7 +1,7 @@
 <template>
-  <v-bottom-navigation class="jp-footer">
+  <div class="tw-flex tw-justify-center tw-align-center tw-mt-8 tw-mb-2">
     {{ footerText }}
-  </v-bottom-navigation>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';

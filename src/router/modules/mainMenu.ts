@@ -12,7 +12,7 @@ const mainMenuRoutes: RouteRecordRaw[] = [
       icon: 'mdi-view-dashboard',
       roles: ['admin', 'user'],
     },
-    component: () => import('@/views/dashboard/Dashboard.vue'),
+    component: () => import('@/views/dashboard/index.vue'),
   },
   {
     path: '/user1',

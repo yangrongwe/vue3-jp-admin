@@ -3,7 +3,6 @@
     <jp-left-bar></jp-left-bar>
     <jp-header-bar></jp-header-bar>
     <jp-main></jp-main>
-    <jp-footer-bar></jp-footer-bar>
   </v-app>
 </template>
 
@@ -12,7 +11,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import JpLeftBar from './layout/JpLeftBar.vue';
 import JpHeaderBar from './layout/JpHeaderBar.vue';
-import JpFooterBar from './layout/JpFooterBar.vue';
+
 import JpMain from './layout/JpMain.vue';
 const drawer = ref(true);
 const router = useRouter();
