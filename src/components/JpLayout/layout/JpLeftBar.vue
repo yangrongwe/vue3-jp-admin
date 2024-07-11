@@ -15,13 +15,8 @@
     <v-divider></v-divider>
 
     <menu-list
-      @mouseover="
-        () => {
-          if (rail) {
-            rail = false;
-          }
-        }
-      "
+      @mouseover="changeRail('focus')"
+      @railChange="changeRail"
     ></menu-list>
 
     <template v-slot:append>
@@ -41,4 +36,13 @@ import MenuList from '../menu/index.vue';
 import { useDisplay } from 'vuetify';
 const { mobile } = useDisplay();
 const rail = ref<boolean>(false);
+const changeRail = (type?: string) => {
+  if (type === 'focus') {
+    if (rail.value) {
+      rail.value = false;
+    }
+  } else {
+    rail.value = false;
+  }
+};
 </script>

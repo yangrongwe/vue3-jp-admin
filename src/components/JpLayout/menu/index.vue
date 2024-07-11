@@ -47,11 +47,13 @@
 </template>
 
 <script setup lang="tsx">
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
 import { useTabsStore } from '@/store/tabs';
 import { RouteRecordRaw } from 'vue-router';
+
+const emits = defineEmits(['railChange']);
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -59,6 +61,14 @@ const tabsStore = useTabsStore();
 const expandedMenuItem = ref<string[]>([]);
 const selectedMenu = ref<string[]>(['/dashboard']);
 const menuItems: RouteRecordRaw[] = authStore.filteredMenuRoutes;
+
+watch(
+  () => tabsStore.selectedTab,
+  () => {
+    emits('railChange');
+  },
+  { deep: true }
+);
 
 // tabの変化に伴いメニューも変化する
 watchEffect(() => {
