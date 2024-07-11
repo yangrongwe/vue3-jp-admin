@@ -42,7 +42,8 @@ const changeRail = (type?: string) => {
       rail.value = false;
     }
   } else {
-    rail.value = false;
+    // タブをクリックすると左側のメニューが開きます。
+    // rail.value = false;
   }
 };
 </script>
