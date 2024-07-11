@@ -28,10 +28,15 @@ export const useTabsStore = defineStore('tabs', {
     setSelectedTab(path: string) {
       this.selectedTab = path;
     },
-    deleteTab(path: string) {
+    removeTab(path: string) {
       const index = this.tabs.findIndex((tab) => tab.value === path);
-      if (index !== -1) {
+      if (index !== -1 && this.tabs.length > 1) {
+        // Ensure there's always at least one tab
         this.tabs.splice(index, 1);
+        if (this.selectedTab === path) {
+          const nextTab = this.tabs[index] || this.tabs[index - 1];
+          this.selectedTab = nextTab ? nextTab.value : '';
+        }
       }
     },
   },
