@@ -14,7 +14,15 @@
 
     <v-divider></v-divider>
 
-    <menu-list></menu-list>
+    <menu-list
+      @mouseover="
+        () => {
+          if (rail) {
+            rail = false;
+          }
+        }
+      "
+    ></menu-list>
 
     <template v-slot:append>
       <div class="tw-border-t-2 tw-border-l-zinc-300">

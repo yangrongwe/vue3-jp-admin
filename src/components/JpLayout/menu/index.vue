@@ -28,7 +28,6 @@
               v-bind="props"
               :prepend-icon="menuItem.meta.icon"
               :title="menuItem.meta.title"
-              @click.stop="rail = false"
             ></v-list-item>
           </template>
           <template v-for="(subMenuItem, i) in menuItem.children" :key="i">
@@ -57,7 +56,6 @@ import { RouteRecordRaw } from 'vue-router';
 const router = useRouter();
 const authStore = useAuthStore();
 const tabsStore = useTabsStore();
-const rail = ref<boolean>(false);
 const expandedMenuItem = ref<string[]>([]);
 const selectedMenu = ref<string[]>(['/dashboard']);
 const menuItems: RouteRecordRaw[] = authStore.filteredMenuRoutes;
