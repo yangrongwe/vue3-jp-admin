@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "strict": false,
     "jsx": "preserve",
@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
+    "noEmit": true,
     "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
@@ -20,7 +21,7 @@
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["esnext", "dom"],
     "paths": {
       "@/*": ["src/*"],
       "@build/*": ["build/*"]
