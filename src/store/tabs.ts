@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import router from '@/router';
+import { $t } from '@/plugins/i18n/i18nUtils';
 
 type Tab = {
   value: string;
@@ -10,7 +11,7 @@ export const useTabsStore = defineStore('tabs', {
     tabs: [
       {
         value: '/dashboard',
-        title: 'Dashboard',
+        title: $t('title.dashboard'),
       },
     ] as Tab[],
     selectedTab: '/dashboard' as string,

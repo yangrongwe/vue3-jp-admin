@@ -12,7 +12,7 @@
       ></v-list-item>
     </v-list>
 
-    <v-divider></v-divider>
+    <v-divider opacity="0.85"></v-divider>
 
     <menu-list
       @mouseover="changeRail('focus')"
@@ -47,3 +47,4 @@ const changeRail = (type?: string) => {
   }
 };
 </script>
+<style lang="scss" scoped></style>

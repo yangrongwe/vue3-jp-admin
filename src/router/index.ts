@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
+import { useTabsStore } from '@/store/tabs';
+import { $t } from '@/plugins/i18n/i18nUtils';
 
 // モジュールのルートファイルをロードする
 const modules = import.meta.glob<{ default: RouteRecordRaw[] }>(
@@ -46,9 +48,19 @@ const router = createRouter({
 // ルートガードを設定する
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
+  const tabsStore = useTabsStore();
   // ログインしているかどうかを判断する
   if (authStore.isAuthenticated) {
     if (to.path === '/login') {
+      authStore.isAuthenticated = false;
+      authStore.user = null;
+      tabsStore.selectedTab = '/dashboard';
+      tabsStore.tabs = [
+        {
+          value: '/dashboard',
+          title: $t('title.dashboard'),
+        },
+      ];
       next();
     } else {
       // ユーザーがURLにアクセスできるかどうかを確認します。

@@ -31,7 +31,7 @@
 
     <template v-slot:extension>
       <div class="tw-flex tw-flex-col tw-w-full">
-        <v-divider class="tw-w-full" opacity="1"></v-divider>
+        <v-divider class="tw-w-full" opacity="0.85"></v-divider>
         <v-tabs
           v-model="tab"
           show-arrows

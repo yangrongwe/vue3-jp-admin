@@ -14,7 +14,11 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "axios": "^1.7.2",
+    "echarts": "^5.5.1",
     "element-plus": "^2.7.6",
     "mockjs": "^1.1.0",
     "pinia": "^2.1.7",
