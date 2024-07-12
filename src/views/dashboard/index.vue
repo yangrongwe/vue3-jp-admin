@@ -2,56 +2,6 @@
   <div class="dashboard">
     <div class="tw-flex tw-flex-wrap tw-justify-start">
       <div class="tw-mb-4 tw-max-w-[1000px]">
-        <div class="tw-flex tw-flex-wrap tw-mb-4">
-          <v-card color="primary" variant="elevated" class="mx-auto">
-            <v-card-item>
-              <div>
-                <div class="text-overline mb-1">elevated</div>
-                <div class="text-h6 mb-1">Headline</div>
-                <div class="text-caption">
-                  Greyhound divisely hello coldly fonwderfully
-                </div>
-              </div>
-            </v-card-item>
-
-            <v-card-actions>
-              <v-btn> Button </v-btn>
-            </v-card-actions>
-          </v-card>
-
-          <v-card color="primary" variant="outlined" class="mx-auto">
-            <v-card-item>
-              <div>
-                <div class="text-overline mb-1">outlined</div>
-                <div class="text-h6 mb-1">Headline</div>
-                <div class="text-caption">
-                  Greyhound divisely hello coldly fonwderfully
-                </div>
-              </div>
-            </v-card-item>
-
-            <v-card-actions>
-              <v-btn> Button </v-btn>
-            </v-card-actions>
-          </v-card>
-
-          <v-card color="primary" variant="tonal" class="mx-auto">
-            <v-card-item>
-              <div>
-                <div class="text-overline mb-1">outlined</div>
-                <div class="text-h6 mb-1">Headline</div>
-                <div class="text-caption">
-                  Greyhound divisely hello coldly fonwderfully
-                </div>
-              </div>
-            </v-card-item>
-
-            <v-card-actions>
-              <v-btn> Button </v-btn>
-            </v-card-actions>
-          </v-card>
-        </div>
-
         <v-expansion-panels variant="popout" class="tw-mb-4">
           <v-expansion-panel
             v-for="(message, i) in messages"
@@ -107,6 +57,56 @@
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
+        <div class="tw-flex tw-flex-wrap tw-mb-4">
+          <v-card color="primary" variant="elevated" class="mx-auto">
+            <v-card-item>
+              <div>
+                <div class="text-overline mb-1">elevated</div>
+                <div class="text-h6 mb-1">Headline</div>
+                <div class="text-caption">
+                  Greyhound divisely hello coldly fonwderfully
+                </div>
+              </div>
+            </v-card-item>
+
+            <v-card-actions>
+              <v-btn> Button </v-btn>
+            </v-card-actions>
+          </v-card>
+
+          <v-card color="primary" variant="outlined" class="mx-auto">
+            <v-card-item>
+              <div>
+                <div class="text-overline mb-1">outlined</div>
+                <div class="text-h6 mb-1">Headline</div>
+                <div class="text-caption">
+                  Greyhound divisely hello coldly fonwderfully
+                </div>
+              </div>
+            </v-card-item>
+
+            <v-card-actions>
+              <v-btn> Button </v-btn>
+            </v-card-actions>
+          </v-card>
+
+          <v-card color="primary" variant="tonal" class="mx-auto">
+            <v-card-item>
+              <div>
+                <div class="text-overline mb-1">outlined</div>
+                <div class="text-h6 mb-1">Headline</div>
+                <div class="text-caption">
+                  Greyhound divisely hello coldly fonwderfully
+                </div>
+              </div>
+            </v-card-item>
+
+            <v-card-actions>
+              <v-btn> Button </v-btn>
+            </v-card-actions>
+          </v-card>
+        </div>
+
         <div>
           <v-card
             class="tw-ml-4 tw-px-4 tw-mb-4 tw-min-w-[430px] tw-max-w-[1000px] tw-py-10"
