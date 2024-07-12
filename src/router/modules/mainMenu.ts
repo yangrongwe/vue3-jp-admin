@@ -24,7 +24,7 @@ const mainMenuRoutes: RouteRecordRaw[] = [
       roles: ['admin', 'user'],
     },
     component: () => import('@/components/EmptyComponent.vue'),
-    redirect: '/user/list1',
+    redirect: '/user1/list1',
     children: [
       {
         path: 'profile1',

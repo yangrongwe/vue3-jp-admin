@@ -10,7 +10,7 @@
           <menu-list></menu-list>
         </v-menu>
       </div>
-      <v-breadcrumbs :items="breadcrumbs">
+      <v-breadcrumbs :items="breadcrumbs" @click="breadcrumbsClick">
         <template v-slot:title="{ item }">
           {{ item.title }}
         </template>
@@ -106,11 +106,18 @@ const breadcrumbs = computed(() => {
     .map((matchedRoute) => {
       return {
         title: matchedRoute.meta.title || matchedRoute.name,
-        // to: { name: matchedRoute.name },
+        to: { name: matchedRoute.name },
       };
     });
   return items;
 });
+
+// breadcrumbsの変更を監視し、選択したラベルを更新
+const breadcrumbsClick = () => {
+  const currentPath = router.currentRoute.value.path;
+  tabsStore.setSelectedTab(currentPath);
+};
+
 const { mobile } = useDisplay();
 </script>
 

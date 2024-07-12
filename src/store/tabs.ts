@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import router from '@/router';
 
 type Tab = {
   value: string;
@@ -26,6 +27,16 @@ export const useTabsStore = defineStore('tabs', {
       this.setSelectedTab(path);
     },
     setSelectedTab(path: string) {
+      const existingTab = this.tabs.find((tab) => tab.value === path);
+      if (!existingTab) {
+        const route = router.getRoutes().find((route) => route.path === path);
+        if (route) {
+          this.tabs.push({
+            value: path,
+            title: route.meta.title || 'Untitled', // 使用页面的标题，如果没有则使用默认标题
+          });
+        }
+      }
       this.selectedTab = path;
     },
     removeTab(path: string) {
