@@ -4,14 +4,14 @@ import { useTabsStore } from '@/store/tabs';
 import { $t } from '@/plugins/i18n/i18nUtils';
 
 // モジュールのルートファイルをロードする
-const modules = import.meta.glob<{ default: RouteRecordRaw[] }>(
-  './modules/*.ts'
-);
+const modules: Record<string, any> = import.meta.glob('./modules/*.ts', {
+  eager: true,
+});
 let routes: RouteRecordRaw[] = [];
 async function loadModules() {
   const childrenRoutes: RouteRecordRaw[] = [];
   const promises = Object.keys(modules).map(async (path) => {
-    const mod = await modules[path]();
+    const mod = await modules[path];
     if (path.includes('auth')) {
       routes.push(...mod.default);
     } else {
