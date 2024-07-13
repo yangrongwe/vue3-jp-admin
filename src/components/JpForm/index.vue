@@ -69,7 +69,7 @@
           variant="tonal"
           block
           @click="item.clickMethod"
-          >123
+          >{{ item.itemName }}
         </v-btn>
       </div>
     </template>
