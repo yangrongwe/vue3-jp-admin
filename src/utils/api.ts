@@ -152,7 +152,7 @@ class ApiService {
 }
 
 // アプリケーション全体で同じインスタンスを共有するためにシングルトンオブジェクトを作成する
-const baseURL = ''; // 実際の状況に応じて baseURL を設定してください
+const baseURL = 'wxcorer.com'; // 実際の状況に応じて baseURL を設定してください
 const apiService = new ApiService(baseURL);
 
 export default apiService;
