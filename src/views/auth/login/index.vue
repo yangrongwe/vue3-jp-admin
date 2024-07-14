@@ -59,7 +59,7 @@ const formOptions = reactive<JpFormOptions>({
     },
     {
       itemType: 'button',
-      itemName: 'Log IN',
+      itemName: 'Login',
       clickMethod: login,
     },
   ],
