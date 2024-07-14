@@ -22,13 +22,12 @@ RUN pnpm run build
 # 使用官方的Nginx镜像作为运行阶段的基础镜像
 FROM nginx
 
-RUN mkdir -p /etc/nginx/ssl
 
 # 创建一个目录来存放应用文件
 RUN mkdir /usr/share/nginx/html/app
 
-# COPY /etc/nginx/ssl/www.wxcorer.com_bundle.crt /usr/share/nginx/html/app/www.wxcorer.com_bundle.crt
-# COPY /etc/nginx/ssl/www.wxcorer.com.key /usr/share/nginx/html/app/www.wxcorer.com.key
+COPY /etc/nginx/ssl/www.wxcorer.com_bundle.crt /usr/share/nginx/html/app/www.wxcorer.com_bundle.crt
+COPY /etc/nginx/ssl/www.wxcorer.com.key /usr/share/nginx/html/app/www.wxcorer.com.key
 
 # 复制构建好的文件到Nginx的html目录中
 COPY --from=build /app/dist /usr/share/nginx/html/app
