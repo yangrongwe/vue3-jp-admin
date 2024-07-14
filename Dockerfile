@@ -27,8 +27,8 @@ RUN mkdir -p /etc/nginx/ssl
 # 创建一个目录来存放应用文件
 RUN mkdir /usr/share/nginx/html/app
 
-COPY /etc/nginx/ssl/www.wxcorer.com_bundle.crt /usr/share/nginx/html/app/www.wxcorer.com_bundle.crt
-COPY /etc/nginx/ssl/www.wxcorer.com.key /usr/share/nginx/html/app/www.wxcorer.com.key
+# COPY /etc/nginx/ssl/www.wxcorer.com_bundle.crt /usr/share/nginx/html/app/www.wxcorer.com_bundle.crt
+# COPY /etc/nginx/ssl/www.wxcorer.com.key /usr/share/nginx/html/app/www.wxcorer.com.key
 
 # 复制构建好的文件到Nginx的html目录中
 COPY --from=build /app/dist /usr/share/nginx/html/app
@@ -37,7 +37,7 @@ COPY --from=build /app/dist /usr/share/nginx/html/app
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # 暴露端口
-EXPOSE 80
+EXPOSE 80 443
 
 # 启动Nginx
 CMD ["nginx", "-g", "daemon off;"]
