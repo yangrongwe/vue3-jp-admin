@@ -7,8 +7,9 @@ vue-jp-admin（ヴュー ジェイピー アドミン）は、日本市場向け
 ## プレビュー
 
 https://wxcorer.com
-![pc01](https://github.com/user-attachments/assets/e2073199-fe97-43e8-83ce-a568f208761d)
-![mb01](https://github.com/user-attachments/assets/fda4ccab-b75e-4f62-9b97-58ba57b6775e)
+![pc01](https://github.com/user-attachments/assets/6f24fb3e-d6f6-467e-9511-2ade9f88f998)
+![pc02](https://github.com/user-attachments/assets/774bf90a-ade8-4858-b848-531a36736be8)
+![mb01](https://github.com/user-attachments/assets/b658c5eb-06b2-41f3-bb1c-84e4c092a27b)
 
 
 ## 特徴と利点
