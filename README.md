@@ -1,11 +1,16 @@
 # vue-jp-admin
 
-日本でソフトウェア開発を長年行っており、常にVue 3.0を基盤とした迅速な開発を支援するバックエンド管理システムを作りたいと考えていました。多くの優れたオープンソースプロジェクトを見てきましたが、日本市場向けの専用プロジェクトが見当たらなかったため、自分自身でバックエンドシステムの開発を始めました。それがvue-jp-adminの始まりです。
+日本で長年ソフトウェア開発を行ってきた中で、Vue 3.0を基盤とした迅速な開発を支援するバックエンド管理システムを作りたいと考えていました。多くの優れたオープンソースプロジェクトが存在するものの、日本市場向けの専用プロジェクトが見当たらなかったため、自分自身でバックエンドシステムの開発を始めました。それがvue-jp-adminの始まりです。
 
 vue-jp-admin（ヴュー ジェイピー アドミン）は、日本市場向けに設計されたVue 3.0ベースの管理システムです。このシステムは、ウェブサイト管理、会員センター、CMS、CRM、OAなど、さまざまなWebアプリケーションの迅速な開発を支援します。
 
+## プレビュー
+
+https://wxcorer.com
+
 ## 特徴と利点
 
+- **同時兼容移動端和PC端**：レスポンシブデザインにより、モバイル端末とPC端末の両方で快適に使用可能。
 - **日本市場向け最適化**：日本の開発者と市場のニーズを深く理解し、設計および最適化された機能セット。
 - **シンプルで使いやすい**：フロントエンドのコードは精緻に封装されており、使いやすさがあり、エラーの発生確率が低いです。
 - **クロスプラットフォーム対応**：モバイルクライアントアクセスをサポートし、異なるデバイスでの互換性と一貫したユーザーエクスペリエンスを確保します。
@@ -29,6 +34,7 @@ vue-jp-adminは、以下のような幅広いシーンで活用可能です：
 ## 技術スタック
 
 - **Vue 3**: ユーザーインターフェース構築のためのプログレッシブJavaScriptフレームワーク
+- **Vuetify 3**: Vue.js用のマテリアルデザインコンポーネントフレームワーク
 - **Vite**: 次世代のフロントエンドツールチェーン、迅速なビルド
 - **Pinia**: 次世代の状態管理ライブラリ
 - **TypeScript**: JavaScriptのスーパーセットで、静的タイプを提供
@@ -39,16 +45,33 @@ vue-jp-adminは、以下のような幅広いシーンで活用可能です：
 ### プロジェクトのクローン
 
 ```bash
-git clone https://github.com/yangrongwe/jp-admin.git
+git clone https://github.com/yangrongwe/vue3-jp-admin.git
 
 pnpm i
 
 pnpm run serve
 ```
 
+### Docker
+
+```bash
+git clone https://github.com/yangrongwe/vue3-jp-admin.git
+
+sudo docker build -t jp-admin .
+
+sudo docker run -d -p 8080:80 jp-admin
+```
+
+## その他APIドキュメント
+
+アイコン: https://pictogrammers.com/library/mdi/
+Pinia: https://pinia.vuejs.org/
+Vuetify: https://vuetifyjs.com/
+Tailwind: https://tailwindcss.com/
+VxeTable: https://vxetable.cn/
+Vue: https://vuejs.org/
+
 ## 連絡先(技術支援)
 
 メール: yangrongwei1996@gmail.com
 WeChat: 13196848849
-
-https://pictogrammers.com/library/mdi/
