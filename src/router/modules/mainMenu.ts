@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import { dashboard } from '../rank';
+import { dashboard, components, methods } from '../rank';
 import { $t } from '@/plugins/i18n/i18nUtils';
 
 const mainMenuRoutes: RouteRecordRaw[] = [
@@ -15,38 +15,96 @@ const mainMenuRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/dashboard/index.vue'),
   },
   {
-    path: '/user1',
-    name: 'user1',
+    path: '/components',
+    name: 'components',
     meta: {
-      title: $t('title.user.manage') + 1,
-      rank: 3,
-      icon: 'mdi-view-dashboard',
+      title: $t('title.components.manage'),
+      rank: components,
+      icon: ' mdi-animation',
       roles: ['admin', 'user'],
     },
     component: () => import('@/components/EmptyComponent.vue'),
-    redirect: '/user1/list1',
+    redirect: '/components/table',
     children: [
       {
-        path: 'profile1',
-        name: 'UserProfile1',
+        path: 'table',
+        name: 'table',
         meta: {
-          title: $t('title.user.profile') + 1,
-          icon: 'mdi-view-dashboard',
+          title: $t('title.components.table'),
+          icon: 'mdi-table',
           unShow: false,
-          roles: ['admin'],
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/table/index.vue'),
+      },
+      {
+        path: 'form',
+        name: 'form',
+        meta: {
+          title: $t('title.components.form'),
+          icon: 'mdi-list-box',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/form/index.vue'),
+      },
+      {
+        path: 'pdf',
+        name: 'pdf',
+        meta: {
+          title: $t('title.components.pdf'),
+          icon: 'mdi-file-pdf-box',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/pdf/index.vue'),
+      },
+    ],
+  },
+  {
+    path: '/methods',
+    name: 'methods',
+    meta: {
+      title: $t('title.methods.manage'),
+      rank: components,
+      icon: 'mdi-calendar-sync-outline',
+      roles: ['admin', 'user'],
+    },
+    component: () => import('@/components/EmptyComponent.vue'),
+    redirect: '/methods/table',
+    children: [
+      {
+        path: 'time',
+        name: 'time',
+        meta: {
+          title: $t('title.methods.time'),
+          icon: 'mdi-clock-time-eight',
+          unShow: false,
+          roles: ['admin', 'user'],
         },
         component: () => import('@/views/user/Profile.vue'),
       },
       {
-        path: 'list1',
-        name: 'UserList1',
+        path: 'text',
+        name: 'text',
         meta: {
-          title: $t('title.user.list') + 1,
-          icon: 'mdi-view-dashboard',
+          title: $t('title.methods.text'),
+          icon: 'mdi-text-shadow',
           unShow: false,
-          roles: ['admin'],
+          roles: ['admin', 'user'],
         },
-        component: () => import('@/views/user/UserList.vue'),
+        component: () => import('@/views/user/Profile.vue'),
+      },
+      {
+        path: 'money',
+        name: 'money',
+        meta: {
+          title: $t('title.methods.money'),
+          icon: 'mdi-cash',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/user/Profile.vue'),
       },
     ],
   },

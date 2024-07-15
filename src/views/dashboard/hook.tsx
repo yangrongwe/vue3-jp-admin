@@ -1,4 +1,5 @@
 import { ref, reactive } from 'vue';
+import { VxeGridProps } from 'vxe-table';
 const chartRadaOptions = ref({
   title: {},
   legend: {
@@ -172,7 +173,26 @@ const messages = [
     exceprt: 'New deals available, Join Today',
   },
 ];
-import { VxeUI, VxeGridProps } from 'vxe-table';
+const messages2 = [
+  {
+    from: 'You',
+    message: `Sure, I'll see you later.`,
+    time: '10:42am',
+    color: 'deep-purple-lighten-1',
+  },
+  {
+    from: 'John Doe',
+    message: 'Yeah, sure. Does 1:00pm work?',
+    time: '10:37am',
+    color: 'green',
+  },
+  {
+    from: 'You',
+    message: 'Did you still want to grab lunch today?',
+    time: '9:47am',
+    color: 'deep-purple-lighten-1',
+  },
+];
 
 interface RowVO {
   id: number;
@@ -301,6 +321,8 @@ const gridOptions = reactive<VxeGridProps<RowVO>>({
     },
   ],
 });
+const value = [423, 446, 675, 510, 590, 610, 760];
+const labels = ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm'];
 const lorem =
   'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.';
 export {
@@ -311,4 +333,7 @@ export {
   messages,
   lorem,
   lights,
+  value,
+  labels,
+  messages2,
 };

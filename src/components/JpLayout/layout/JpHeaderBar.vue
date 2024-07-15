@@ -18,7 +18,7 @@
     </template>
 
     <template v-slot:default>
-      <div v-if="!mobile">123003-とんかつ一番（いちぱん）</div>
+      <div v-if="!mobile">Vue3-JP-ADMIN</div>
     </template>
 
     <template v-slot:append>

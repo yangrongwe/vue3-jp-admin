@@ -26,8 +26,8 @@ FROM nginx
 # 创建一个目录来存放应用文件
 RUN mkdir /usr/share/nginx/html/app
 
-COPY ./www.wxcorer.com_bundle.crt /usr/share/nginx/html/app/www.wxcorer.com_bundle.crt
-COPY ./www.wxcorer.com.key /usr/share/nginx/html/app/www.wxcorer.com.key
+# COPY ./www.wxcorer.com_bundle.crt /usr/share/nginx/html/app/www.wxcorer.com_bundle.crt
+# COPY ./www.wxcorer.com.key /usr/share/nginx/html/app/www.wxcorer.com.key
 
 # 复制构建好的文件到Nginx的html目录中
 COPY --from=build /app/dist /usr/share/nginx/html/app

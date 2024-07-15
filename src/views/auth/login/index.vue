@@ -9,21 +9,32 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import JpForm from '@/components/JpForm/index.vue';
 import type JpFormOptions from '@/components/JpForm/type.ts';
 import logo from '@/assets/logo/logo_transparent.png';
 import { useAuthStore } from '@/store/auth';
 import { useRouter } from 'vue-router';
-import { userLogin } from '@/api/user';
+// import { userLogin } from '@/api/user';
 const router = useRouter();
 const authStore = useAuthStore();
 
 const login = async () => {
-  const response: any = await userLogin({
-    account: 'admin',
-    password: '123456',
-  });
+  // const response: any = await userLogin({
+  //   account: 'admin',
+  //   password: '123456',
+  // });
+  const response = {
+    user: {
+      userId: '1001',
+      name: '田中　太郎',
+      email: 'taro@wxcorer.com',
+      avatar: 'https://randomuser.me/api/portraits/women/85.jpg',
+      role: 'admin',
+    },
+    errorCode: null,
+    errorMessage: '',
+  };
 
   if (!response.errorCode) {
     authStore.login(response.user);

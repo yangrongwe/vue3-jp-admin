@@ -5,6 +5,18 @@
       "manage": "ユーザー管理",
       "list": "ユーザーリスト",
       "profile": "ユーザープロファイル"
+    },
+    "components": {
+      "manage": "コンポーネント管理",
+      "table": "テーブル",
+      "form": "フォーム",
+      "pdf": "PDF"
+    },
+    "methods": {
+      "manage": "共通関数管理",
+      "time": "日付フォーマット",
+      "text": "文字列フォーマット",
+      "money": "金額フォーマット"
     }
   },
   "input": {

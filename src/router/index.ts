@@ -31,7 +31,7 @@ async function loadModules() {
   localStorage.setItem('menuRoutes', JSON.stringify(childrenRoutes));
   routes.push({
     path: '/',
-    redirect: '/dashboard',
+    redirect: '/login',
     component: () => import('@/components/JpLayout/index.vue'),
     children: childrenRoutes,
   });
