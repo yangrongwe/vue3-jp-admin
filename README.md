@@ -7,6 +7,9 @@ vue-jp-admin（ヴュー ジェイピー アドミン）は、日本市場向け
 ## プレビュー
 
 https://wxcorer.com
+![pc01](https://github.com/user-attachments/assets/e2073199-fe97-43e8-83ce-a568f208761d)
+![mb01](https://github.com/user-attachments/assets/fda4ccab-b75e-4f62-9b97-58ba57b6775e)
+
 
 ## 特徴と利点
 
@@ -74,3 +77,5 @@ Vue: https://vuejs.org/
 
 メール: yangrongwei1996@gmail.com
 WeChat: 13196848849
+
+
