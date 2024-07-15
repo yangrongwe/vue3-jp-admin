@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <div class="tw-flex tw-flex-wrap tw-justify-start">
-      <div class="tw-mb-4 tw-max-w-[1000px] tw-min-w-[400px]">
+      <div class="tw-mb-4 tw-max-w-[1000px] tw-min-w-[350px]">
         <v-expansion-panels variant="popout" class="tw-mb-4">
           <v-expansion-panel
             v-for="(message, i) in messages"
@@ -60,30 +60,26 @@
 
         <div class="tw-w-full tw-flex tw-flex-wrap tw-justify-between">
           <v-card
-            class="tw-basis-1/2 tw-py-10 tw-mb-4 tw-max-w-[480px] tw-min-w-[450px]"
+            class="tw-basis-1/2 tw-py-10 tw-mb-4 tw-max-w-[480px] tw-min-w-[350px]"
           >
             <JpEcharts :options="chartOptions" />
           </v-card>
 
           <v-card
-            class="tw-px-4 tw-basis-1/2 tw-py-10 tw-mb-4 tw-max-w-[480px] tw-min-w-[450px]"
+            class="tw-px-4 tw-basis-1/2 tw-py-10 tw-mb-4 tw-max-w-[480px] tw-min-w-[350px]"
           >
             <JpEcharts :options="chartRadaOptions" />
           </v-card>
         </div>
 
         <div class="tw-w-full">
-          <v-card class="tw-px-4 tw-mb-4 tw-py-10">
+          <v-card class="tw-mb-4 tw-py-10 tw-min-w-[350px]">
             <JpEcharts :options="option" />
           </v-card>
         </div>
-
-        <!-- <div>
-          <vxe-grid v-bind="gridOptions"></vxe-grid>
-        </div> -->
       </div>
-      <div class="tw-mb-4 tw-mx-4">
-        <v-card class="mx-auto mb-4" min-width="400px">
+      <div :class="mobile ? 'tw-mb-4' : 'tw-mb-4 tw-ml-4'">
+        <v-card class="mb-4 tw-mx-auto tw-max-w-[350px]">
           <v-img
             :aspect-ratio="18 / 7"
             src="	https://cdn.zekkei-japan.jp/images/articles/157bde2830ee9985ed50d6c388273dc9.jpg"
@@ -99,7 +95,7 @@
             </div>
 
             <div
-              class="tw-text-base tw-text-wrap tw-max-w-[400px] tw-text-zinc-400"
+              class="tw-text-base tw-text-wrap tw-max-w-[350px] tw-text-zinc-400"
             >
               {{ t('views.dashboard.welcomeCard.text') }}
             </div>
@@ -125,7 +121,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card class="mx-auto" min-width="400px">
+        <v-card class="tw-mx-auto tw-max-w-[350px]">
           <v-img
             color="surface-variant"
             height="140"
@@ -178,7 +174,6 @@
 import {
   messages2,
   option,
-  labels,
   messages,
   lorem,
   chartOptions,
@@ -186,7 +181,9 @@ import {
 } from './hook.tsx';
 import JpEcharts from '@/components/JpEcharts/index.vue';
 import { useI18n } from 'vue-i18n';
+import { useDisplay } from 'vuetify';
 const { t } = useI18n();
+const { mobile } = useDisplay();
 </script>
 
 <style scoped>
