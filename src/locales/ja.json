@@ -10,7 +10,9 @@
       "manage": "コンポーネント管理",
       "table": "テーブル",
       "form": "フォーム",
-      "pdf": "PDF"
+      "pdf": "PDF",
+      "alert": "アラート",
+      "modal": "モーダル"
     },
     "methods": {
       "manage": "共通関数管理",

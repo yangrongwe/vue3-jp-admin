@@ -59,6 +59,28 @@ const mainMenuRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/componentsDemo/pdf/index.vue'),
       },
+      {
+        path: 'alert',
+        name: 'alert',
+        meta: {
+          title: $t('title.components.alert'),
+          icon: 'mdi-file-pdf-box',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/alert/index.vue'),
+      },
+      {
+        path: 'modal',
+        name: 'modal',
+        meta: {
+          title: $t('title.components.modal'),
+          icon: 'mdi-file-pdf-box',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/alert/index.vue'),
+      },
     ],
   },
   {
