@@ -6,4 +6,8 @@ type User = {
   role: string;
 };
 
-export type { User };
+type AlertProps = {
+  show: boolean;
+};
+
+export type { User, AlertProps };

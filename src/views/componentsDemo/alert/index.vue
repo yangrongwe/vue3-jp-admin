@@ -1,6 +1,5 @@
-<template>
-  <Alert></Alert>
-</template>
+<template></template>
 <script setup lang="ts">
-import Alert from '@/components/JpAlert/index.vue';
+import { handleShowAlert, handleClearAllAlerts } from './hook';
+handleShowAlert();
 </script>
