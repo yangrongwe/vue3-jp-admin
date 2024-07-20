@@ -1,30 +1,35 @@
 import { defineStore } from 'pinia';
 
+interface Alert {
+  id: number;
+  message: string;
+  color: 'info' | 'success' | 'warning' | 'error';
+  timeout: number;
+}
+
 export const useAlertStore = defineStore('alert', {
   state: () => ({
-    alerts: [],
+    alerts: [] as Alert[],
   }),
   actions: {
-    addAlert({ message, color = 'info', timeout = 3000 }) {
-      const alert = { message, color, timeout, id: Date.now() };
-      this.alerts.push(alert);
-      if (timeout) {
+    addAlert(alert: Omit<Alert, 'id'>) {
+      const id = Date.now();
+      const newAlert = { ...alert, id };
+      this.alerts.push(newAlert);
+      if (alert.timeout) {
         setTimeout(() => {
-          this.removeAlert(alert.id);
-        }, timeout);
+          this.removeAlert(id);
+        }, alert.timeout);
       }
     },
-    removeAlert(id) {
-      const index = this.alerts.findIndex((alert) => alert.id === id);
-      if (index !== -1) {
-        this.alerts.splice(index, 1);
+    removeAlert(id: number) {
+      this.alerts = this.alerts.filter((alert) => alert.id !== id);
+      if (this.alerts.length === 0) {
+        this.$reset();
       }
     },
     clearAlerts() {
       this.alerts = [];
     },
-  },
-  getters: {
-    // 这里可以添加其他 getter 以支持从 state 计算的属性
   },
 });
