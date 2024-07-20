@@ -5,6 +5,7 @@ interface Alert {
   message: string;
   color: 'info' | 'success' | 'warning' | 'error';
   timeout: number;
+  props: Record<string, any>; // 包含所有 v-alert 的属性
 }
 
 export const useAlertStore = defineStore('alert', {

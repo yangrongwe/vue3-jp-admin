@@ -9,6 +9,13 @@ const handleShowAlert = () => {
     showAlert({
       message: 'This is an alert message!' + count,
       color: 'success',
+      props: {
+        dismissible: true,
+        elevation: 2,
+        variant: 'tonal',
+        type: 'success',
+        closable: true,
+      },
     });
     count++;
   }, 300);

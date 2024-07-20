@@ -2,10 +2,9 @@
   <div>
     <div v-for="(alert, index) in alerts" :key="alert.id">
       <v-alert
-        :type="alert.color"
+        v-bind="alert.props"
         :class="alertClasses"
         :style="getTopStyle(index)"
-        closable
         @click="removeAlert(alert.id)"
       >
         {{ alert.message }}
