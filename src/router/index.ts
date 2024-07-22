@@ -67,6 +67,9 @@ router.beforeEach((to, from, next) => {
       const role = authStore.user.role as string;
       const roles = to.meta.roles as string[];
       if (roles?.indexOf(role) > -1) {
+        if (tabsStore.selectedTab != to.path) {
+          tabsStore.selectedTab = to.path;
+        }
         next();
       } else {
         // アクセス権がない、アクセス権がないプロンプトボックスをポップアップします。

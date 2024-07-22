@@ -1,11 +1,13 @@
 <template>
   <!-- メインコンテンツ領域 -->
-  <v-main class="tw-bg-slate-100">
+  <v-main class="tw-bg-slate-100 tw-flex-col tw-min-h-full">
     <!-- コンテンツコンテナ -->
-    <div class="tw-px-6 tw-pt-6 tw-h-full tw-flex tw-flex-col">
+    <div class="tw-px-6 tw-pt-6 tw-flex tw-flex-col tw-h-full">
       <!-- Vue Router のビュー コンテナ -->
-      <router-view class="tw-flex-grow"></router-view>
-      <jp-footer-bar class="tw-flex-grow-0"></jp-footer-bar>
+      <div class="tw-flex-grow">
+        <router-view></router-view>
+      </div>
+      <jp-footer-bar class="tw-w-full tw-text-center tw-mb-4"></jp-footer-bar>
     </div>
   </v-main>
 </template>
@@ -14,4 +16,10 @@
 import JpFooterBar from './JpFooterBar.vue';
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+// .v-main {
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh;
+// }
+</style>

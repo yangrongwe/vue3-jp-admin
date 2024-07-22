@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-flex tw-justify-center tw-align-center tw-my-2">
+  <div>
     {{ footerText }}
   </div>
 </template>
