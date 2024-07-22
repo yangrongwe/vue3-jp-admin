@@ -6,7 +6,7 @@
         <slot name="title"></slot>
       </div>
       <!-- title模板 -->
-      <div v-if="!$slots.title">
+      <div v-if="!$slots.title && mainTitle">
         <div class="tw-text-lg">{{ mainTitle.title }}</div>
         DemoCode：
         <a

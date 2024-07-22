@@ -4,14 +4,15 @@ interface Alert {
   id: number;
   message: string;
   timeout: number;
-  props: Record<string, any>; // 包含所有 v-alert 的属性
+  props: Record<string, any>;
 }
 
 export const useAlertStore = defineStore('alert', {
   state: () => ({
-    alerts: [] as Alert[],
+    alerts: [] as Alert[], // アラートのリスト
   }),
   actions: {
+    // アラートを追加する
     addAlert(alert: Omit<Alert, 'id'>) {
       const id = Date.now();
       const newAlert = { ...alert, id };
@@ -22,12 +23,14 @@ export const useAlertStore = defineStore('alert', {
         }, alert.timeout);
       }
     },
+    // 特定のIDのアラートを削除する
     removeAlert(id: number) {
       this.alerts = this.alerts.filter((alert) => alert.id !== id);
       if (this.alerts.length === 0) {
         this.$reset();
       }
     },
+    // すべてのアラートをクリアする
     clearAlerts() {
       this.alerts = [];
     },

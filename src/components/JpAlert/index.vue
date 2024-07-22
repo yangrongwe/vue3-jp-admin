@@ -36,7 +36,7 @@ export default defineComponent({
     );
 
     const getTopStyle = (index: number) => {
-      const topPosition = 150 + index * 80; // 每个alert之间的间隔为50px
+      const topPosition = 150 + index * 80;
       return { top: `${topPosition}px` };
     };
 

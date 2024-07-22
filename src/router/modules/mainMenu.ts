@@ -64,7 +64,7 @@ const mainMenuRoutes: RouteRecordRaw[] = [
         name: 'alert',
         meta: {
           title: $t('title.components.alert'),
-          icon: 'mdi-file-pdf-box',
+          icon: 'mdi-message-alert-outline',
           unShow: false,
           roles: ['admin', 'user'],
         },
