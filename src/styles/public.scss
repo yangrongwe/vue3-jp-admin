@@ -22,3 +22,12 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
 }
+$title-color: #409eff;
+$sub-title-color: #409eff;
+
+.jp-title {
+  color: $title-color;
+}
+.jp-sub-title {
+  color: $sub-title-color;
+}

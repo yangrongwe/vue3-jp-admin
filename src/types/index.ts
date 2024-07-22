@@ -10,4 +10,10 @@ type AlertProps = {
   show: boolean;
 };
 
-export type { User, AlertProps };
+type MainTitle = {
+  title: string;
+  linkText: string;
+  path: string;
+};
+
+export type { User, AlertProps, MainTitle };

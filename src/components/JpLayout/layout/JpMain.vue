@@ -7,7 +7,7 @@
       <div class="tw-flex-grow">
         <router-view></router-view>
       </div>
-      <jp-footer-bar class="tw-w-full tw-text-center tw-mb-4"></jp-footer-bar>
+      <jp-footer-bar class="tw-w-full tw-text-center tw-my-4"></jp-footer-bar>
     </div>
   </v-main>
 </template>

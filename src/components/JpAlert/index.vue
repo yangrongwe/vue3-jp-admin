@@ -54,6 +54,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
-/* 你可以在这里添加其他样式 */
-</style>
+<style scoped lang="scss"></style>

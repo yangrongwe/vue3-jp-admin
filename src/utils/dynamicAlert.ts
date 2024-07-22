@@ -15,7 +15,7 @@ let appInstance: ReturnType<typeof createApp> | null = null;
 let mountPoint: HTMLElement | null = null;
 
 export function showAlert(options: AlertOptions): void {
-  const { message, color = 'info', timeout = 3000, props = {} } = options;
+  const { message, timeout, props = {} } = options;
 
   if (!appInstance) {
     // 创建应用实例
@@ -30,7 +30,7 @@ export function showAlert(options: AlertOptions): void {
 
   // 使用 Pinia 管理状态
   const alertStore = useAlertStore();
-  alertStore.addAlert({ message, color, timeout, props });
+  alertStore.addAlert({ message, timeout, props });
 }
 
 export function clearAllAlerts(): void {

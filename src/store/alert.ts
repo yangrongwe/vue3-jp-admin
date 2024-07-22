@@ -3,7 +3,6 @@ import { defineStore } from 'pinia';
 interface Alert {
   id: number;
   message: string;
-  color: 'info' | 'success' | 'warning' | 'error';
   timeout: number;
   props: Record<string, any>; // 包含所有 v-alert 的属性
 }
