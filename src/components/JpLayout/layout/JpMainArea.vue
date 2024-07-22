@@ -8,7 +8,7 @@
       <!-- title模板 -->
       <div v-if="!$slots.title">
         <div class="tw-text-lg">{{ mainTitle.title }}</div>
-        demo位置：
+        DemoCode：
         <a
           class="tw-text-sm jp-sub-title tw-cursor-pointer"
           target="_blank"

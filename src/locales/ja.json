@@ -30,6 +30,23 @@
         "text": "世の中に失敗というものはない。チャレンジしているうちは失敗はない。あきらめた時が失敗である。",
         "temperature": "月曜日、午後12時30分、昼 27°"
       }
+    },
+    "alerts": {
+      "baseStyle": "基本スタイル",
+      "default": "デフォルト",
+      "outlined": "アウトライン",
+      "tonal": "トナル",
+      "differentType": "異なるタイプ",
+      "primary": "プライマリ",
+      "success": "成功",
+      "warning": "警告",
+      "error": "エラー",
+      "timeoutClose": "タイムアウトクローズ",
+      "autoClose": "3秒後自動クローズ",
+      "clearAll": "关闭所有弹出框",
+      "close": "关闭",
+      "demoDescription": "この画面は関数呼び出しによるv-alertのデモ画面です。",
+      "documentationLink": "その他の設定については、vuetifyのドキュメントを参照してください。"
     }
   }
 }

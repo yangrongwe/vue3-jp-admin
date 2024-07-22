@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import JpMainArea from '@/components/JpLayout/layout/JpMainArea.vue';
 import { handleShowAlert, handleClearAllAlerts, mainTitle } from './hook';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
+
 <template>
   <JpMainArea :h-full="true" :main-title="mainTitle">
-    <!-- 这里可以放置具体的内容或其他组件 -->
-    <!-- <template #title>
-    </template> -->
     <div>
-      <div class="tw-mb-4">Base Style</div>
+      <div class="tw-mb-4">{{ t('views.alerts.baseStyle') }}</div>
 
       <div>
         <v-btn
@@ -16,21 +17,21 @@ import { handleShowAlert, handleClearAllAlerts, mainTitle } from './hook';
           variant="outlined"
           class="tw-mr-4"
           @click="handleShowAlert(1)"
-          >Default</v-btn
+          >{{ t('views.alerts.default') }}</v-btn
         >
         <v-btn
           color="primary"
           variant="outlined"
           class="tw-mr-4"
           @click="handleShowAlert(2)"
-          >Outlined</v-btn
+          >{{ t('views.alerts.outlined') }}</v-btn
         >
-        <v-btn color="primary" variant="outlined" @click="handleShowAlert(3)"
-          >Tonal</v-btn
-        >
+        <v-btn color="primary" variant="outlined" @click="handleShowAlert(3)">{{
+          t('views.alerts.tonal')
+        }}</v-btn>
       </div>
-      <!-- different Type -->
-      <div class="tw-my-4">Different Type</div>
+
+      <div class="tw-my-4">{{ t('views.alerts.differentType') }}</div>
 
       <div>
         <v-btn
@@ -38,32 +39,32 @@ import { handleShowAlert, handleClearAllAlerts, mainTitle } from './hook';
           variant="outlined"
           class="tw-mr-4"
           @click="handleShowAlert(4)"
-          >Primary</v-btn
+          >{{ t('views.alerts.primary') }}</v-btn
         >
         <v-btn
           color="primary"
           variant="outlined"
           class="tw-mr-4"
           @click="handleShowAlert(5)"
-          >Success</v-btn
+          >{{ t('views.alerts.success') }}</v-btn
         >
         <v-btn
           color="primary"
           variant="outlined"
           class="tw-mr-4"
           @click="handleShowAlert(6)"
-          >Warning</v-btn
+          >{{ t('views.alerts.warning') }}</v-btn
         >
         <v-btn
           color="primary"
           variant="outlined"
           class="tw-mr-4"
           @click="handleShowAlert(7)"
-          >Error</v-btn
+          >{{ t('views.alerts.error') }}</v-btn
         >
       </div>
 
-      <div class="tw-my-4">Timeout Close</div>
+      <div class="tw-my-4">{{ t('views.alerts.timeoutClose') }}</div>
 
       <div>
         <v-btn
@@ -71,19 +72,34 @@ import { handleShowAlert, handleClearAllAlerts, mainTitle } from './hook';
           variant="outlined"
           class="tw-mr-4"
           @click="handleShowAlert(8)"
-          >3S Auto Close</v-btn
+          >{{ t('views.alerts.autoClose') }}</v-btn
         >
       </div>
-      <v-divider class="tw-my-4"></v-divider>
-      <!-- Other -->
+
+      <div class="tw-my-4">{{ t('views.alerts.clearAll') }}</div>
+
       <div>
-        <div>本页面演示函数调用v-alert。</div>
+        <v-btn
+          color="primary"
+          variant="outlined"
+          class="tw-mr-4"
+          @click="handleClearAllAlerts"
+          >{{ t('views.alerts.close') }}</v-btn
+        >
+      </div>
+
+      <v-divider class="tw-my-4"></v-divider>
+
+      <div>
+        <div class="tw-text-lg tw-mb-04">
+          {{ t('views.alerts.demoDescription') }}
+        </div>
         <a
-          class="tw-text-sm tw-text-red-500 tw-cursor-pointer"
+          class="tw-text-lg jp-title tw-cursor-pointer tw-underline tw-underline-offset-8"
           target="_blank"
           href="https://vuetifyjs.com/en/api/v-alert/#props"
         >
-          Other 设置，请参照vuetify文档
+          {{ t('views.alerts.documentationLink') }}
         </a>
       </div>
     </div>
