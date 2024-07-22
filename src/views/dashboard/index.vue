@@ -101,7 +101,7 @@
             </div>
           </v-card-title>
 
-          <v-divider class="mx-4" opacity="0.85"></v-divider>
+          <v-divider class="mx-4"></v-divider>
 
           <v-card-text class="tw-flex tw-justify-start">
             <v-chip color="pink" label class="tw-mr-4">

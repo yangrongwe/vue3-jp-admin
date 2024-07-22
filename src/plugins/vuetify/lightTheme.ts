@@ -23,7 +23,7 @@ const lightTheme: ThemeDefinition = {
   },
   variables: {
     'border-color': '#000000',
-    'border-opacity': 0.12,
+    'border-opacity': 0.85,
     'high-emphasis-opacity': 0.87,
     'medium-emphasis-opacity': 0.6,
     'disabled-opacity': 0.38,
