@@ -4,7 +4,7 @@
     :rail="rail"
     :permanent="!mobile"
   >
-    <v-list>
+    <v-list class="tw-h-[60px]">
       <v-list-item
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
         subtitle="sandra_a88@gmailcom"

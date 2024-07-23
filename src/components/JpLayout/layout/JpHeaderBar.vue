@@ -25,8 +25,21 @@
       <v-btn icon="mdi-heart"></v-btn>
 
       <v-btn icon="mdi-magnify"></v-btn>
-
-      <v-btn icon="mdi-dots-vertical"></v-btn>
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in items"
+            :key="index"
+            :value="index"
+            @click="router.push('/login')"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </template>
 
     <template v-slot:extension>
@@ -72,7 +85,7 @@ import { useDisplay } from 'vuetify';
 import MenuList from '../menu/index.vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useTabsStore } from '@/store/tabs';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const tabsStore = useTabsStore(); // カスタムのタブストアを使用
 const router = useRouter(); // Vue Router を使用
@@ -119,6 +132,15 @@ const breadcrumbsClick = () => {
 };
 
 const { mobile } = useDisplay();
+
+const items = ref([
+  {
+    title: 'ログアウト',
+  },
+  {
+    title: '設定',
+  },
+]);
 </script>
 
 <style lang="scss" scoped>
