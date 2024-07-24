@@ -1,5 +1,5 @@
 <template>
-  <jp-main-area class="tw-p-6">
+  <jp-main-area>
     <div>
       <h1 class="text-3xl font-bold underline">Table</h1>
     </div>

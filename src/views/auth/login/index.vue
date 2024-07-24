@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import JpForm from '@/components/JpForm/index.vue';
-import type JpFormOptions from '@/components/JpForm/type.ts';
+import { JpFormOptions } from '@/components/JpForm/type.ts';
 import logo from '@/assets/logo/logo_transparent.png';
 import { useAuthStore } from '@/store/auth';
 import { useRouter } from 'vue-router';

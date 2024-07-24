@@ -76,8 +76,8 @@
   </v-form>
 </template>
 <script setup lang="ts">
-import type JpFormOptions from './type.ts';
-import JpInput from '@/components/JpInput/index.vue';
+import { JpFormOptions } from './type.ts';
+import JpInput from '@/components/JpForm/JpInput/index.vue';
 
 const props = defineProps({
   formOptions: {

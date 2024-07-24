@@ -1,19 +1,23 @@
-type FormItems = {
-  itemName: string;
-  itemType: string;
-  imagePath?: string;
-  labelPosition?: string;
-  visible?: boolean;
-  appendInnerIcon?: string;
-  prependInnerIcon?: string;
-  width?: number;
-  clickMethod?: () => void;
-};
-
-type JpFormOptions = {
+export interface JpFormOptions {
   type: string;
-  formItems: Array<FormItems>;
-  rules: Array<any>;
-};
-
-export default JpFormOptions;
+  formItems: Array<{
+    itemType: string;
+    itemSubType?: string;
+    itemName?: string;
+    labelPosition?: string;
+    prependInnerIcon?: string;
+    appendInnerIcon?: string;
+    visible?: boolean;
+    modelValue?: any;
+    placeholder?: string;
+    label?: string;
+    items?: Array<any>;
+    min?: number;
+    max?: number;
+    options?: Array<{ label: string; value: any }>;
+    clickMethod?: () => void;
+    props?: Record<string, any>; // Component props
+    eventHandlers?: Record<string, Function>; // Event handlers
+  }>;
+  rules: Record<string, any>;
+}
