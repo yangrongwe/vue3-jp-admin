@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent, defineExpose } from 'vue';
+import { ref, defineAsyncComponent } from 'vue';
 import type { JpFormOptions } from './type.ts';
 
 // 动态导入子组件
@@ -29,6 +29,7 @@ const getComponent = (type: string) => {
     rangeSlider: defineAsyncComponent(
       () => import('./JpRangeSlider/index.vue')
     ),
+    image: defineAsyncComponent(() => import('./JpImage/index.vue')),
     select: defineAsyncComponent(() => import('./JpSelect/index.vue')),
     switch: defineAsyncComponent(() => import('./JpSwitch/index.vue')),
     textarea: defineAsyncComponent(() => import('./JpTextarea/index.vue')),
@@ -53,14 +54,21 @@ const props = defineProps({
 
 const formRef = ref(null);
 
+const validateForm = async () => {
+  if (formRef.value) {
+    const validationResults = await formRef.value.validate();
+    if (validationResults.valid) {
+      console.log('Form is valid');
+      return true;
+    } else {
+      console.log('Form is invalid');
+      return false;
+    }
+  }
+};
 // 暴露 formRef 实例方法
 defineExpose({
-  validateForm() {
-    if (formRef.value) {
-      return formRef.value.validate();
-    }
-    return false;
-  },
+  validateForm,
 });
 </script>
 

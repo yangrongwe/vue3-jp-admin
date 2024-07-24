@@ -3,16 +3,20 @@
     class="tw-bg-[url('@/assets/login/bg.jpg')] tw-bg-cover tw-h-screen tw-w-full tw-flex tw-justify-center tw-items-center"
   >
     <v-card class="tw-w-[480px] tw-mx-auto login-card" elevation="2">
-      <jp-form :form-options="formOptions"></jp-form>
+      <jp-form
+        ref="formRef"
+        :form-options="formOptions"
+        :form-data="formData"
+      ></jp-form>
     </v-card>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
-import JpForm from '@/components/JpForm/index.vue';
+import { reactive, ref } from 'vue';
+import JpForm from '@/components/JpForm/Form.vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
-import logo from '@/assets/logo/logo_transparent.png';
+import logo from '@/assets/logo/logo.png';
 import { useAuthStore } from '@/store/auth';
 import { useRouter } from 'vue-router';
 // import { userLogin } from '@/api/user';
@@ -41,40 +45,91 @@ const login = async () => {
     router.push('/dashboard');
   }
 };
+const formRef = ref(null);
+
+const formData = reactive({
+  email: '',
+  password: '',
+});
 const formOptions = reactive<JpFormOptions>({
   type: 'vuetify',
   formItems: [
     {
       itemType: 'image',
-      itemName: '',
-      labelPosition: 'center',
-      imagePath: logo,
-      width: 200,
+      itemName: 'logo',
+      props: {
+        src: logo,
+        class: 'tw-mt-16 tw-w-[200px] tw-m-auto',
+      },
+      eventHandlers: {
+        //
+      },
     },
     {
-      itemType: 'text',
-      itemName: '',
-      labelPosition: 'left',
-      prependInnerIcon: 'mdi-email-outline',
+      itemType: 'input',
+      itemName: 'email',
+      props: {
+        type: 'email',
+        modelValue: '',
+        // label: 'email',
+        placeholder: 'Enter your email',
+        prependInnerIcon: 'mdi-email-outline',
+        class: 'tw-mb-4 tw-mt-8',
+      },
+      eventHandlers: {
+        input: () => {},
+      },
     },
     {
-      itemType: 'password',
-      itemName: '',
-      labelPosition: 'left',
-      visible: false,
-    },
-    {
-      itemType: 'cardText',
-      itemName: '',
-      labelPosition: 'left',
+      itemType: 'input',
+      itemName: 'password',
+      props: {
+        type: 'password',
+        modelValue: '',
+        placeholder: 'Enter your password',
+        prependInnerIcon: 'mdi-lock-outline',
+      },
+      eventHandlers: {
+        blur: (el) => {
+          // formData.password = el.srcElement._value;
+        },
+        click: () => {
+          // alert(123);
+        },
+      },
     },
     {
       itemType: 'button',
-      itemName: 'Login',
-      clickMethod: login,
+      itemName: 'button',
+      props: {
+        label: 'Login',
+        color: 'blue',
+        size: 'large',
+        variant: 'tonal',
+        block: true,
+      },
+      eventHandlers: {
+        click: async () => {
+          if (await formRef.value.validateForm()) {
+            // 表单验证通过，进行提交操作
+            console.log('Form submitted:', formData);
+            login();
+          } else {
+            // 表单验证失败
+            console.log('Form validation failed');
+          }
+        },
+      },
     },
   ],
-  rules: [],
+  rules: {
+    email: [
+      (value) => {
+        if (value) return true;
+        return 'You must enter email.';
+      },
+    ],
+  },
 });
 </script>
 

@@ -33,7 +33,7 @@ const formOptions = reactive<JpFormOptions>({
         label: 'email',
         placeholder: 'Enter your email',
         prependInnerIcon: 'mdi-email-outline',
-        class: 'tw-mb-4',
+        class: 'tw-mb-2',
       },
       eventHandlers: {
         input: () => {},
@@ -49,7 +49,9 @@ const formOptions = reactive<JpFormOptions>({
         prependInnerIcon: 'mdi-lock-outline',
       },
       eventHandlers: {
-        input: () => {},
+        blur: (el) => {
+          formData.password = el.srcElement._value;
+        },
         click: () => {
           // alert(123);
         },
@@ -66,8 +68,8 @@ const formOptions = reactive<JpFormOptions>({
         block: true,
       },
       eventHandlers: {
-        click: () => {
-          if (formRef.value.validateForm()) {
+        click: async () => {
+          if (await formRef.value.validateForm()) {
             // 表单验证通过，进行提交操作
             console.log('Form submitted:', formData);
           } else {
