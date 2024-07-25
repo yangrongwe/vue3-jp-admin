@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="formRef" v-bind="$attrs" class="tw-px-12 tw-pt-1 tw-py-12">
+  <v-form ref="formRef" v-bind="$attrs" class="tw-px-8 tw-pt-1 tw-py-12">
     <template v-for="item in formOptions.formItems" :key="item.itemName">
       <component
         :is="getComponent(item.itemType)"
@@ -7,6 +7,8 @@
         v-bind="item.props"
         v-on="item.eventHandlers"
         :rules="formOptions.rules[item.itemName] || []"
+        :id="`input-${item.itemName}`"
+        class="tw-flex-grow"
       />
     </template>
   </v-form>

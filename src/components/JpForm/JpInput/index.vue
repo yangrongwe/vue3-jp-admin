@@ -1,5 +1,13 @@
 <template>
-  <div v-if="item.props.type === 'password'">
+  <!-- password -->
+  <div v-if="item.props.type === 'password'" class="tw-flex tw-items-center">
+    <div
+      v-if="item.label"
+      class="tw-mr-6 tw-mt-[-11px]"
+      :style="{ width: item.labelWidth }"
+    >
+      {{ item.label }}
+    </div>
     <v-text-field
       v-bind="$attrs"
       bg-color="white"
@@ -9,7 +17,15 @@
     >
     </v-text-field>
   </div>
-  <div v-else>
+  <!-- input -->
+  <div v-else class="tw-flex tw-items-center">
+    <div
+      v-if="item.label"
+      class="tw-mr-6 tw-mt-[-11px]"
+      :style="{ width: item.labelWidth }"
+    >
+      {{ item.label }}
+    </div>
     <v-text-field v-bind="$attrs" bg-color="white"> </v-text-field>
   </div>
 </template>

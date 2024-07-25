@@ -1,7 +1,7 @@
 import { showAlert, clearAllAlerts } from '@/utils/dynamicAlert';
 import { MainTitle } from '@/types/index';
 const mainTitle: MainTitle = {
-  title: 'Vuetify3 アラート 二次封装【関数式呼び出し】',
+  title: 'Vuetify3 アラート　カプセル化【関数式呼び出し】',
   linkText: 'src/views/componentsDemo/alert/index.vue',
   path: 'https://github.com/yangrongwe/vue3-jp-admin/blob/main/src/views/componentsDemo/alert/index.vue',
 };
