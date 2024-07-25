@@ -1,8 +1,7 @@
 export interface JpFormOptions {
   formItems: Array<{
-    itemName?: string;
-
     itemType: string;
+    itemName?: string;
     itemSubType?: string;
 
     label?: string;

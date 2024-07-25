@@ -7,8 +7,8 @@
         v-bind="item.props"
         v-on="item.eventHandlers"
         :rules="formOptions.rules[item.itemName] || []"
-        :id="`input-${item.itemName}`"
         class="tw-flex-grow"
+        @update:modelValue="handleModelValueUpdate"
       />
     </template>
   </v-form>
@@ -48,13 +48,13 @@ const props = defineProps({
       rules: [],
     }),
   },
-  formData: {
-    type: Object,
-    required: true,
-  },
 });
 
 const formRef = ref(null);
+const formData = ref<{ [key: string]: any }>({});
+const handleModelValueUpdate = ({ itemName, value }) => {
+  formData.value[itemName] = value;
+};
 
 const validateForm = async () => {
   if (formRef.value) {
@@ -71,6 +71,7 @@ const validateForm = async () => {
 // 暴露 formRef 实例方法
 defineExpose({
   validateForm,
+  formData,
 });
 </script>
 

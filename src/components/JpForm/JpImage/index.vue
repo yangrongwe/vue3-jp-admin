@@ -1,6 +1,6 @@
 <!-- JpButton.vue -->
 <template>
-  <v-img v-bind="$attrs"></v-img>
+  <v-img v-bind="item.props"></v-img>
 </template>
 
 <script setup lang="ts">

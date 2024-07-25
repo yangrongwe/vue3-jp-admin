@@ -52,14 +52,13 @@ const formData = reactive({
   password: '',
 });
 const formOptions = reactive<JpFormOptions>({
-  type: 'vuetify',
   formItems: [
     {
       itemType: 'image',
       itemName: 'logo',
       props: {
         src: logo,
-        class: 'tw-mt-16 tw-w-[200px] tw-m-auto',
+        class: 'tw-mt-16 tw-w-[250px] tw-m-auto',
       },
       eventHandlers: {
         //
@@ -72,9 +71,10 @@ const formOptions = reactive<JpFormOptions>({
         type: 'email',
         modelValue: '',
         // label: 'email',
+        variant: 'outlined',
         placeholder: 'Enter your email',
         prependInnerIcon: 'mdi-email-outline',
-        class: 'tw-mb-4 tw-mt-8',
+        class: 'tw-mb-4 tw-mt-4',
       },
       eventHandlers: {
         input: () => {},
@@ -86,6 +86,7 @@ const formOptions = reactive<JpFormOptions>({
       props: {
         type: 'password',
         modelValue: '',
+        variant: 'outlined',
         placeholder: 'Enter your password',
         prependInnerIcon: 'mdi-lock-outline',
       },
