@@ -21,6 +21,7 @@ import type { JpFormOptions } from './type.ts';
 // 动态导入子组件
 const getComponent = (type: string) => {
   const components = {
+    customEl: defineAsyncComponent(() => import('./JpCustomEl/index.vue')),
     autoComplete: defineAsyncComponent(
       () => import('./JpAutoComplete/index.vue')
     ),
@@ -31,6 +32,8 @@ const getComponent = (type: string) => {
     rangeSlider: defineAsyncComponent(
       () => import('./JpRangeSlider/index.vue')
     ),
+    datePicker: defineAsyncComponent(() => import('./JpDatePicker/index.vue')),
+    timePicker: defineAsyncComponent(() => import('./JpTimePicker/index.vue')),
     image: defineAsyncComponent(() => import('./JpImage/index.vue')),
     select: defineAsyncComponent(() => import('./JpSelect/index.vue')),
     switch: defineAsyncComponent(() => import('./JpSwitch/index.vue')),

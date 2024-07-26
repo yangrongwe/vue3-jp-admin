@@ -1,7 +1,8 @@
 import { MainTitle } from '@/types/index';
 import { reactive, ref } from 'vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
-
+import { VCard } from 'vuetify/components';
+import { showAlert } from '@/utils/dynamicAlert';
 const mainTitle: MainTitle = {
   title: 'Vuetify3 フォーム　カプセル化',
   linkText: 'src/views/componentsDemo/form/index.vue',
@@ -26,10 +27,10 @@ const formOptions = reactive<JpFormOptions>({
         class: 'tw-mb-1',
       },
       eventHandlers: {
-        input: (event: Event) => {
+        input: (event) => {
           /* handle input event */
         },
-        change: (el: any) => {
+        change: (el) => {
           /* handle change event */
         },
       },
@@ -47,7 +48,7 @@ const formOptions = reactive<JpFormOptions>({
         class: 'tw-mb-1',
       },
       eventHandlers: {
-        change: (el: any) => {
+        change: (el) => {
           /* handle change event */
         },
         click: () => {
@@ -69,10 +70,10 @@ const formOptions = reactive<JpFormOptions>({
         clearable: true,
       },
       eventHandlers: {
-        'update:modelValue': (value: any) => {
+        'update:modelValue': (value) => {
           /* handle update:modelValue event */
         },
-        'update:menu': (value: any) => {
+        'update:menu': (value) => {
           /* handle update:menu event */
         },
       },
@@ -89,11 +90,43 @@ const formOptions = reactive<JpFormOptions>({
         class: 'tw-mb-1',
       },
       eventHandlers: {
-        'update:modelValue': (value: any) => {
+        'update:modelValue': (value) => {
           /* handle update:modelValue event */
         },
-        'update:input': (value: any) => {
+        'update:input': (value) => {
           /* handle update:input event */
+        },
+      },
+    },
+    // Time picker item
+    {
+      itemType: 'timePicker',
+      itemName: 'reminderTime',
+      label: '提醒时间',
+      labelWidth: '80px',
+      props: {
+        placeholder: '请选择时间',
+        class: 'tw-mb-1',
+      },
+      eventHandlers: {
+        change: (value) => {
+          /* handle change event */
+        },
+      },
+    },
+    // Date picker item
+    {
+      itemType: 'datePicker',
+      itemName: 'birthDate',
+      label: '出生日期',
+      labelWidth: '80px',
+      props: {
+        placeholder: '请选择日期',
+        class: 'tw-mb-1',
+      },
+      eventHandlers: {
+        change: (value) => {
+          /* handle change event */
         },
       },
     },
@@ -111,7 +144,7 @@ const formOptions = reactive<JpFormOptions>({
         class: 'tw-mb-1',
       },
       eventHandlers: {
-        change: (value: any) => {
+        change: (value) => {
           /* handle change event */
         },
       },
@@ -128,22 +161,68 @@ const formOptions = reactive<JpFormOptions>({
         class: 'tw-mb-1',
       },
       eventHandlers: {
-        change: (value: any) => {
+        change: (value) => {
           /* handle change event */
         },
       },
     },
-    // Image item
+
+    // Switch item
     {
-      itemType: 'image',
-      itemName: 'profileImage',
+      itemType: 'switch',
+      itemName: 'newsletter',
+      label: '订阅新闻',
+      labelWidth: '80px',
       props: {
-        src: 'path/to/image.jpg',
-        alt: 'Profile Image',
         class: 'tw-mb-1',
       },
       eventHandlers: {
-        // nothing
+        change: (el) => {
+          /* handle change event */
+        },
+      },
+    },
+
+    // Textarea item
+    {
+      itemType: 'textarea',
+      itemName: 'description',
+      label: '描述',
+      labelWidth: '80px',
+      props: {
+        placeholder: '请输入描述',
+        class: 'tw-mb-1',
+      },
+      eventHandlers: {
+        input: (event) => {
+          /* handle input event */
+        },
+      },
+    },
+    // CustomEl item
+    {
+      itemType: 'customEl',
+      itemName: 'memo',
+      label: '备注',
+      labelWidth: '80px',
+      props: {
+        placeholder: '请输入备注',
+        class: 'tw-mb-1',
+        customContent: (
+          <VCard
+            class="tw-h-24 tw-p-2 tw-bg-slate-100"
+            variant="outlined"
+            density="comfortable"
+          >
+            <div>这是一个自定义的 DIV 元素</div>
+            <div>当前方式可以避免复杂的html结构。</div>
+            <div>只需要配置formOptions就可以实现form的创建</div>
+          </VCard>
+        ),
+      },
+
+      eventHandlers: {
+        //
       },
     },
     // Checkbox item
@@ -157,7 +236,7 @@ const formOptions = reactive<JpFormOptions>({
         label: '我同意条款和条件',
       },
       eventHandlers: {
-        change: (el: any) => {
+        change: (el) => {
           /* handle change event */
         },
         click: () => {
@@ -181,6 +260,16 @@ const formOptions = reactive<JpFormOptions>({
           if (await formRef.value.validateForm()) {
             // 表单验证通过，进行提交操作
             console.log(formRef.value.formData);
+            showAlert({
+              message: 'This is an alert timeout!',
+              // timeout: 3000,
+              props: {
+                type: 'success',
+                closable: true,
+                border: 'start',
+                borderColor: 'white',
+              },
+            });
           } else {
             // 表单验证失败
             console.log('Form validation failed');
@@ -199,15 +288,13 @@ const formOptions = reactive<JpFormOptions>({
       (value: any) => (value && value.length >= 6) || '密码长度至少为6个字符',
     ],
     frontEnd: [
-      (value: any) =>
-        (Array.isArray(value) && value.length > 0) || '请选择至少一个前端框架',
+      (value: any) => (value && value.length > 0) || '请选择至少一个前端框架',
     ],
     agreeTerms: [(value: any) => !!value || '您必须同意条款'],
     gender: [(value: any) => !!value || '请选择性别'],
     ageRange: [(value: any) => value != null || '请选择年龄范围'],
     skills: [
-      (value: any) =>
-        (Array.isArray(value) && value.length > 0) || '请选择至少一个技能',
+      (value: any) => (value && value.length > 0) || '请选择至少一个技能',
     ],
   },
 });

@@ -2,16 +2,12 @@
   <div class="tw-flex">
     <div
       v-if="item.label"
-      class="tw-mr-6 tw-mt-[16px]"
+      class="tw-mr-6 tw-mt-[12px]"
       :style="{ width: item.labelWidth }"
     >
       {{ item.label }}
     </div>
-    <v-switch
-      v-bind="item.props"
-      v-model="switchValue"
-      :rules="rules"
-    ></v-switch>
+    <v-date-picker v-bind="item.props" v-model="dateValue"></v-date-picker>
   </div>
 </template>
 
@@ -24,16 +20,12 @@ const props = defineProps({
     required: true,
     default: () => ({}),
   },
-  rules: {
-    type: Array,
-    default: () => [],
-  },
 });
 
 const emit = defineEmits(['update:modelValue']);
-const switchValue = ref(props.item.props.modelValue || false);
+const dateValue = ref(props.item.props.modelValue || null);
 
-watch(switchValue, (newValue) => {
+watch(dateValue, (newValue) => {
   emit('update:modelValue', { itemName: props.item.itemName, value: newValue });
 });
 </script>
