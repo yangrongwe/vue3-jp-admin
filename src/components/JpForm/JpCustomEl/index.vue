@@ -1,7 +1,6 @@
 <!-- JpCustomEl.vue -->
 <template>
   <div>
-    <!-- 直接渲染 customContent -->
     <component :is="customContent" />
   </div>
 </template>

@@ -1,4 +1,4 @@
-<!-- JpButton.vue -->
+<!-- JpImage.vue -->
 <template>
   <v-img v-bind="item.props"></v-img>
 </template>

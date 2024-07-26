@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import JpMainArea from '@/components/JpLayout/layout/JpMainArea.vue';
-import JpForm from '@/components/JpForm/Form.vue';
+import JpForm from '@/components/JpForm/index.vue';
 import { mainTitle, formRef, formOptions } from './hook.tsx';
 </script>
 

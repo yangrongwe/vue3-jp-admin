@@ -1,93 +1,86 @@
 <template>
-  <v-form v-bind="$attrs" class="tw-px-12 tw-pt-1 tw-py-12">
-    <template v-for="item in formOptions.formItems">
-      <div v-if="item.itemType == 'image'">
-        <v-img
-          :width="item.width"
-          :src="item.imagePath"
-          class="tw-mx-auto"
-        ></v-img>
-      </div>
-      <div
-        v-if="item.itemType == 'text'"
-        :class="item.labelPosition == 'top' ? '' : 'tw-flex'"
-      >
-        <div v-if="item.itemName != ''" class="tw-mr-2 tw-w-20">
-          {{ item.itemName }}
-        </div>
-        <JpInput
-          density="compact"
-          placeholder="Email address"
-          :prepend-inner-icon="
-            item.prependInnerIcon ? item.prependInnerIcon : ''
-          "
-          variant="outlined"
-        ></JpInput>
-      </div>
-      <div
-        v-if="item.itemType == 'password'"
-        :class="item.labelPosition == 'top' ? '' : 'tw-flex'"
-      >
-        <div v-if="item.itemName != ''" class="tw-mr-2 tw-w-20">
-          <span>{{ item.itemName }}</span>
-        </div>
-
-        <JpInput
-          :append-inner-icon="item.visible ? 'mdi-eye-off' : 'mdi-eye'"
-          :type="item.visible ? 'text' : 'password'"
-          density="compact"
-          placeholder="Enter your password"
-          prepend-inner-icon="mdi-lock-outline"
-          variant="outlined"
-          @click:append-inner="item.visible = !item.visible"
-        ></JpInput>
-      </div>
-      <div
-        v-if="item.itemType == 'cardText'"
-        :class="item.labelPosition == 'top' ? '' : 'tw-flex'"
-      >
-        <div class="tw-mr-5 tw-w-20" v-if="item.itemName != ''">
-          <span>{{ item.itemName }}</span>
-        </div>
-        <v-card
-          class="tw-mb-2 tw-w-full"
-          color="surface-variant"
-          variant="tonal"
-        >
-          <v-card-text class="text-medium-emphasis text-caption">
-            Warning: After 3 consecutive failed login attempts, you account will
-            be temporarily locked for three hours. If you must login now, you
-            can also click "Forgot login password?" below to reset the login
-            password.
-          </v-card-text>
-        </v-card>
-      </div>
-      <div v-if="item.itemType == 'button'">
-        <v-btn
-          color="blue"
-          size="large"
-          variant="tonal"
-          block
-          @click="item.clickMethod"
-          >{{ item.itemName }}
-        </v-btn>
-      </div>
+  <v-form ref="formRef" v-bind="$attrs" class="tw-px-8 tw-pt-1 tw-py-12">
+    <template v-for="item in formOptions.formItems" :key="item.itemName">
+      <component
+        :is="getComponent(item.itemType)"
+        :item="item"
+        v-bind="item.props"
+        v-on="item.eventHandlers"
+        :rules="formOptions.rules[item.itemName] || []"
+        class="tw-flex-grow"
+        @update:modelValue="handleModelValueUpdate"
+      />
     </template>
   </v-form>
 </template>
-<script setup lang="ts">
-import { JpFormOptions } from './type.ts';
-import JpInput from '@/components/JpForm/JpInput/index.vue';
 
+<script setup lang="ts">
+import { ref, defineAsyncComponent } from 'vue';
+import type { JpFormOptions } from './type.ts';
+
+// コンポーネントを動的にインポートする関数
+const getComponent = (type: string) => {
+  const components = {
+    customEl: defineAsyncComponent(() => import('./JpCustomEl/index.vue')),
+    autoComplete: defineAsyncComponent(
+      () => import('./JpAutoComplete/index.vue')
+    ),
+    button: defineAsyncComponent(() => import('./JpButton/index.vue')),
+    checkbox: defineAsyncComponent(() => import('./JpCheckbox/index.vue')),
+    input: defineAsyncComponent(() => import('./JpInput/index.vue')),
+    radioBtn: defineAsyncComponent(() => import('./JpRadioBtn/index.vue')),
+    rangeSlider: defineAsyncComponent(
+      () => import('./JpRangeSlider/index.vue')
+    ),
+    datePicker: defineAsyncComponent(() => import('./JpDatePicker/index.vue')),
+    timePicker: defineAsyncComponent(() => import('./JpTimePicker/index.vue')),
+    image: defineAsyncComponent(() => import('./JpImage/index.vue')),
+    select: defineAsyncComponent(() => import('./JpSelect/index.vue')),
+    switch: defineAsyncComponent(() => import('./JpSwitch/index.vue')),
+    textarea: defineAsyncComponent(() => import('./JpTextarea/index.vue')),
+  };
+  return components[type] || null;
+};
+
+// プロパティを定義
 const props = defineProps({
   formOptions: {
     type: Object as () => JpFormOptions,
-    default: {
+    default: () => ({
       type: 'vuetify',
       formItems: [],
       rules: [],
-    },
+    }),
   },
 });
+
+const formRef = ref(null); // フォームの参照
+const formData = ref<{ [key: string]: any }>({}); // フォームデータを格納
+
+// モデル値の更新を処理する関数
+const handleModelValueUpdate = ({ itemName, value }) => {
+  formData.value[itemName] = value;
+};
+
+// フォームのバリデーションを行う関数
+const validateForm = async () => {
+  if (formRef.value) {
+    const validationResults = await formRef.value.validate();
+    if (validationResults.valid) {
+      console.log('フォームは有効です');
+      return true;
+    } else {
+      console.log('フォームは無効です');
+      return false;
+    }
+  }
+};
+
+// formRef のインスタンスメソッドを公開
+defineExpose({
+  validateForm,
+  formData,
+});
 </script>
-<style></style>
+
+<style scoped></style>

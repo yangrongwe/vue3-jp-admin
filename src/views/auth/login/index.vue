@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import JpForm from '@/components/JpForm/Form.vue';
+import JpForm from '@/components/JpForm/index.vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
 import logo from '@/assets/logo/logo.png';
 import { useAuthStore } from '@/store/auth';
@@ -69,12 +69,12 @@ const formOptions = reactive<JpFormOptions>({
       itemName: 'email',
       props: {
         type: 'email',
-        modelValue: '',
+        modelValue: 'admin@gmail.com',
         // label: 'email',
         variant: 'outlined',
         placeholder: 'Enter your email',
         prependInnerIcon: 'mdi-email-outline',
-        class: 'tw-mb-4 tw-mt-4',
+        class: 'tw-mt-4',
       },
       eventHandlers: {
         input: () => {},
@@ -85,7 +85,7 @@ const formOptions = reactive<JpFormOptions>({
       itemName: 'password',
       props: {
         type: 'password',
-        modelValue: '',
+        modelValue: '123456',
         variant: 'outlined',
         placeholder: 'Enter your password',
         prependInnerIcon: 'mdi-lock-outline',
@@ -99,6 +99,7 @@ const formOptions = reactive<JpFormOptions>({
         },
       },
     },
+
     {
       itemType: 'button',
       itemName: 'button',

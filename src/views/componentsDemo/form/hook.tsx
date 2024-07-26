@@ -1,10 +1,12 @@
+// src/hooks/formHook.ts
+import { ref, reactive } from 'vue';
 import { MainTitle } from '@/types/index';
-import { reactive, ref } from 'vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
 import { VCard } from 'vuetify/components';
-import { showAlert } from '@/utils/dynamicAlert';
+import { $t } from '@/plugins/i18n/i18nUtils';
+
 const mainTitle: MainTitle = {
-  title: 'Vuetify3 フォーム　カプセル化',
+  title: $t('title.components.form'),
   linkText: 'src/views/componentsDemo/form/index.vue',
   path: 'https://github.com/yangrongwe/vue3-jp-admin/blob/main/src/views/componentsDemo/form/index.vue',
 };
@@ -13,57 +15,57 @@ const formRef = ref<any>(null);
 
 const formOptions = reactive<JpFormOptions>({
   formItems: [
-    // Input item for email
+    // メールアドレス用の入力項目
     {
       itemType: 'input',
       itemName: 'email',
-      label: '邮箱',
-      labelWidth: '80px',
+      label: $t('views.form.email.label'),
+      labelWidth: '150px',
       props: {
         type: 'email',
-        placeholder: '请输入邮箱',
+        placeholder: $t('views.form.email.placeholder'),
         prependInnerIcon: 'mdi-email-outline',
         validateOn: 'blur',
         class: 'tw-mb-1',
       },
       eventHandlers: {
         input: (event) => {
-          /* handle input event */
+          // 入力イベントを処理
         },
         change: (el) => {
-          /* handle change event */
+          // 変更イベントを処理
         },
       },
     },
-    // Input item for password
+    // パスワード用の入力項目
     {
       itemType: 'input',
       itemName: 'password',
-      label: '密码',
-      labelWidth: '80px',
+      label: $t('views.form.password.label'),
+      labelWidth: '150px',
       props: {
         type: 'password',
-        placeholder: '请输入密码',
+        placeholder: $t('views.form.password.placeholder'),
         prependInnerIcon: 'mdi-lock-outline',
         class: 'tw-mb-1',
       },
       eventHandlers: {
         change: (el) => {
-          /* handle change event */
+          // 変更イベントを処理
         },
         click: () => {
-          /* handle click event */
+          // クリックイベントを処理
         },
       },
     },
-    // Select item for frontend frameworks
+    // フロントエンドフレームワーク用のセレクト項目
     {
       itemType: 'select',
       itemName: 'frontEnd',
-      label: '前端框架',
-      labelWidth: '80px',
+      label: $t('views.form.frontEnd.label'),
+      labelWidth: '150px',
       props: {
-        placeholder: '请选择擅长的前端框架',
+        placeholder: $t('views.form.frontEnd.placeholder'),
         class: 'tw-mb-1',
         items: ['Vue', 'React', 'Angular', 'Jquery'],
         multiple: true,
@@ -71,90 +73,90 @@ const formOptions = reactive<JpFormOptions>({
       },
       eventHandlers: {
         'update:modelValue': (value) => {
-          /* handle update:modelValue event */
+          // update:modelValue イベントを処理
         },
         'update:menu': (value) => {
-          /* handle update:menu event */
+          // update:menu イベントを処理
         },
       },
     },
-    // Autocomplete item
+    // 自動補完用の項目
     {
       itemType: 'autoComplete',
       itemName: 'skills',
-      label: '技能',
-      labelWidth: '80px',
+      label: $t('views.form.skills.label'),
+      labelWidth: '150px',
       props: {
         items: ['JavaScript', 'TypeScript', 'Python', 'Java'],
-        placeholder: '选择你的技能',
+        placeholder: $t('views.form.skills.placeholder'),
         class: 'tw-mb-1',
       },
       eventHandlers: {
         'update:modelValue': (value) => {
-          /* handle update:modelValue event */
+          // update:modelValue イベントを処理
         },
         'update:input': (value) => {
-          /* handle update:input event */
+          // update:input イベントを処理
         },
       },
     },
-    // Time picker item
+    // 時間選択用の項目
     {
       itemType: 'timePicker',
       itemName: 'reminderTime',
-      label: '提醒时间',
-      labelWidth: '80px',
+      label: $t('views.form.reminderTime.label'),
+      labelWidth: '200px',
       props: {
-        placeholder: '请选择时间',
+        placeholder: $t('views.form.reminderTime.placeholder'),
         class: 'tw-mb-1',
       },
       eventHandlers: {
         change: (value) => {
-          /* handle change event */
+          // 変更イベントを処理
         },
       },
     },
-    // Date picker item
+    // 日付選択用の項目
     {
       itemType: 'datePicker',
       itemName: 'birthDate',
-      label: '出生日期',
-      labelWidth: '80px',
+      label: $t('views.form.birthDate.label'),
+      labelWidth: '150px',
       props: {
-        placeholder: '请选择日期',
+        placeholder: $t('views.form.birthDate.placeholder'),
         class: 'tw-mb-1',
       },
       eventHandlers: {
         change: (value) => {
-          /* handle change event */
+          // 変更イベントを処理
         },
       },
     },
-    // Radio group item
+    // ラジオボタン用の項目
     {
       itemType: 'radioBtn',
       itemName: 'gender',
-      label: '性别',
-      labelWidth: '80px',
+      label: $t('views.form.gender.label'),
+      labelWidth: '150px',
       props: {
         items: [
-          { label: '男', value: 'male' },
-          { label: '女', value: 'female' },
+          { label: $t('views.form.gender.male'), value: 'male' },
+          { label: $t('views.form.gender.female'), value: 'female' },
         ],
         class: 'tw-mb-1',
       },
       eventHandlers: {
         change: (value) => {
-          /* handle change event */
+          // 変更イベントを処理
         },
       },
     },
-    // Range slider item
+    // レンジスライダー用の項目
     {
       itemType: 'rangeSlider',
       itemName: 'ageRange',
-      label: '年龄范围',
-      labelWidth: '80px',
+      label: $t('views.form.ageRange.label'),
+      labelWidth: '150px',
       props: {
         min: 0,
         max: 100,
@@ -162,94 +164,91 @@ const formOptions = reactive<JpFormOptions>({
       },
       eventHandlers: {
         change: (value) => {
-          /* handle change event */
+          // 変更イベントを処理
         },
       },
     },
 
-    // Switch item
+    // スイッチ用の項目
     {
       itemType: 'switch',
       itemName: 'newsletter',
-      label: '订阅新闻',
-      labelWidth: '80px',
+      label: $t('views.form.newsletter.label'),
+      labelWidth: '150px',
       props: {
         class: 'tw-mb-1',
       },
       eventHandlers: {
         change: (el) => {
-          /* handle change event */
+          // 変更イベントを処理
         },
       },
     },
 
-    // Textarea item
+    // テキストエリア用の項目
     {
       itemType: 'textarea',
       itemName: 'description',
-      label: '描述',
-      labelWidth: '80px',
+      label: $t('views.form.description.label'),
+      labelWidth: '150px',
       props: {
-        placeholder: '请输入描述',
+        placeholder: $t('views.form.description.placeholder'),
         class: 'tw-mb-1',
       },
       eventHandlers: {
         input: (event) => {
-          /* handle input event */
+          // 入力イベントを処理
         },
       },
     },
-    // CustomEl item
+    // チェックボックス用の項目
+    {
+      itemType: 'checkbox',
+      itemName: 'agreeTerms',
+      props: {
+        label: $t('views.form.agreeTerms.checkboxLabel'),
+      },
+      eventHandlers: {
+        change: (el) => {
+          // 変更イベントを処理
+        },
+        click: () => {
+          // クリックイベントを処理
+        },
+      },
+    },
+    // カスタム要素用の項目
     {
       itemType: 'customEl',
       itemName: 'memo',
-      label: '备注',
-      labelWidth: '80px',
+      label: $t('views.form.memo.label'),
+      labelWidth: '150px',
       props: {
-        placeholder: '请输入备注',
-        class: 'tw-mb-1',
+        placeholder: $t('views.form.memo.placeholder'),
+        class: 'tw-mb-4',
         customContent: (
           <VCard
             class="tw-h-24 tw-p-2 tw-bg-slate-100"
             variant="outlined"
             density="comfortable"
           >
-            <div>这是一个自定义的 DIV 元素</div>
-            <div>当前方式可以避免复杂的html结构。</div>
-            <div>只需要配置formOptions就可以实现form的创建</div>
+            <div>{$t('views.form.memo.customContent.cardContent.0')}</div>
+            <div>{$t('views.form.memo.customContent.cardContent.1')}</div>
+            <div>{$t('views.form.memo.customContent.cardContent.2')}</div>
           </VCard>
         ),
       },
+      eventHandlers: {
+        // カスタム要素のイベントを処理
+      },
+    },
 
-      eventHandlers: {
-        //
-      },
-    },
-    // Checkbox item
-    {
-      itemType: 'checkbox',
-      itemName: 'agreeTerms',
-      label: '同意条款',
-      labelWidth: '80px',
-      props: {
-        class: 'tw-mb-1',
-        label: '我同意条款和条件',
-      },
-      eventHandlers: {
-        change: (el) => {
-          /* handle change event */
-        },
-        click: () => {
-          /* handle click event */
-        },
-      },
-    },
-    // Button item
+    // ボタン用の項目
     {
       itemType: 'button',
       itemName: 'submitButton',
       props: {
-        label: '提交',
+        label: $t('views.form.submitButton.label'),
         color: 'blue',
         size: 'large',
         variant: 'tonal',
@@ -258,20 +257,20 @@ const formOptions = reactive<JpFormOptions>({
       eventHandlers: {
         click: async () => {
           if (await formRef.value.validateForm()) {
-            // 表单验证通过，进行提交操作
+            // フォームが有効な場合、提出処理を行う
             console.log(formRef.value.formData);
-            showAlert({
-              message: 'This is an alert timeout!',
-              // timeout: 3000,
-              props: {
-                type: 'success',
-                closable: true,
-                border: 'start',
-                borderColor: 'white',
-              },
-            });
+            // showAlert({
+            //   message: $t('views.form.submitButton.alert.message'),
+            //   // timeout: 3000,
+            //   props: {
+            //     type: $t('views.form.submitButton.alert.type'),
+            //     closable: $t('views.form.submitButton.alert.closable'),
+            //     border: $t('views.form.submitButton.alert.border'),
+            //     borderColor: $t('views.form.submitButton.alert.borderColor'),
+            //   },
+            // });
           } else {
-            // 表单验证失败
+            // フォームが無効な場合
             console.log('Form validation failed');
           }
         },
@@ -280,21 +279,36 @@ const formOptions = reactive<JpFormOptions>({
   ],
   rules: {
     email: [
-      (value: any) => !!value || '请输入邮箱',
-      (value: any) => /.+@.+\..+/.test(value) || '请输入有效的邮箱地址',
+      (value: any) => !!value || $t('views.form.email.validation.required'),
+      (value: any) =>
+        /.+@.+\..+/.test(value) || $t('views.form.email.validation.invalid'),
     ],
     password: [
-      (value: any) => !!value || '请输入密码',
-      (value: any) => (value && value.length >= 6) || '密码长度至少为6个字符',
+      (value: any) => !!value || $t('views.form.password.validation.required'),
+      (value: any) =>
+        (value && value.length >= 6) ||
+        $t('views.form.password.validation.length'),
     ],
     frontEnd: [
-      (value: any) => (value && value.length > 0) || '请选择至少一个前端框架',
+      (value: any) =>
+        (value && value.length > 0) ||
+        $t('views.form.frontEnd.validation.required'),
     ],
-    agreeTerms: [(value: any) => !!value || '您必须同意条款'],
-    gender: [(value: any) => !!value || '请选择性别'],
-    ageRange: [(value: any) => value != null || '请选择年龄范围'],
+    agreeTerms: [
+      (value: any) =>
+        !!value || $t('views.form.agreeTerms.validation.required'),
+    ],
+    gender: [
+      (value: any) => !!value || $t('views.form.gender.validation.required'),
+    ],
+    ageRange: [
+      (value: any) =>
+        value != null || $t('views.form.ageRange.validation.required'),
+    ],
     skills: [
-      (value: any) => (value && value.length > 0) || '请选择至少一个技能',
+      (value: any) =>
+        (value && value.length > 0) ||
+        $t('views.form.skills.validation.required'),
     ],
   },
 });

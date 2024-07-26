@@ -43,10 +43,100 @@
       "error": "エラー",
       "timeoutClose": "タイムアウトクローズ",
       "autoClose": "3秒後自動クローズ",
-      "clearAll": "关闭所有弹出框",
-      "close": "关闭",
+      "clearAll": "すべてのアラートを閉じる",
+      "close": "閉じる",
       "demoDescription": "この画面は関数呼び出しによるv-alertのデモ画面です。",
       "documentationLink": "その他の設定については、vuetifyのドキュメントを参照してください。"
+    },
+    "form": {
+      "email": {
+        "label": "メールアドレス",
+        "placeholder": "メールアドレスを入力してください",
+        "validation": {
+          "required": "メールアドレスを入力してください",
+          "invalid": "有効なメールアドレスを入力してください"
+        }
+      },
+      "password": {
+        "label": "パスワード",
+        "placeholder": "パスワードを入力してください",
+        "validation": {
+          "required": "パスワードを入力してください",
+          "length": "パスワードは6文字以上でなければなりません"
+        }
+      },
+      "frontEnd": {
+        "label": "フロントエンド",
+        "placeholder": "得意なフロントエンドフレームワークを選択してください",
+        "validation": {
+          "required": "少なくとも1つのフレームワークを選択してください"
+        }
+      },
+      "skills": {
+        "label": "スキル",
+        "placeholder": "スキルを選択してください",
+        "validation": {
+          "required": "少なくとも1つのスキルを選択してください"
+        }
+      },
+      "reminderTime": {
+        "label": "リマインダー時間",
+        "placeholder": "時間を選択してください"
+      },
+      "birthDate": {
+        "label": "生年月日",
+        "placeholder": "日付を選択してください"
+      },
+      "gender": {
+        "label": "性別",
+        "male": "男性",
+        "female": "女性",
+        "validation": {
+          "required": "性別を選択してください"
+        }
+      },
+      "ageRange": {
+        "label": "年齢範囲",
+        "validation": {
+          "required": "年齢範囲を選択してください"
+        }
+      },
+      "description": {
+        "label": "説明",
+        "placeholder": "説明を入力してください"
+      },
+      "memo": {
+        "label": "メモ",
+        "placeholder": "メモを入力してください",
+        "customContent": {
+          "cardTitle": "カスタムカード",
+          "cardContent": [
+            "これはカスタム DIV 要素です",
+            "この方法で複雑な HTML 構造を回避できます。",
+            "formOptions を設定するだけでフォームが作成できます"
+          ]
+        }
+      },
+      "agreeTerms": {
+        "label": "利用規約に同意する",
+        "checkboxLabel": "利用規約に同意します",
+        "validation": {
+          "required": "利用規約に同意する必要があります"
+        }
+      },
+      "newsletter": {
+        "label": "ニュースレター"
+      },
+      "submitButton": {
+        "label": "送信",
+        "alert": {
+          "message": "アラートタイムアウトです！",
+          "type": "success",
+          "closable": true,
+          "border": "start",
+          "borderColor": "white"
+        }
+      }
     }
   }
 }

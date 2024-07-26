@@ -41,6 +41,4 @@ watch(isChecked, (newValue) => {
 });
 </script>
 
-<style scoped>
-/* 你可以根据需要自定义样式 */
-</style>
+<style scoped></style>
