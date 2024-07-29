@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <div v-for="(alert, index) in alerts" :key="alert.id">
-      <v-alert
-        v-bind="alert.props"
-        :class="alertClasses"
-        :style="getTopStyle(index)"
-        @click="removeAlert(alert.id)"
-      >
-        {{ alert.message }}
-      </v-alert>
-    </div>
+  <div
+    v-for="(alert, index) in alerts"
+    :key="alert.id"
+    class="tw-flex tw-justify-center tw-content-center"
+  >
+    <v-alert
+      v-bind="alert.props"
+      :class="alertClasses"
+      :style="getTopStyle(index)"
+      @click="removeAlert(alert.id)"
+    >
+      {{ alert.message }}
+    </v-alert>
   </div>
 </template>
 
@@ -31,8 +33,8 @@ export default defineComponent({
 
     const alertClasses = computed(() =>
       mobile.value
-        ? ['tw-absolute', 'tw-z-[9999]', 'tw-inset-x-[15px]', 'tw-w-auto']
-        : ['tw-absolute', 'tw-z-[9999]', 'tw-inset-x-[20%]', 'tw-w-auto']
+        ? ['tw-fixed', 'tw-z-[9999]', 'tw-inset-x-[15px]', 'tw-w-auto']
+        : ['tw-fixed', 'tw-z-[9999]']
     );
 
     const getTopStyle = (index: number) => {

@@ -12,13 +12,14 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { reactive, ref } from 'vue';
 import JpForm from '@/components/JpForm/index.vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
 import logo from '@/assets/logo/logo.png';
 import { useAuthStore } from '@/store/auth';
 import { useRouter } from 'vue-router';
+import { VCard } from 'vuetify/components';
 // import { userLogin } from '@/api/user';
 const router = useRouter();
 const authStore = useAuthStore();
@@ -97,6 +98,22 @@ const formOptions = reactive<JpFormOptions>({
         click: () => {
           // alert(123);
         },
+      },
+    },
+    {
+      itemType: 'customEl',
+      itemName: 'memo',
+      props: {
+        class: 'tw-mb-4 tw-text-zinc-900 tw-bg-gray-300 tw-p-2',
+        customContent: (
+          <div>
+            <div>ようこそ、ご利用いただきありがとうございます</div>
+            <div>万事順調をお祈りします</div>
+          </div>
+        ),
+      },
+      eventHandlers: {
+        //
       },
     },
 
