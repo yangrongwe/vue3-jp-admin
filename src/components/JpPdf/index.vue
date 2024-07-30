@@ -45,10 +45,10 @@
       <canvas ref="pdfCanvas" class="tw-canvas"></canvas>
     </div>
     <div class="tw-text-center tw-mt-4">
-      <!-- 根据 isAllPages 渲染不同的页数信息 -->
       <template v-if="isAllPages"> ページ総数: {{ totalPages }} </template>
       <template v-else> ページ {{ currentPage }} / {{ totalPages }} </template>
     </div>
+    <div ref="textLayer" class="tw-text-layer"></div>
   </div>
 </template>
 
@@ -57,7 +57,9 @@ import { ref, onMounted, computed } from 'vue';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 import { useResizeObserver } from '@vueuse/core';
 import pdf from '@/assets/helloworld.pdf';
-// 设置 workerSrc 为本地路径中的 pdf.worker.mjs
+import { TextLayerBuilder } from 'pdfjs-dist/web/pdf_viewer.mjs';
+import 'pdfjs-dist/web/pdf_viewer.css';
+
 GlobalWorkerOptions.workerSrc =
   '../../../node_modules/pdfjs-dist/build/pdf.worker.mjs';
 
@@ -67,16 +69,16 @@ const pdfContainer = ref<HTMLDivElement | null>(null);
 const currentPage = ref(1);
 const totalPages = ref(0);
 const scale = ref(1.5);
-const zoomPercentage = ref(150); // 初始化为 150%
-const maxZoom = 4.0; // 最大缩放比例
-const minZoom = 0.1; // 最小缩放比例
-const rotation = ref(0); // 添加旋转状态
+const zoomPercentage = ref(150);
+const maxZoom = 4.0;
+const minZoom = 0.1;
+const rotation = ref(0);
 
-const isAllPages = ref(false); // 视图模式标识
-const initialScale = 1.5; // 初始缩放比例
-const initialZoomPercentage = 150; // 初始缩放百分比
-const initialOffsetX = 0; // 初始X偏移
-const initialOffsetY = 0; // 初始Y偏移
+const isAllPages = ref(false);
+const initialScale = 1.5;
+const initialZoomPercentage = 150;
+const initialOffsetX = 0;
+const initialOffsetY = 0;
 
 const zoomInDisabled = computed(() => scale.value >= maxZoom);
 const zoomOutDisabled = computed(() => scale.value <= minZoom);
@@ -86,11 +88,12 @@ let pendingRender = false;
 let isDragging = false;
 let startX = 0;
 let startY = 0;
-let offsetX = initialOffsetX; // X偏移初始化
-let offsetY = initialOffsetY; // Y偏移初始化
+let offsetX = initialOffsetX;
+let offsetY = initialOffsetY;
+const textLayer = ref<HTMLDivElement | null>(null);
 
 const renderPDF = async (pageNum?: number) => {
-  if (pdfCanvas.value) {
+  if (pdfCanvas.value && textLayer.value) {
     if (renderTask) {
       await renderTask;
     }
@@ -151,7 +154,36 @@ const renderPDF = async (pageNum?: number) => {
       renderTask = page.render(renderContext).promise;
       await renderTask;
     }
+    // Clear the previous text layer content
+    if (textLayer.value) {
+      textLayer.value.innerHTML = '';
+    }
 
+    if (isAllPages.value) {
+      for (let i = 1; i <= totalPages.value; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: scale.value });
+        const textLayerBuilder = new TextLayerBuilder({
+          pdfPage: page,
+          highlighter: null,
+          accessibilityManager: null,
+          enablePermissions: false,
+        });
+        textLayerBuilder.div = textLayer.value!;
+        await textLayerBuilder.render(viewport);
+      }
+    } else {
+      const page = await pdf.getPage(pageNum || 1);
+      const viewport = page.getViewport({ scale: scale.value });
+      const textLayerBuilder = new TextLayerBuilder({
+        pdfPage: page,
+        highlighter: null,
+        accessibilityManager: null,
+        enablePermissions: false,
+      });
+      textLayerBuilder.div = textLayer.value!;
+      await textLayerBuilder.render(viewport);
+    }
     pendingRender = false;
     centerCanvas();
   }
@@ -209,7 +241,7 @@ const reset = () => {
   zoomPercentage.value = initialZoomPercentage;
   offsetX = initialOffsetX;
   offsetY = initialOffsetY;
-  rotation.value = 0; // 重置旋转角度
+  rotation.value = 0;
 
   if (pdfCanvas.value) {
     pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation.value}deg)`;
