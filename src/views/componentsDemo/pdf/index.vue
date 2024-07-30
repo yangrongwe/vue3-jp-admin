@@ -1,11 +1,12 @@
 <template>
-  <jp-main-area>
-    <div>
-      <h1 class="text-3xl font-bold underline">pdf</h1>
-    </div>
+  <jp-main-area :h-full="true">
+    <PdfViewer :pdf="url" />
   </jp-main-area>
 </template>
 
 <script setup lang="ts">
 import JpMainArea from '@/components/JpLayout/layout/JpMainArea.vue';
+import PdfViewer from '@/components/JpPdf/index.vue';
+const url =
+  'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf';
 </script>

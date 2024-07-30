@@ -1,5 +1,5 @@
 <template>
-  <jp-main-area>
+  <jp-main-area :h-full="true">
     <div>
       <h1 class="text-3xl font-bold underline">Table</h1>
     </div>
