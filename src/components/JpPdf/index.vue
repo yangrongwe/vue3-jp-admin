@@ -2,13 +2,17 @@
   <div class="tw-container tw-mx-auto tw-p-4">
     <div class="tw-flex tw-justify-between tw-mb-4">
       <div>
-        <button @click="prevPage" class="tw-btn">前のページ</button>
-        <button @click="nextPage" class="tw-btn">次のページ</button>
+        <v-btn @click="prevPage" class="tw-btn" :disabled="isAllPages">
+          前のページ
+        </v-btn>
+        <v-btn @click="nextPage" class="tw-btn" :disabled="isAllPages">
+          次のページ
+        </v-btn>
       </div>
       <div class="tw-flex tw-items-center">
-        <button @click="zoomOut" :disabled="zoomOutDisabled" class="tw-btn">
+        <v-btn @click="zoomOut" :disabled="zoomOutDisabled" class="tw-btn">
           縮小
-        </button>
+        </v-btn>
         <input
           type="number"
           v-model.number="zoomPercentage"
@@ -17,14 +21,18 @@
           min="10"
           step="1"
         />
-        <button @click="zoomIn" :disabled="zoomInDisabled" class="tw-btn">
+        <v-btn @click="zoomIn" :disabled="zoomInDisabled" class="tw-btn">
           拡大
-        </button>
+        </v-btn>
       </div>
       <div>
-        <button @click="downloadPDF" class="tw-btn">ダウンロード</button>
-        <button @click="reset" class="tw-btn tw-bg-red-500">リセット</button>
-        <!-- 新的还原按钮 -->
+        <v-btn @click="downloadPDF" class="tw-btn">ダウンロード</v-btn>
+        <v-btn @click="reset" class="tw-btn tw-bg-red-500">リセット</v-btn>
+        <v-btn @click="toggleView" class="tw-btn">
+          {{ isAllPages ? '単ページ表示' : '全ページ表示' }}
+        </v-btn>
+        <v-btn @click="rotateLeft" class="tw-btn"> 左に回転 </v-btn>
+        <v-btn @click="rotateRight" class="tw-btn"> 右に回転 </v-btn>
       </div>
     </div>
     <div
@@ -37,7 +45,9 @@
       <canvas ref="pdfCanvas" class="tw-canvas"></canvas>
     </div>
     <div class="tw-text-center tw-mt-4">
-      ページ {{ currentPage }} / {{ totalPages }}
+      <!-- 根据 isAllPages 渲染不同的页数信息 -->
+      <template v-if="isAllPages"> ページ総数: {{ totalPages }} </template>
+      <template v-else> ページ {{ currentPage }} / {{ totalPages }} </template>
     </div>
   </div>
 </template>
@@ -60,7 +70,9 @@ const scale = ref(1.5);
 const zoomPercentage = ref(150); // 初始化为 150%
 const maxZoom = 4.0; // 最大缩放比例
 const minZoom = 0.1; // 最小缩放比例
+const rotation = ref(0); // 添加旋转状态
 
+const isAllPages = ref(false); // 视图模式标识
 const initialScale = 1.5; // 初始缩放比例
 const initialZoomPercentage = 150; // 初始缩放百分比
 const initialOffsetX = 0; // 初始X偏移
@@ -77,7 +89,7 @@ let startY = 0;
 let offsetX = initialOffsetX; // X偏移初始化
 let offsetY = initialOffsetY; // Y偏移初始化
 
-const renderPDF = async (pageNum: number) => {
+const renderPDF = async (pageNum?: number) => {
   if (pdfCanvas.value) {
     if (renderTask) {
       await renderTask;
@@ -97,22 +109,50 @@ const renderPDF = async (pageNum: number) => {
     const pdf = await loadingTask.promise;
     totalPages.value = pdf.numPages;
 
-    const page = await pdf.getPage(pageNum);
-    const viewport = page.getViewport({ scale: scale.value });
-    pdfCanvas.value.height = viewport.height * window.devicePixelRatio;
-    pdfCanvas.value.width = viewport.width * window.devicePixelRatio;
-    context?.scale(window.devicePixelRatio, window.devicePixelRatio);
+    if (isAllPages.value) {
+      let totalHeight = 0;
+      let maxWidth = 0;
+      for (let i = 1; i <= totalPages.value; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: scale.value });
+        totalHeight += viewport.height;
+        maxWidth = Math.max(maxWidth, viewport.width);
+      }
 
-    const renderContext = {
-      canvasContext: context,
-      viewport: viewport,
-    };
+      pdfCanvas.value.height = totalHeight * window.devicePixelRatio;
+      pdfCanvas.value.width = maxWidth * window.devicePixelRatio;
+      context?.scale(window.devicePixelRatio, window.devicePixelRatio);
 
-    renderTask = page.render(renderContext).promise;
-    await renderTask;
+      for (let i = 1; i <= totalPages.value; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: scale.value });
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport,
+        };
+
+        renderTask = page.render(renderContext).promise;
+        await renderTask;
+
+        context.translate(0, viewport.height);
+      }
+    } else {
+      const page = await pdf.getPage(pageNum || 1);
+      const viewport = page.getViewport({ scale: scale.value });
+      pdfCanvas.value.height = viewport.height * window.devicePixelRatio;
+      pdfCanvas.value.width = viewport.width * window.devicePixelRatio;
+      context?.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      const renderContext = {
+        canvasContext: context,
+        viewport: viewport,
+      };
+
+      renderTask = page.render(renderContext).promise;
+      await renderTask;
+    }
+
     pendingRender = false;
-
-    // 调整canvas位置
     centerCanvas();
   }
 };
@@ -121,7 +161,7 @@ const zoomIn = () => {
   if (scale.value < maxZoom) {
     scale.value *= 1.1;
     zoomPercentage.value = Math.round(scale.value * 100);
-    renderPDF(currentPage.value);
+    renderPDF(isAllPages.value ? undefined : currentPage.value);
   }
 };
 
@@ -129,27 +169,31 @@ const zoomOut = () => {
   if (scale.value > minZoom) {
     scale.value /= 1.1;
     zoomPercentage.value = Math.round(scale.value * 100);
-    renderPDF(currentPage.value);
+    renderPDF(isAllPages.value ? undefined : currentPage.value);
   }
 };
 
 const updateZoom = () => {
   scale.value = zoomPercentage.value / 100;
   scale.value = Math.min(Math.max(scale.value, minZoom), maxZoom);
-  renderPDF(currentPage.value);
+  renderPDF(isAllPages.value ? undefined : currentPage.value);
 };
 
 const prevPage = () => {
-  if (currentPage.value > 1) {
+  if (currentPage.value > 1 && !isAllPages.value) {
     currentPage.value--;
     renderPDF(currentPage.value);
+  } else if (isAllPages.value) {
+    renderPDF();
   }
 };
 
 const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
+  if (currentPage.value < totalPages.value && !isAllPages.value) {
     currentPage.value++;
     renderPDF(currentPage.value);
+  } else if (isAllPages.value) {
+    renderPDF();
   }
 };
 
@@ -161,21 +205,48 @@ const downloadPDF = () => {
 };
 
 const reset = () => {
-  // 还原到初始状态
   scale.value = initialScale;
   zoomPercentage.value = initialZoomPercentage;
   offsetX = initialOffsetX;
   offsetY = initialOffsetY;
+  rotation.value = 0; // 重置旋转角度
 
   if (pdfCanvas.value) {
-    pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-    centerCanvas(); // 确保canvas在还原时居中显示
+    pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation.value}deg)`;
+    centerCanvas();
   }
 
-  renderPDF(currentPage.value);
+  if (pdfContainer.value) {
+    pdfContainer.value.scrollTop = 0;
+    pdfContainer.value.scrollLeft = 0;
+  }
+
+  renderPDF(isAllPages.value ? undefined : currentPage.value);
 };
 
-// 计算canvas X 轴居中显示
+const toggleView = () => {
+  isAllPages.value = !isAllPages.value;
+  if (isAllPages.value) {
+    renderPDF();
+  } else {
+    renderPDF(currentPage.value);
+  }
+};
+
+const rotateLeft = () => {
+  rotation.value -= 90;
+  if (pdfCanvas.value) {
+    pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation.value}deg)`;
+  }
+};
+
+const rotateRight = () => {
+  rotation.value += 90;
+  if (pdfCanvas.value) {
+    pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation.value}deg)`;
+  }
+};
+
 const centerCanvas = () => {
   if (pdfCanvas.value && pdfContainer.value) {
     const containerWidth = pdfContainer.value.clientWidth;
@@ -183,56 +254,37 @@ const centerCanvas = () => {
 
     const offsetX = (containerWidth - canvasWidth) / 2;
 
-    pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation.value}deg)`;
   }
 };
 
 const startDrag = (event: MouseEvent) => {
-  if (pdfCanvas.value) {
-    isDragging = true;
-    startX = event.clientX - offsetX;
-    startY = event.clientY - offsetY;
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', stopDrag);
-  }
-};
-
-const drag = (event: MouseEvent) => {
-  if (isDragging && pdfCanvas.value && pdfContainer.value) {
-    const containerRect = pdfContainer.value.getBoundingClientRect();
-    const canvasRect = pdfCanvas.value.getBoundingClientRect();
-
-    // 计算新的偏移量
-    let newOffsetX = event.clientX - startX;
-    let newOffsetY = event.clientY - startY;
-
-    // 限制拖动范围，允许canvas部分内容超出容器边界
-    const maxOffsetX = Math.min(0, -canvasRect.width + containerRect.width);
-    const maxOffsetY = Math.min(0, -canvasRect.height + containerRect.height);
-
-    newOffsetX = Math.max(newOffsetX, maxOffsetX);
-    newOffsetY = Math.max(newOffsetY, maxOffsetY);
-
-    offsetX = newOffsetX;
-    offsetY = newOffsetY;
-
-    // 更新canvas位置
-    pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-  }
+  isDragging = true;
+  startX = event.clientX - offsetX;
+  startY = event.clientY - offsetY;
 };
 
 const stopDrag = () => {
   isDragging = false;
-  document.removeEventListener('mousemove', drag);
-  document.removeEventListener('mouseup', stopDrag);
+};
+
+const drag = (event: MouseEvent) => {
+  if (isDragging && pdfCanvas.value) {
+    offsetX = event.clientX - startX;
+    offsetY = event.clientY - startY;
+    pdfCanvas.value.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation.value}deg)`;
+  }
 };
 
 onMounted(() => {
-  renderPDF(currentPage.value);
-});
+  if (pdfContainer.value) {
+    useResizeObserver(pdfContainer.value, () => {
+      centerCanvas();
+      renderPDF(isAllPages.value ? undefined : currentPage.value);
+    });
+  }
 
-useResizeObserver(pdfContainer, () => {
-  renderPDF(currentPage.value);
+  renderPDF(isAllPages.value ? undefined : currentPage.value);
 });
 </script>
 
@@ -248,15 +300,15 @@ input[type='number'] {
 .tw-relative {
   position: relative;
   width: 100%;
-  height: 500px; /* 可以调整为所需的固定高度 */
-  overflow: auto; /* 允许滚动 */
+  height: 500px;
+  overflow: auto;
 }
 
 .tw-canvas {
   position: absolute;
   top: 0;
   left: 0;
-  transition: transform 0.1s; /* 平滑拖动效果 */
-  cursor: grab; /* 提示用户可以拖动 */
+  transition: transform 0.1s;
+  cursor: grab;
 }
 </style>
