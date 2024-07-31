@@ -81,10 +81,9 @@ import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 import { useResizeObserver } from '@vueuse/core';
 import { TextLayerBuilder } from 'pdfjs-dist/web/pdf_viewer.mjs';
 import 'pdfjs-dist/web/pdf_viewer.css';
-
 // PDF.jsのワーカーのパスを設定
 GlobalWorkerOptions.workerSrc =
-  '../../../node_modules/pdfjs-dist/build/pdf.worker.mjs';
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.mjs';
 
 // コンポーネントのプロパティを定義
 const props = defineProps({
