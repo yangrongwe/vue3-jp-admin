@@ -3,15 +3,22 @@
     <div class="tw-flex tw-justify-between tw-mb-4">
       <div>
         <v-btn @click="prevPage" class="tw-btn" :disabled="isAllPages">
-          前のページ
+          {{ $t('views.pdf.prevPage') }}
         </v-btn>
         <v-btn @click="nextPage" class="tw-btn" :disabled="isAllPages">
-          次のページ
+          {{ $t('views.pdf.nextPage') }}
+        </v-btn>
+        <v-btn @click="toggleView" class="tw-btn">
+          {{
+            isAllPages
+              ? $t('views.pdf.singlePageView')
+              : $t('views.pdf.allPagesView')
+          }}
         </v-btn>
       </div>
       <div class="tw-flex tw-items-center">
         <v-btn @click="zoomOut" :disabled="zoomOutDisabled" class="tw-btn">
-          縮小
+          {{ $t('views.pdf.zoomOut') }}
         </v-btn>
         <input
           type="number"
@@ -22,17 +29,26 @@
           step="1"
         />
         <v-btn @click="zoomIn" :disabled="zoomInDisabled" class="tw-btn">
-          拡大
+          {{ $t('views.pdf.zoomIn') }}
         </v-btn>
       </div>
       <div>
-        <v-btn @click="downloadPDF" class="tw-btn">ダウンロード</v-btn>
-        <v-btn @click="reset" class="tw-btn tw-bg-red-500">リセット</v-btn>
-        <v-btn @click="toggleView" class="tw-btn">
-          {{ isAllPages ? '単ページ表示' : '全ページ表示' }}
-        </v-btn>
-        <v-btn @click="rotateLeft" class="tw-btn"> 左に回転 </v-btn>
-        <v-btn @click="rotateRight" class="tw-btn"> 右に回転 </v-btn>
+        <v-btn @click="downloadPDF" class="tw-btn">{{
+          $t('views.pdf.download')
+        }}</v-btn>
+        <v-btn @click="reset" class="tw-btn tw-bg-red-500">{{
+          $t('views.pdf.reset')
+        }}</v-btn>
+
+        <v-btn @click="rotateLeft" class="tw-btn">{{
+          $t('views.pdf.rotateLeft')
+        }}</v-btn>
+        <v-btn @click="rotateRight" class="tw-btn">{{
+          $t('views.pdf.rotateRight')
+        }}</v-btn>
+        <v-btn @click="alertText" class="tw-btn">{{
+          $t('views.pdf.alertText')
+        }}</v-btn>
       </div>
     </div>
     <div
@@ -44,11 +60,18 @@
     >
       <canvas ref="pdfCanvas" class="tw-canvas"></canvas>
     </div>
+
     <div class="tw-text-center tw-mt-4">
-      <template v-if="isAllPages"> ページ総数: {{ totalPages }} </template>
-      <template v-else> ページ {{ currentPage }} / {{ totalPages }} </template>
+      <template v-if="isAllPages">
+        {{ $t('views.pdf.totalPages', { count: totalPages }) }}
+      </template>
+      <template v-else>
+        {{
+          $t('views.pdf.pageInfo', { current: currentPage, total: totalPages })
+        }}
+      </template>
     </div>
-    <div ref="textLayer" class="tw-text-layer"></div>
+    <div ref="textLayer" class="tw-text-layer" v-show="false"></div>
   </div>
 </template>
 
@@ -56,23 +79,43 @@
 import { ref, onMounted, computed } from 'vue';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 import { useResizeObserver } from '@vueuse/core';
-import pdf from '@/assets/helloworld.pdf';
 import { TextLayerBuilder } from 'pdfjs-dist/web/pdf_viewer.mjs';
 import 'pdfjs-dist/web/pdf_viewer.css';
 
+// PDF.jsのワーカーのパスを設定
 GlobalWorkerOptions.workerSrc =
   '../../../node_modules/pdfjs-dist/build/pdf.worker.mjs';
 
-const pdfUrl = pdf;
+// コンポーネントのプロパティを定義
+const props = defineProps({
+  pdfUrl: {
+    type: String,
+    default: '',
+  },
+  pdfName: {
+    type: String,
+    default: 'test.pdf',
+  },
+  initialZoom: {
+    type: Number,
+    default: 150,
+  },
+  initialRotation: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const pdfUrl = ref(props.pdfUrl);
 const pdfCanvas = ref<HTMLCanvasElement | null>(null);
 const pdfContainer = ref<HTMLDivElement | null>(null);
 const currentPage = ref(1);
 const totalPages = ref(0);
-const scale = ref(1.5);
-const zoomPercentage = ref(150);
+const scale = ref(props.initialZoom / 100);
+const zoomPercentage = ref(props.initialZoom);
 const maxZoom = 4.0;
 const minZoom = 0.1;
-const rotation = ref(0);
+const rotation = ref(props.initialRotation);
 
 const isAllPages = ref(false);
 const initialScale = 1.5;
@@ -92,6 +135,7 @@ let offsetX = initialOffsetX;
 let offsetY = initialOffsetY;
 const textLayer = ref<HTMLDivElement | null>(null);
 
+// PDFをレンダリングする関数
 const renderPDF = async (pageNum?: number) => {
   if (pdfCanvas.value && textLayer.value) {
     if (renderTask) {
@@ -108,7 +152,7 @@ const renderPDF = async (pageNum?: number) => {
     }
 
     pendingRender = true;
-    const loadingTask = getDocument(pdfUrl);
+    const loadingTask = getDocument(pdfUrl.value);
     const pdf = await loadingTask.promise;
     totalPages.value = pdf.numPages;
 
@@ -154,7 +198,8 @@ const renderPDF = async (pageNum?: number) => {
       renderTask = page.render(renderContext).promise;
       await renderTask;
     }
-    // Clear the previous text layer content
+
+    // 以前のテキストレイヤーの内容をクリア
     if (textLayer.value) {
       textLayer.value.innerHTML = '';
     }
@@ -184,11 +229,13 @@ const renderPDF = async (pageNum?: number) => {
       textLayerBuilder.div = textLayer.value!;
       await textLayerBuilder.render(viewport);
     }
+
     pendingRender = false;
     centerCanvas();
   }
 };
 
+// ズームインの処理
 const zoomIn = () => {
   if (scale.value < maxZoom) {
     scale.value *= 1.1;
@@ -197,6 +244,7 @@ const zoomIn = () => {
   }
 };
 
+// ズームアウトの処理
 const zoomOut = () => {
   if (scale.value > minZoom) {
     scale.value /= 1.1;
@@ -205,12 +253,14 @@ const zoomOut = () => {
   }
 };
 
+// ズームの更新処理
 const updateZoom = () => {
   scale.value = zoomPercentage.value / 100;
   scale.value = Math.min(Math.max(scale.value, minZoom), maxZoom);
   renderPDF(isAllPages.value ? undefined : currentPage.value);
 };
 
+// 前のページに移動する処理
 const prevPage = () => {
   if (currentPage.value > 1 && !isAllPages.value) {
     currentPage.value--;
@@ -220,6 +270,7 @@ const prevPage = () => {
   }
 };
 
+// 次のページに移動する処理
 const nextPage = () => {
   if (currentPage.value < totalPages.value && !isAllPages.value) {
     currentPage.value++;
@@ -229,13 +280,15 @@ const nextPage = () => {
   }
 };
 
+// PDFをダウンロードする処理
 const downloadPDF = () => {
   const link = document.createElement('a');
-  link.href = pdfUrl;
-  link.download = 'your.pdf';
+  link.href = pdfUrl.value;
+  link.download = props.pdfName;
   link.click();
 };
 
+// リセット処理
 const reset = () => {
   scale.value = initialScale;
   zoomPercentage.value = initialZoomPercentage;
@@ -256,6 +309,7 @@ const reset = () => {
   renderPDF(isAllPages.value ? undefined : currentPage.value);
 };
 
+// 表示モードを切り替える処理
 const toggleView = () => {
   isAllPages.value = !isAllPages.value;
   if (isAllPages.value) {
@@ -265,6 +319,7 @@ const toggleView = () => {
   }
 };
 
+// 左に回転する処理
 const rotateLeft = () => {
   rotation.value -= 90;
   if (pdfCanvas.value) {
@@ -272,6 +327,7 @@ const rotateLeft = () => {
   }
 };
 
+// 右に回転する処理
 const rotateRight = () => {
   rotation.value += 90;
   if (pdfCanvas.value) {
@@ -279,6 +335,12 @@ const rotateRight = () => {
   }
 };
 
+// テキストレイヤーの内容をアラート表示する処理
+const alertText = () => {
+  alert(textLayer.value.innerText);
+};
+
+// キャンバスを中央に配置する処理
 const centerCanvas = () => {
   if (pdfCanvas.value && pdfContainer.value) {
     const containerWidth = pdfContainer.value.clientWidth;
@@ -290,16 +352,19 @@ const centerCanvas = () => {
   }
 };
 
+// ドラッグ開始の処理
 const startDrag = (event: MouseEvent) => {
   isDragging = true;
   startX = event.clientX - offsetX;
   startY = event.clientY - offsetY;
 };
 
+// ドラッグ終了の処理
 const stopDrag = () => {
   isDragging = false;
 };
 
+// ドラッグ中の処理
 const drag = (event: MouseEvent) => {
   if (isDragging && pdfCanvas.value) {
     offsetX = event.clientX - startX;
@@ -308,6 +373,7 @@ const drag = (event: MouseEvent) => {
   }
 };
 
+// コンポーネントのマウント時に呼ばれる処理
 onMounted(() => {
   if (pdfContainer.value) {
     useResizeObserver(pdfContainer.value, () => {

@@ -137,6 +137,21 @@
           "borderColor": "white"
         }
       }
+    },
+    "pdf": {
+      "prevPage": "前のページ",
+      "nextPage": "次のページ",
+      "singlePageView": "単一ページ表示",
+      "allPagesView": "全ページ表示",
+      "zoomOut": "縮小",
+      "zoomIn": "拡大",
+      "download": "ダウンロード",
+      "reset": "リセット",
+      "rotateLeft": "左に回転",
+      "rotateRight": "右に回転",
+      "alertText": "メッセージ",
+      "totalPages": "全ページ数: {count}",
+      "pageInfo": "ページ {current} / {total}"
     }
   }
 }
