@@ -79,7 +79,7 @@ const mainMenuRoutes: RouteRecordRaw[] = [
           unShow: false,
           roles: ['admin', 'user'],
         },
-        component: () => import('@/views/componentsDemo/alert/index.vue'),
+        component: () => import('@/views/componentsDemo/modal/index.vue'),
       },
     ],
   },

@@ -153,5 +153,15 @@
       "totalPages": "全ページ数: {count}",
       "pageInfo": "ページ {current} / {total}"
     }
+  },
+  "modals": {
+    "modalTitle": "モーダルタイトル",
+    "modalContent": "モーダルコンテンツ",
+    "close": "閉じる",
+    "cancel": "キャンセル"
+  },
+  "buttons": {
+    "openModal": "モーダルを開く",
+    "closeAllModals": "すべてのモーダルを閉じる"
   }
 }
