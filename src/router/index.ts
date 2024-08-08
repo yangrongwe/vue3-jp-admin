@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { useAuthStore } from '@/store/auth';
-import { useTabsStore } from '@/store/tabs';
+import { useAuthStore } from '@/store/authStore';
+import { useTabsStore } from '@/store/tabsStore';
 import { $t } from '@/plugins/i18n/i18nUtils';
 
 // モジュールのルートファイルをロードする

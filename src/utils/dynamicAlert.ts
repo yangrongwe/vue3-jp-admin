@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import AlertComponent from '@/components/JpAlert/index.vue';
-import { useAlertStore } from '@/store/alert';
+import { useAlertStore } from '@/store/alertStore';
 import vuetify from '@/plugins/vuetify/index.ts';
 
 interface AlertOptions {

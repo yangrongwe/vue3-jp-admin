@@ -17,7 +17,7 @@ import { reactive, ref } from 'vue';
 import JpForm from '@/components/JpForm/index.vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
 import logo from '@/assets/logo/logo.png';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'vue-router';
 import { VCard } from 'vuetify/components';
 // import { userLogin } from '@/api/user';

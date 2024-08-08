@@ -19,7 +19,7 @@
 import { defineComponent, computed } from 'vue';
 import { VAlert } from 'vuetify/components';
 import { useDisplay } from 'vuetify';
-import { useAlertStore } from '@/store/alert';
+import { useAlertStore } from '@/store/alertStore';
 
 export default defineComponent({
   name: 'AlertComponent',

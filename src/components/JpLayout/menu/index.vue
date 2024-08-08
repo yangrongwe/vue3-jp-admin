@@ -49,8 +49,8 @@
 <script setup lang="tsx">
 import { ref, watchEffect, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/store/auth';
-import { useTabsStore } from '@/store/tabs';
+import { useAuthStore } from '@/store/authStore';
+import { useTabsStore } from '@/store/tabsStore';
 import { RouteRecordRaw } from 'vue-router';
 
 const emits = defineEmits(['railChange']);

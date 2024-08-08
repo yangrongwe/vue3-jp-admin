@@ -1,28 +1,18 @@
+<!-- App.vue -->
 <template>
-    <v-btn @click="openModalHandler">Open Modal</v-btn>
-  </template>
-  
-  <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { openModal, closeModal, closeAllModals } from '@/utils/modalUtils'; // 请根据你的实际路径调整
-  
-  export default defineComponent({
-    setup() {
-      const openModalHandler = () => {
-        openModal(1, {
-          maxWidth: '500px',
-          persistent: true,
-          fullscreen: false,
-          scrollable: true,
-          transition: 'dialog-bottom-transition',
-          // 添加更多的 v-dialog 属性
-        });
-      };
-  
-      return {
-        openModalHandler,
-      };
-    },
-  });
-  </script>
-  
+  <v-btn @click="showModal">Show Modal</v-btn>
+  <CustomModal v-if="modalId" :modalId="modalId" />
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import MyComponent from '@/components/JpModal/index.vue';
+import { useModalStore } from '@/store/modalStore';
+
+const modalStore = useModalStore();
+const modalId = ref<string | null>(null);
+
+const showModal = () => {
+  modalId.value = modalStore.openModal(MyComponent, { title: 'My Modal' });
+};
+</script>

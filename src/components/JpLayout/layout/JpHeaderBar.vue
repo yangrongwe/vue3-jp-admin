@@ -84,7 +84,7 @@
 import { useDisplay } from 'vuetify';
 import MenuList from '../menu/index.vue';
 import { useRouter, useRoute } from 'vue-router';
-import { useTabsStore } from '@/store/tabs';
+import { useTabsStore } from '@/store/tabsStore';
 import { computed, ref } from 'vue';
 
 const tabsStore = useTabsStore(); // カスタムのタブストアを使用

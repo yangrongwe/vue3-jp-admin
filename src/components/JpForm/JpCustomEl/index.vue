@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, PropType, VNode } from 'vue';
+import { PropType, VNode } from 'vue';
 
 const props = defineProps({
   customContent: {

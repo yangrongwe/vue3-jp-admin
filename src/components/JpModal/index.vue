@@ -1,62 +1,50 @@
+<!-- components/CustomModal.vue -->
 <template>
-    <v-dialog
-      v-model:show="isVisible"
-      v-bind="dialogProps"
-      :z-index="zIndex"
-      @click:outside="handleClose"
-    >
+  <v-dialog
+    v-model="isVisible"
+    :style="{ zIndex: modal.zIndex }"
+    persistent
+    max-width="600"
+  >
+    <template #default="{ close }">
       <v-card>
-        <v-card-title>
-          <slot name="title">Default Title</slot>
-        </v-card-title>
-        <v-card-subtitle>
-          <slot name="content">Default Content</slot>
-        </v-card-subtitle>
+        <v-card-title>{{ modal.props?.title }}</v-card-title>
+        <v-card-text>
+          <component :is="modal.component" v-bind="modal.props" />
+        </v-card-text>
         <v-card-actions>
-          <slot name="footer">
-            <v-btn @click="handleClose">Close</v-btn>
-            <v-btn @click="handleCancel">Cancel</v-btn>
-          </slot>
+          <v-spacer></v-spacer>
+          <v-btn @click="closeModal(modal.id)">Close</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
-  </template>
-  
-  <script lang="ts">
-  import { defineComponent, computed } from 'vue';
-  import { useModalStore } from '@/store/modal';
-  
-  export default defineComponent({
-    props: {
-      id: {
-        type: Number,
-        required: true,
-      },
-      dialogProps: {
-        type: Object,
-        default: () => ({}),
-      },
-    },
-    setup(props) {
-      const modalStore = useModalStore();
-      const isVisible = computed(() => modalStore.modals[props.id]?.visible ?? false);
-      const zIndex = computed(() => modalStore.modals[props.id]?.zIndex ?? 1000);
-  
-      const handleClose = () => {
-        modalStore.closeModal(props.id);
-      };
-  
-      const handleCancel = () => {
-        modalStore.closeModal(props.id);
-      };
-  
-      return {
-        isVisible,
-        zIndex,
-        handleClose,
-        handleCancel,
-      };
-    },
-  });
-  </script>
-  
+    </template>
+  </v-dialog>
+</template>
+
+<script setup lang="ts">
+import { computed, ref, watch } from 'vue';
+import { useModalStore } from '@/store/modalStore';
+
+const modalStore = useModalStore();
+const isVisible = ref(true);
+
+const props = defineProps<{ modalId: string }>();
+const modal = computed(() =>
+  modalStore.modals.find((m) => m.id === props.modalId)
+);
+
+watch(modal, (newVal) => {
+  if (!newVal) isVisible.value = false;
+});
+
+const closeModal = (id: string) => {
+  modalStore.closeModal(id);
+  isVisible.value = false;
+};
+</script>
+
+<style scoped>
+.v-dialog {
+  transition: none;
+}
+</style>
