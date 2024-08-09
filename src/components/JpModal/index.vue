@@ -62,7 +62,7 @@ const closeModal = (id: string) => {
   }, 300); // 300ms 是 Vue transition 默认过渡时间，可根据需要调整
 };
 
-const isFullscreen = ref(true);
+const isFullscreen = ref(modal.value?.props?.fullscreen);
 const toggleFullscreen = () => {
   isFullscreen.value = !isFullscreen.value;
 };
