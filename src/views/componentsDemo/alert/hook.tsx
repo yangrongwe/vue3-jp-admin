@@ -1,4 +1,4 @@
-import { showAlert, clearAllAlerts } from '@/utils/dynamicAlert';
+import { showAlert, clearAllAlerts } from '@/utils/alertUtils';
 import { MainTitle } from '@/types/index';
 const mainTitle: MainTitle = {
   title: 'Vuetify3 アラート　カプセル化【関数式呼び出し】',

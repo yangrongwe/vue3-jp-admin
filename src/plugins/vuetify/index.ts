@@ -23,6 +23,11 @@ const vuetify = createVuetify({
     // VCard: {
     //   VBtn: { variant: 'outlined' },
     // },
+    // VDialog: {},
+    VBtn: {
+      color: 'primary',
+      variant: 'outlined',
+    },
   },
   components,
   directives,

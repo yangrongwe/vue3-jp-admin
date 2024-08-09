@@ -1,14 +1,14 @@
 <template>
   <div class="tw-container tw-mx-auto tw-p-4">
     <div class="tw-flex tw-justify-between tw-mb-4">
-      <div>
-        <v-btn @click="prevPage" class="tw-btn" :disabled="isAllPages">
+      <div class="tw-flex tw-gap-2">
+        <v-btn @click="prevPage" :disabled="isAllPages">
           {{ $t('views.pdf.prevPage') }}
         </v-btn>
-        <v-btn @click="nextPage" class="tw-btn" :disabled="isAllPages">
+        <v-btn @click="nextPage" :disabled="isAllPages">
           {{ $t('views.pdf.nextPage') }}
         </v-btn>
-        <v-btn @click="toggleView" class="tw-btn">
+        <v-btn @click="toggleView">
           {{
             isAllPages
               ? $t('views.pdf.singlePageView')
@@ -16,8 +16,8 @@
           }}
         </v-btn>
       </div>
-      <div class="tw-flex tw-items-center">
-        <v-btn @click="zoomOut" :disabled="zoomOutDisabled" class="tw-btn">
+      <div class="tw-flex tw-items-center tw-gap-2">
+        <v-btn @click="zoomOut" :disabled="zoomOutDisabled">
           {{ $t('views.pdf.zoomOut') }}
         </v-btn>
         <input
@@ -28,27 +28,17 @@
           min="10"
           step="1"
         />
-        <v-btn @click="zoomIn" :disabled="zoomInDisabled" class="tw-btn">
+        <v-btn @click="zoomIn" :disabled="zoomInDisabled">
           {{ $t('views.pdf.zoomIn') }}
         </v-btn>
       </div>
-      <div>
-        <v-btn @click="downloadPDF" class="tw-btn">{{
-          $t('views.pdf.download')
-        }}</v-btn>
-        <v-btn @click="reset" class="tw-btn tw-bg-red-500">{{
-          $t('views.pdf.reset')
-        }}</v-btn>
+      <div class="tw-flex tw-gap-2">
+        <v-btn @click="downloadPDF">{{ $t('views.pdf.download') }}</v-btn>
+        <v-btn @click="reset">{{ $t('views.pdf.reset') }}</v-btn>
 
-        <v-btn @click="rotateLeft" class="tw-btn">{{
-          $t('views.pdf.rotateLeft')
-        }}</v-btn>
-        <v-btn @click="rotateRight" class="tw-btn">{{
-          $t('views.pdf.rotateRight')
-        }}</v-btn>
-        <v-btn @click="alertText" class="tw-btn">{{
-          $t('views.pdf.alertText')
-        }}</v-btn>
+        <v-btn @click="rotateLeft">{{ $t('views.pdf.rotateLeft') }}</v-btn>
+        <v-btn @click="rotateRight">{{ $t('views.pdf.rotateRight') }}</v-btn>
+        <v-btn @click="alertText">{{ $t('views.pdf.alertText') }}</v-btn>
       </div>
     </div>
     <div
@@ -386,10 +376,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.tw-btn {
-  @apply tw-bg-blue-500 tw-text-white tw-px-4 tw-py-2 tw-rounded tw-mx-1;
-}
-
 input[type='number'] {
   @apply tw-border tw-border-gray-300 tw-rounded tw-px-2 tw-py-1;
 }

@@ -6,7 +6,6 @@ import vuetify from './plugins/vuetify/index.ts';
 import pinia from './plugins/pinia/index.ts';
 import i18n from './plugins/i18n/i18n.ts';
 import VXETable from 'vxe-table';
-
 import './styles/index.css';
 import 'vxe-table/lib/style.css';
 
@@ -18,3 +17,5 @@ app.use(i18n);
 app.use(vuetify);
 app.use(VXETable);
 app.mount('#app');
+
+export { app };
