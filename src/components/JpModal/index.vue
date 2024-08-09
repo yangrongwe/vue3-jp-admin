@@ -3,14 +3,31 @@
     v-model="isVisible"
     :style="{ zIndex: modal?.zIndex }"
     v-bind="modal?.props"
+    :fullscreen="isFullscreen"
   >
     <v-card v-if="modal">
-      <v-card-title>{{ modal.props?.title }}</v-card-title>
+      <v-card-title>
+        <template v-if="modal.slots?.titleSlot">
+          <component :is="modal.slots.titleSlot" />
+        </template>
+        <div class="tw-flex tw-justify-between tw-items-center" v-else>
+          <div class="tw-flex-shrink-0">{{ modal?.props.title }}</div>
+          <div class="tw-flex tw-space-x-4">
+            <v-icon @click="toggleFullscreen" v-if="modal?.props.fullscreen">{{
+              isFullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'
+            }}</v-icon>
+            <v-icon @click="closeModal(modal.id)" class="tw-place-items-end">{{
+              'mdi-window-close'
+            }}</v-icon>
+          </div>
+        </div>
+      </v-card-title>
+      <v-divider></v-divider>
       <v-card-text>
         <component :is="modal.component" v-bind="modal.props" />
       </v-card-text>
+      <v-divider></v-divider>
       <v-card-actions>
-        <v-spacer></v-spacer>
         <v-btn @click="closeModal(modal.id)">Close</v-btn>
       </v-card-actions>
     </v-card>
@@ -43,6 +60,11 @@ const closeModal = (id: string) => {
   setTimeout(() => {
     modalStore.closeModal(id);
   }, 300); // 300ms 是 Vue transition 默认过渡时间，可根据需要调整
+};
+
+const isFullscreen = ref(true);
+const toggleFullscreen = () => {
+  isFullscreen.value = !isFullscreen.value;
 };
 </script>
 

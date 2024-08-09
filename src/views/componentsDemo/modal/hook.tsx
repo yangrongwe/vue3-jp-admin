@@ -60,11 +60,18 @@ const useOpenModal = (action: number) => {
       });
       break;
     case 5:
-      openModal(<HighlightCode code={opacityCode} />, {
-        title: 'fullscreen Modal',
-        fullscreen: true,
-        transition: 'slide-x-reverse-transition',
-      });
+      openModal(
+        <HighlightCode code={opacityCode} />,
+        {
+          title: 'fullscreen Modal',
+          fullscreen: true,
+          minWidth: '500px',
+          transition: 'slide-x-reverse-transition',
+        },
+        {
+          // titleSlot: <div>123213</div>,
+        }
+      );
       break;
     case 6:
       break;

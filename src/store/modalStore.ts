@@ -5,6 +5,7 @@ interface Modal {
   id: string;
   component: any;
   props?: Record<string, any>;
+  slots?: Record<string, any>;
   zIndex: number;
 }
 
@@ -14,7 +15,11 @@ export const useModalStore = defineStore('modalStore', {
     zIndexCounter: 9999,
   }),
   actions: {
-    openModal(component: any, props?: Record<string, any>) {
+    openModal(
+      component: any,
+      props?: Record<string, any>,
+      slots?: Record<string, any>
+    ) {
       const id = `modal-${Date.now()}`;
       this.zIndexCounter++;
       this.modals.push({
@@ -22,6 +27,7 @@ export const useModalStore = defineStore('modalStore', {
         component,
         props,
         zIndex: this.zIndexCounter,
+        slots,
       });
       return id;
     },
