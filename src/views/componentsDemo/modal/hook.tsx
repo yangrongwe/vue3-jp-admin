@@ -23,6 +23,16 @@ const opacityCode = `
         opacity: 0,
     });
 `;
+
+const fullscreenCode = `
+  // use method
+   openModal(
+      <HighlightCode code={opacityCode} />, {
+        title: 'fullscreen Modal',
+        fullscreen: true,
+        transition: 'slide-x-reverse-transition',
+    });
+`;
 const formRef = ref(null);
 const useOpenModal = (action: number) => {
   switch (action) {
@@ -61,11 +71,10 @@ const useOpenModal = (action: number) => {
       break;
     case 5:
       openModal(
-        <HighlightCode code={opacityCode} />,
+        <HighlightCode code={fullscreenCode} />,
         {
           title: 'fullscreen Modal',
           fullscreen: true,
-          minWidth: '500px',
           transition: 'slide-x-reverse-transition',
         },
         {
