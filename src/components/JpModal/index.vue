@@ -12,7 +12,7 @@
         </template>
         <div class="tw-flex tw-justify-between tw-items-center" v-else>
           <div class="tw-flex-shrink-0">{{ modal?.props.title }}</div>
-          <div class="tw-flex tw-space-x-4">
+          <div class="tw-flex tw-space-x-2">
             <v-icon @click="toggleFullscreen" v-if="modal?.props.fullscreen">{{
               isFullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'
             }}</v-icon>
