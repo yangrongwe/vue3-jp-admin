@@ -5,94 +5,261 @@ import { reactive, ref } from 'vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
 import { $t } from '@/plugins/i18n/i18nUtils';
 import HighlightCode from './HighlightCode.vue';
+import { VBtn, VIcon } from 'vuetify/components';
 const tsxCode = `
   // use method
-  openModal(
-    <HighlightCode code={tsxCode} />,
-    { title: 'TSX Modal', width: '600' }
-  );
+  openModal({
+        component: <HighlightCode code={tsxCode} />,
+        props: {
+          title: 'TSX Modal',
+          width: '600',
+        },
+  });
 `;
 const opacityCode = `
   // use method
   // 注意：此处只是透明度为0，遮罩并未消失。因此依然不能点击页面的其他元素。
-   openModal(
-      <HighlightCode code={opacityCode} />, {
-        title: '无遮罩 Modal',
-        width: '600',
-        persistent: true,
-        opacity: 0,
+   openModal({
+        component: <HighlightCode code={opacityCode} />,
+        props: {
+          title: '无遮罩 Modal',
+          width: '600',
+          persistent: true,
+          opacity: 0,
+        },
     });
 `;
 
 const fullscreenCode = `
   // use method
-   openModal(
-      <HighlightCode code={opacityCode} />, {
-        title: 'fullscreen Modal',
-        fullscreen: true,
-        transition: 'slide-x-reverse-transition',
-    });
-`;
-const formRef = ref(null);
-const useOpenModal = (action: number) => {
-  switch (action) {
-    case 1:
-      openModal(<HighlightCode code={tsxCode} />, {
-        title: 'TSX Modal',
-        width: '600',
-      });
-      break;
-    case 2:
-      openModal(MyComponent, {
-        title: 'VNode Modal',
-        width: '600',
-      });
-      break;
-    case 3:
-      openModal(
-        <JpForm
-          ref={formRef.value}
-          form-options={formOptions}
-          class="tw-pb-0"
-        ></JpForm>,
-        {
-          title: 'Form Modal',
-          width: '800',
-        }
-      );
-      break;
-    case 4:
-      openModal(<HighlightCode code={opacityCode} />, {
-        title: '无遮罩 Modal',
-        width: '600',
-        persistent: true,
-        opacity: 0,
-      });
-      break;
-    case 5:
-      openModal(
-        <HighlightCode code={fullscreenCode} />,
-        {
+    openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
           title: 'fullscreen Modal',
           fullscreen: true,
           transition: 'slide-x-reverse-transition',
         },
-        {
-          // titleSlot: <div>123213</div>,
-        }
-      );
+    });
+`;
+const nestingCode = `
+  // use method
+    openModal({
+        component: (
+          <div class="tw-flex-col">
+            <div onClick={newModal}>
+              <VBtn class="tw-mb-2">点击弹出新的Modal</VBtn>
+            </div>
+            <HighlightCode code={fullscreenCode} />
+          </div>
+        ),
+        props: {
+          title: '嵌套 Modal',
+          width: '600',
+        },
+      });
+`;
+
+const titleCode = `
+  // use method
+    openModal({
+        component: <HighlightCode code={titleCode} />,
+        props: {
+          title: '自定义头部 Modal',
+          width: '500',
+        },
+        slots: {
+          titleSlot: (
+            <div class="tw-flex tw-justify-between">
+              <div>自定义头部</div>
+              <div
+                onClick={() => {
+                  alert('正在连接扫描端，请等待......');
+                }}
+              >
+                <VIcon
+                  icon="mdi-barcode-scan"
+                  class="tw-cursor-pointer"
+                ></VIcon>
+              </div>
+            </div>
+          ),
+        },
+      });
+`;
+
+const footCode = `
+  // use method
+   openModal({
+        component: <HighlightCode code={footCode} />,
+        props: {
+          title: '自定义底部 Modal',
+          width: '700',
+        },
+        slots: {
+          footSlot: (
+            <div class="tw-flex tw-justify-between tw-w-full">
+              <div>自定义底部</div>
+              <div
+                onClick={() => {
+                  alert('正在连接扫描端，请等待......');
+                }}
+              >
+                <VIcon
+                  icon="mdi-barcode-scan"
+                  class="tw-cursor-pointer"
+                ></VIcon>
+              </div>
+            </div>
+          ),
+        },
+      });
+`;
+const formRef = ref(null);
+const newModal = () => {
+  openModal({
+    component: <div>*****</div>,
+    props: {
+      title: '新的Modal',
+      width: '400',
+    },
+  });
+};
+const useOpenModal = (action: number) => {
+  switch (action) {
+    case 1:
+      openModal({
+        component: <HighlightCode code={tsxCode} />,
+        props: {
+          title: 'TSX Modal',
+          width: '700',
+        },
+      });
+      break;
+    case 2:
+      openModal({
+        component: MyComponent,
+        props: {
+          title: 'VNode Modal',
+          width: '700',
+        },
+      });
+      break;
+    case 3:
+      openModal({
+        component: (
+          <JpForm
+            ref={formRef.value}
+            form-options={formOptions}
+            class="tw-pb-0"
+          ></JpForm>
+        ),
+        props: {
+          title: 'Form Modal',
+          width: '800',
+        },
+      });
+      break;
+    case 4:
+      openModal({
+        component: <HighlightCode code={opacityCode} />,
+        props: {
+          title: '无遮罩 Modal',
+          width: '700',
+          persistent: true,
+          opacity: 0,
+        },
+      });
+
+      break;
+    case 5:
+      openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: 'fullscreen Modal',
+          fullscreen: true,
+          transition: 'slide-x-reverse-transition',
+        },
+      });
       break;
     case 6:
+      openModal({
+        component: (
+          <div class="tw-flex-col">
+            <div onClick={newModal}>
+              <VBtn class="tw-mb-2">点击弹出新的Modal</VBtn>
+            </div>
+            <HighlightCode code={nestingCode} />
+          </div>
+        ),
+        props: {
+          title: '嵌套 Modal',
+          width: '600',
+        },
+        callbackMethod: {
+          onCloseCallback: () => {
+            return true;
+          },
+          onConfirmCallback: () => {
+            return false;
+          },
+        },
+      });
       break;
     case 7:
+      openModal({
+        component: <HighlightCode code={titleCode} />,
+        props: {
+          title: '自定义头部 Modal',
+          width: '700',
+        },
+        slots: {
+          titleSlot: (
+            <div class="tw-flex tw-justify-between">
+              <div>自定义头部</div>
+              <div
+                onClick={() => {
+                  alert('正在连接扫描端，请等待......');
+                }}
+              >
+                <VIcon
+                  icon="mdi-barcode-scan"
+                  class="tw-cursor-pointer"
+                ></VIcon>
+              </div>
+            </div>
+          ),
+        },
+      });
       break;
     case 8:
+      openModal({
+        component: <HighlightCode code={footCode} />,
+        props: {
+          title: '自定义底部 Modal',
+          width: '700',
+        },
+        slots: {
+          footSlot: (
+            <div class="tw-flex tw-justify-between tw-w-full">
+              <div>自定义底部</div>
+              <div
+                onClick={() => {
+                  alert('正在连接扫描端，请等待......');
+                }}
+              >
+                <VIcon
+                  icon="mdi-barcode-scan"
+                  class="tw-cursor-pointer"
+                ></VIcon>
+              </div>
+            </div>
+          ),
+        },
+      });
       break;
     case 9:
       break;
     case 10:
-      break;
-    case 11:
       break;
     default:
       break;

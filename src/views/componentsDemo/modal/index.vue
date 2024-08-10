@@ -16,13 +16,12 @@ import { useOpenModal } from './hook';
       <v-btn @click="useOpenModal(6)">嵌套</v-btn>
     </div>
     <div class="tw-btn">
-      <v-btn @click="useOpenModal(7)">自定义弹出位置</v-btn>
-      <v-btn @click="useOpenModal(8)">自定义头部</v-btn>
-      <v-btn @click="useOpenModal(9)">自定义底部</v-btn>
+      <v-btn @click="useOpenModal(7)">自定义头部</v-btn>
+      <v-btn @click="useOpenModal(8)">自定义底部</v-btn>
     </div>
     <div class="tw-btn">
-      <v-btn @click="useOpenModal(10)">禁止通过点击外部区域的方式关闭</v-btn>
-      <v-btn @click="useOpenModal(11)">关闭后的回调</v-btn>
+      <v-btn @click="useOpenModal(9)">禁止通过点击外部区域的方式关闭</v-btn>
+      <v-btn @click="useOpenModal(10)">关闭后的回调</v-btn>
     </div>
   </JpMainArea>
 </template>

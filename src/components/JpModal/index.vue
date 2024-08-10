@@ -23,12 +23,18 @@
         </div>
       </v-card-title>
       <v-divider></v-divider>
-      <v-card-text>
+      <v-card-text class="tw-overflow-auto tw-max-h-90">
         <component :is="modal.component" v-bind="modal.props" />
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn @click="closeModal(modal.id)">Close</v-btn>
+        <template v-if="modal.slots?.footSlot">
+          <component :is="modal.slots.footSlot" />
+        </template>
+        <template v-else>
+          <v-btn @click="handleCloseClick">Cancel</v-btn>
+          <v-btn @click="handleConfirmClick">confirm</v-btn>
+        </template>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -46,13 +52,6 @@ const modal = computed(() =>
   modalStore.modals.find((m) => m.id === props.modalId)
 );
 
-// 仅在 modal 有效时触发 isVisible 的变化
-watch(modal, (newVal) => {
-  if (!newVal && isVisible.value) {
-    isVisible.value = false;
-  }
-});
-
 const closeModal = (id: string) => {
   // 直接设置 isVisible 为 false，以便在过渡结束时移除 DOM 元素
   isVisible.value = false;
@@ -65,6 +64,30 @@ const closeModal = (id: string) => {
 const isFullscreen = ref(modal.value?.props?.fullscreen);
 const toggleFullscreen = () => {
   isFullscreen.value = !isFullscreen.value;
+};
+
+const handleCloseClick = async () => {
+  let res = true;
+  if (modal.value?.callbackMethod.onCloseCallback) {
+    res = await modal.value?.callbackMethod.onCloseCallback();
+    if (res) {
+      closeModal(modal.value?.id);
+    }
+  } else {
+    closeModal(modal.value?.id);
+  }
+};
+
+const handleConfirmClick = async () => {
+  let res = true;
+  if (modal.value?.callbackMethod.onConfirmCallback) {
+    res = await modal.value?.callbackMethod.onConfirmCallback();
+    if (res) {
+      closeModal(modal.value?.id);
+    }
+  } else {
+    closeModal(modal.value?.id);
+  }
 };
 </script>
 

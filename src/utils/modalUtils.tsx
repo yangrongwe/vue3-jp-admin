@@ -5,14 +5,25 @@ import { app } from '../main.js';
 export function getAppContext() {
   return app._context; // _context 是 Vue 应用实例的上下文
 }
-export function openModal(
-  component: any,
-  props?: Record<string, any>,
-  slots?: Record<string, any>
-) {
+export function openModal({
+  component = null,
+  props = {},
+  slots = {},
+  callbackMethod = {},
+}: {
+  component: any;
+  props?: Record<string, any>;
+  slots?: Record<string, any>;
+  callbackMethod?: Record<string, any>;
+}) {
   const modalStore = useModalStore();
   const componentRef = markRaw(component);
-  const id = modalStore.openModal(componentRef, { ...props }, slots);
+  const id = modalStore.openModal(
+    componentRef,
+    { ...props },
+    slots,
+    callbackMethod
+  );
 
   const modalElement = document.createElement('div');
   document.body.appendChild(modalElement);

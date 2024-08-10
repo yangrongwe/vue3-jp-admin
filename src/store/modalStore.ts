@@ -7,6 +7,7 @@ interface Modal {
   props?: Record<string, any>;
   slots?: Record<string, any>;
   zIndex: number;
+  callbackMethod?: Record<string, Function>;
 }
 
 export const useModalStore = defineStore('modalStore', {
@@ -18,7 +19,8 @@ export const useModalStore = defineStore('modalStore', {
     openModal(
       component: any,
       props?: Record<string, any>,
-      slots?: Record<string, any>
+      slots?: Record<string, any>,
+      callbackMethod?: Record<string, Function>
     ) {
       const id = `modal-${Date.now()}`;
       this.zIndexCounter++;
@@ -28,6 +30,7 @@ export const useModalStore = defineStore('modalStore', {
         props,
         zIndex: this.zIndexCounter,
         slots,
+        callbackMethod,
       });
       return id;
     },
