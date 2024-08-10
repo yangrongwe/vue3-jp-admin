@@ -114,6 +114,39 @@ const footCode = `
         },
       });
 `;
+
+const persistentCode = `
+  // use method
+  openModal({
+        component: <HighlightCode code={persistentCode} />,
+        props: {
+          title: '组织关闭Esc/点击外部区域关闭 Modal',
+          width: '700',
+          persistent: true,
+        },
+    });
+`;
+
+const callbackCode = `
+  // use method
+  openModal({
+        component: <HighlightCode code={callbackCode} />,
+        props: {
+          title: '默认Cancel/Confim回调 Modal',
+          width: '600',
+        },
+        callbackMethod: {
+          // true关闭 false阻止弹出框关闭
+          onCloseCallback: () => {
+            return true;
+          },
+          onConfirmCallback: () => {
+            return false;
+          },
+        },
+    });
+`;
+
 const formRef = ref(null);
 const newModal = () => {
   openModal({
@@ -165,7 +198,6 @@ const useOpenModal = (action: number) => {
         props: {
           title: '无遮罩 Modal',
           width: '700',
-          persistent: true,
           opacity: 0,
         },
       });
@@ -258,8 +290,32 @@ const useOpenModal = (action: number) => {
       });
       break;
     case 9:
+      openModal({
+        component: <HighlightCode code={persistentCode} />,
+        props: {
+          title: '组织关闭Esc/点击外部区域关闭 Modal',
+          width: '700',
+          persistent: true,
+        },
+      });
       break;
     case 10:
+      openModal({
+        component: <HighlightCode code={callbackCode} />,
+        props: {
+          title: '默认Cancel/Confim回调 Modal',
+          width: '600',
+        },
+        callbackMethod: {
+          onCloseCallback: () => {
+            return true;
+          },
+          onConfirmCallback: () => {
+            alert('没通过校验，请确认');
+            return false;
+          },
+        },
+      });
       break;
     default:
       break;
