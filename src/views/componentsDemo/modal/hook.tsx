@@ -1,4 +1,4 @@
-import { openModal, closeModal, closeAllModals } from '@/utils/modalUtils';
+import { openModal } from '@/utils/modalUtils';
 import MyComponent from './MyComponent.vue';
 import JpForm from '@/components/JpForm/index.vue';
 import { reactive, ref } from 'vue';
@@ -6,23 +6,33 @@ import { JpFormOptions } from '@/components/JpForm/type.ts';
 import { $t } from '@/plugins/i18n/i18nUtils';
 import HighlightCode from './HighlightCode.vue';
 import { VBtn, VIcon } from 'vuetify/components';
+import { MainTitle } from '@/types/index';
+
+const mainTitle: MainTitle = {
+  title: $t('views.modal.mainTitle'),
+  linkText: 'src/views/componentsDemo/modal/index.vue',
+  path: 'https://github.com/yangrongwe/vue3-jp-admin/blob/main/src/views/componentsDemo/modal/index.vue',
+};
+// TSX Modal の使用方法
 const tsxCode = `
   // use method
   openModal({
         component: <HighlightCode code={tsxCode} />,
         props: {
-          title: 'TSX Modal',
+          title: $t('views.modal.tsxModal.title'),
           width: '600',
         },
   });
 `;
+
+// 透明度0の Modal 使用方法
 const opacityCode = `
   // use method
-  // 注意：此处只是透明度为0，遮罩并未消失。因此依然不能点击页面的其他元素。
+  // 注意：${$t('views.modal.opacityModal.note')}
    openModal({
         component: <HighlightCode code={opacityCode} />,
         props: {
-          title: '无遮罩 Modal',
+          title: $t('views.modal.opacityModal.title'),
           width: '600',
           persistent: true,
           opacity: 0,
@@ -30,50 +40,54 @@ const opacityCode = `
     });
 `;
 
+// フルスクリーン Modal の使用方法
 const fullscreenCode = `
   // use method
     openModal({
         component: <HighlightCode code={fullscreenCode} />,
         props: {
-          title: 'fullscreen Modal',
+          title: $t('views.modal.fullscreenModal.title'),
           fullscreen: true,
           transition: 'slide-x-reverse-transition',
         },
     });
 `;
+
+// ネストされた Modal の使用方法
 const nestingCode = `
   // use method
     openModal({
         component: (
           <div class="tw-flex-col">
             <div onClick={newModal}>
-              <VBtn class="tw-mb-2">点击弹出新的Modal</VBtn>
+              <VBtn class="tw-mb-2">${$t('views.modal.nestingModal.buttonText')}</VBtn>
             </div>
             <HighlightCode code={fullscreenCode} />
           </div>
         ),
         props: {
-          title: '嵌套 Modal',
+          title: $t('views.modal.nestingModal.title'),
           width: '600',
         },
       });
 `;
 
+// カスタムヘッダー Modal の使用方法
 const titleCode = `
   // use method
     openModal({
         component: <HighlightCode code={titleCode} />,
         props: {
-          title: '自定义头部 Modal',
+          title: $t('views.modal.titleModal.title'),
           width: '500',
         },
         slots: {
           titleSlot: (
             <div class="tw-flex tw-justify-between">
-              <div>自定义头部</div>
+              <div>${$t('views.modal.titleModal.customHeader')}</div>
               <div
                 onClick={() => {
-                  alert('正在连接扫描端，请等待......');
+                  alert($t('views.modal.titleModal.alertMessage'));
                 }}
               >
                 <VIcon
@@ -87,21 +101,22 @@ const titleCode = `
       });
 `;
 
+// カスタムフッター Modal の使用方法
 const footCode = `
   // use method
    openModal({
         component: <HighlightCode code={footCode} />,
         props: {
-          title: '自定义底部 Modal',
+          title: $t('views.modal.footModal.title'),
           width: '700',
         },
         slots: {
           footSlot: (
             <div class="tw-flex tw-justify-between tw-w-full">
-              <div>自定义底部</div>
+              <div>${$t('views.modal.footModal.customFooter')}</div>
               <div
                 onClick={() => {
-                  alert('正在连接扫描端，请等待......');
+                  alert($t('views.modal.footModal.alertMessage'));
                 }}
               >
                 <VIcon
@@ -115,28 +130,30 @@ const footCode = `
       });
 `;
 
+// 組織閉じる Esc/外部領域をクリックして閉じる Modal の使用方法
 const persistentCode = `
   // use method
   openModal({
         component: <HighlightCode code={persistentCode} />,
         props: {
-          title: '组织关闭Esc/点击外部区域关闭 Modal',
+          title: $t('views.modal.persistentModal.title'),
           width: '700',
           persistent: true,
         },
     });
 `;
 
+// デフォルト Cancel/Confirm コールバック Modal の使用方法
 const callbackCode = `
   // use method
   openModal({
         component: <HighlightCode code={callbackCode} />,
         props: {
-          title: '默认Cancel/Confim回调 Modal',
+          title: $t('views.modal.callbackModal.title'),
           width: '600',
         },
         callbackMethod: {
-          // true关闭 false阻止弹出框关闭
+          // trueは閉じる falseはポップアップを閉じない
           onCloseCallback: () => {
             return true;
           },
@@ -152,7 +169,7 @@ const newModal = () => {
   openModal({
     component: <div>*****</div>,
     props: {
-      title: '新的Modal',
+      title: $t('views.modal.newModal.title'),
       width: '400',
     },
   });
@@ -163,7 +180,7 @@ const useOpenModal = (action: number) => {
       openModal({
         component: <HighlightCode code={tsxCode} />,
         props: {
-          title: 'TSX Modal',
+          title: $t('views.modal.tsxModal.title'),
           width: '700',
         },
       });
@@ -172,7 +189,7 @@ const useOpenModal = (action: number) => {
       openModal({
         component: MyComponent,
         props: {
-          title: 'VNode Modal',
+          title: $t('views.modal.vnodeModal.title'),
           width: '700',
         },
       });
@@ -187,7 +204,7 @@ const useOpenModal = (action: number) => {
           ></JpForm>
         ),
         props: {
-          title: 'Form Modal',
+          title: $t('views.modal.formModal.title'),
           width: '800',
         },
       });
@@ -196,7 +213,7 @@ const useOpenModal = (action: number) => {
       openModal({
         component: <HighlightCode code={opacityCode} />,
         props: {
-          title: '无遮罩 Modal',
+          title: $t('views.modal.opacityModal.title'),
           width: '700',
           opacity: 0,
         },
@@ -207,7 +224,7 @@ const useOpenModal = (action: number) => {
       openModal({
         component: <HighlightCode code={fullscreenCode} />,
         props: {
-          title: 'fullscreen Modal',
+          title: $t('views.modal.fullscreenModal.title'),
           fullscreen: true,
           transition: 'slide-x-reverse-transition',
         },
@@ -218,13 +235,15 @@ const useOpenModal = (action: number) => {
         component: (
           <div class="tw-flex-col">
             <div onClick={newModal}>
-              <VBtn class="tw-mb-2">点击弹出新的Modal</VBtn>
+              <VBtn class="tw-mb-2">
+                {$t('views.modal.nestingModal.buttonText')}
+              </VBtn>
             </div>
             <HighlightCode code={nestingCode} />
           </div>
         ),
         props: {
-          title: '嵌套 Modal',
+          title: $t('views.modal.nestingModal.title'),
           width: '600',
         },
         callbackMethod: {
@@ -241,16 +260,16 @@ const useOpenModal = (action: number) => {
       openModal({
         component: <HighlightCode code={titleCode} />,
         props: {
-          title: '自定义头部 Modal',
+          title: $t('views.modal.titleModal.title'),
           width: '700',
         },
         slots: {
           titleSlot: (
             <div class="tw-flex tw-justify-between">
-              <div>自定义头部</div>
+              <div>{$t('views.modal.titleModal.customHeader')}</div>
               <div
                 onClick={() => {
-                  alert('正在连接扫描端，请等待......');
+                  alert($t('views.modal.titleModal.alertMessage'));
                 }}
               >
                 <VIcon
@@ -267,16 +286,16 @@ const useOpenModal = (action: number) => {
       openModal({
         component: <HighlightCode code={footCode} />,
         props: {
-          title: '自定义底部 Modal',
+          title: $t('views.modal.footModal.title'),
           width: '700',
         },
         slots: {
           footSlot: (
             <div class="tw-flex tw-justify-between tw-w-full">
-              <div>自定义底部</div>
+              <div>{$t('views.modal.footModal.customFooter')}</div>
               <div
                 onClick={() => {
-                  alert('正在连接扫描端，请等待......');
+                  alert($t('views.modal.footModal.alertMessage'));
                 }}
               >
                 <VIcon
@@ -293,7 +312,7 @@ const useOpenModal = (action: number) => {
       openModal({
         component: <HighlightCode code={persistentCode} />,
         props: {
-          title: '组织关闭Esc/点击外部区域关闭 Modal',
+          title: $t('views.modal.persistentModal.title'),
           width: '700',
           persistent: true,
         },
@@ -303,7 +322,7 @@ const useOpenModal = (action: number) => {
       openModal({
         component: <HighlightCode code={callbackCode} />,
         props: {
-          title: '默认Cancel/Confim回调 Modal',
+          title: $t('views.modal.callbackModal.title'),
           width: '600',
         },
         callbackMethod: {
@@ -311,7 +330,7 @@ const useOpenModal = (action: number) => {
             return true;
           },
           onConfirmCallback: () => {
-            alert('没通过校验，请确认');
+            alert($t('views.modal.callbackModal.confirmAlert'));
             return false;
           },
         },
@@ -413,4 +432,4 @@ const formOptions = reactive<JpFormOptions>({
   rules: {},
 });
 
-export { useOpenModal };
+export { useOpenModal, mainTitle };

@@ -152,16 +152,72 @@
       "alertText": "メッセージ",
       "totalPages": "全ページ数: {count}",
       "pageInfo": "ページ {current} / {total}"
+    },
+    "modal": {
+      "cancel": "キャンセル",
+      "confirm": "確定",
+      "mainTitle": "Vuetify3 ダイアログ　カプセル化【関数式呼び出し】",
+      "basicUsage": "コンポーネント呼び出し - 基本的な使用法",
+      "attributesSlotsCallbacks": "コンポーネント呼び出し - 属性/スロット/コールバックメソッド",
+      "basicModalTsx": "TSXの書き方",
+      "basicModalVNode": "VNodeの書き方",
+      "withForm": "フォームとの組み合わせ",
+      "noMaskModal": "マスクなしモーダル",
+      "fullScreen": "全画面表示",
+      "nested": "ネスト",
+      "customHeader": "カスタムヘッダー",
+      "customFooter": "カスタムフッター",
+      "preventOutsideClose": "外部クリックによる閉じる操作を防止",
+      "closeCallback": "閉じた後のコールバック",
+      "moreUsage": "その他の使用法",
+      "tsxModal": {
+        "title": "TSX モーダル"
+      },
+      "vnodeModal": {
+        "title": "VNode モーダル"
+      },
+      "formModal": {
+        "title": "フォーム モーダル"
+      },
+      "opacityModal": {
+        "title": "マスクなしモーダル",
+        "note": "透明度が 0 のモーダルは目に見えません。"
+      },
+      "fullscreenModal": {
+        "title": "全画面モーダル"
+      },
+      "nestingModal": {
+        "title": "ネスト モーダル",
+        "buttonText": "新しいモーダルを追加"
+      },
+      "titleModal": {
+        "title": "カスタム ヘッダー モーダル",
+        "customHeader": "カスタム ヘッダー",
+        "alertMessage": "カスタム ヘッダーがクリックされました"
+      },
+      "footModal": {
+        "title": "カスタム フッター モーダル",
+        "customFooter": "カスタム フッター",
+        "alertMessage": "カスタム フッターがクリックされました"
+      },
+      "persistentModal": {
+        "title": "永続モーダル"
+      },
+      "callbackModal": {
+        "title": "デフォルト コールバック モーダル",
+        "confirmAlert": "確認ボタンがクリックされました"
+      },
+      "formOptions": {
+        "name": {
+          "required": "名前を入力してください",
+          "label": "名前",
+          "placeholder": "名前を入力してください"
+        },
+        "email": {
+          "label": "メール",
+          "placeholder": "メールアドレスを入力してください"
+        }
+      }
     }
-  },
-  "modals": {
-    "modalTitle": "モーダルタイトル",
-    "modalContent": "モーダルコンテンツ",
-    "close": "閉じる",
-    "cancel": "キャンセル"
-  },
-  "buttons": {
-    "openModal": "モーダルを開く",
-    "closeAllModals": "すべてのモーダルを閉じる"
   }
 }

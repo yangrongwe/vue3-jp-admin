@@ -1,27 +1,55 @@
 <script setup lang="tsx">
 import JpMainArea from '@/components/JpLayout/layout/JpMainArea.vue';
-import { useOpenModal } from './hook';
+import { useOpenModal, mainTitle } from './hook';
 </script>
 
 <template>
-  <JpMainArea :h-full="true">
+  <JpMainArea :h-full="true" :mainTitle="mainTitle">
+    <div class="tw-my-2">{{ $t('views.modal.basicUsage') }}</div>
     <div class="tw-btn">
-      <v-btn @click="useOpenModal(1)">基本modal-tsx写法</v-btn>
-      <v-btn @click="useOpenModal(2)">基本modal-VNode写法</v-btn>
-      <v-btn @click="useOpenModal(3)">结合Form</v-btn>
+      <v-btn @click="useOpenModal(1)">{{
+        $t('views.modal.basicModalTsx')
+      }}</v-btn>
+      <v-btn @click="useOpenModal(2)">{{
+        $t('views.modal.basicModalVNode')
+      }}</v-btn>
+      <v-btn @click="useOpenModal(3)">{{ $t('views.modal.withForm') }}</v-btn>
+    </div>
+    <div class="tw-my-2">{{ $t('views.modal.attributesSlotsCallbacks') }}</div>
+    <div class="tw-btn">
+      <v-btn @click="useOpenModal(4)">{{
+        $t('views.modal.noMaskModal')
+      }}</v-btn>
+      <v-btn @click="useOpenModal(5)">{{ $t('views.modal.fullScreen') }}</v-btn>
+      <v-btn @click="useOpenModal(6)">{{ $t('views.modal.nested') }}</v-btn>
     </div>
     <div class="tw-btn">
-      <v-btn @click="useOpenModal(4)">无遮罩modal</v-btn>
-      <v-btn @click="useOpenModal(5)">全屏</v-btn>
-      <v-btn @click="useOpenModal(6)">嵌套</v-btn>
+      <v-btn @click="useOpenModal(7)">{{
+        $t('views.modal.customHeader')
+      }}</v-btn>
+      <v-btn @click="useOpenModal(8)">{{
+        $t('views.modal.customFooter')
+      }}</v-btn>
     </div>
     <div class="tw-btn">
-      <v-btn @click="useOpenModal(7)">自定义头部</v-btn>
-      <v-btn @click="useOpenModal(8)">自定义底部</v-btn>
+      <v-btn @click="useOpenModal(9)">{{
+        $t('views.modal.preventOutsideClose')
+      }}</v-btn>
+      <v-btn @click="useOpenModal(10)">{{
+        $t('views.modal.closeCallback')
+      }}</v-btn>
     </div>
-    <div class="tw-btn">
-      <v-btn @click="useOpenModal(9)">禁止通过点击外部区域的方式关闭</v-btn>
-      <v-btn @click="useOpenModal(10)">关闭后的回调</v-btn>
+    <v-divider class="tw-mb-2"></v-divider>
+    <div>
+      {{ $t('views.modal.moreUsage') }}:
+      <a
+        style="color: #409eff"
+        class="tw-underline"
+        target="_blank"
+        href="https://vuetifyjs.com/en/components/dialogs/#api"
+      >
+        https://vuetifyjs.com/en/components/dialogs/#api</a
+      >
     </div>
   </JpMainArea>
 </template>

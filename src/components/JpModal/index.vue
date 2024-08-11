@@ -32,8 +32,12 @@
           <component :is="modal.slots.footSlot" />
         </template>
         <template v-else>
-          <v-btn @click="handleCloseClick">Cancel</v-btn>
-          <v-btn @click="handleConfirmClick">confirm</v-btn>
+          <v-btn @click="handleCloseClick">{{
+            $t('views.modal.cancel')
+          }}</v-btn>
+          <v-btn @click="handleConfirmClick">{{
+            $t('views.modal.confirm')
+          }}</v-btn>
         </template>
       </v-card-actions>
     </v-card>
@@ -41,7 +45,7 @@
 </template>
 
 <script setup lang="tsx">
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import { useModalStore } from '@/store/modalStore';
 
 const modalStore = useModalStore();
@@ -53,12 +57,12 @@ const modal = computed(() =>
 );
 
 const closeModal = (id: string) => {
-  // 直接设置 isVisible 为 false，以便在过渡结束时移除 DOM 元素
+  // isVisible を false に設定し、トランジション終了時に DOM 要素を削除
   isVisible.value = false;
-  // 延迟执行 modalStore.closeModal 以等待过渡结束
+  // トランジションが終了するまで待機してから modalStore.closeModal を実行
   setTimeout(() => {
     modalStore.closeModal(id);
-  }, 300); // 300ms 是 Vue transition 默认过渡时间，可根据需要调整
+  }, 300); // 300ms は Vue のトランジションのデフォルト時間で、必要に応じて調整可能
 };
 
 const isFullscreen = ref(modal.value?.props?.fullscreen);
