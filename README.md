@@ -4,6 +4,8 @@
 
 vue-jp-admin（ヴュー ジェイピー アドミン）は、日本市場向けに設計されたVue 3.0ベースの管理システムです。このシステムは、ウェブサイト管理、会員センター、CMS、CRM、OAなど、さまざまなWebアプリケーションの迅速な開発を支援します。
 
+商業提携や技術サポートに関するお問い合わせは、メールまたはGitHubのIssuesを通じてご連絡ください。
+
 ## プレビュー
 
 ### https://wxcorer.com
@@ -74,7 +76,7 @@ Tailwind: https://tailwindcss.com/
 VxeTable: https://vxetable.cn/
 Vue: https://vuejs.org/
 
-## 連絡先(技術支援)
+### 連絡先(技術支援)
 
 メール: yangrongwei1996@gmail.com
 WeChat: 13196848849
