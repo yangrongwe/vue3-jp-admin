@@ -2,10 +2,222 @@
   "title": {
     "dashboard": "Dashboard",
     "user": {
-      "manage": "UserManage",
-      "list": "UserList",
-      "profile": "UserProfile"
+      "manage": "User Management",
+      "list": "User List",
+      "profile": "User Profile"
+    },
+    "components": {
+      "manage": "Component Management",
+      "table": "Table",
+      "form": "Form",
+      "pdf": "PDF",
+      "alert": "Alert",
+      "modal": "Modal"
+    },
+    "methods": {
+      "manage": "Common Functions Management",
+      "time": "Date Format",
+      "text": "Text Format",
+      "money": "Money Format"
     }
   },
-  "greeting": "Hello!"
+  "input": {
+    "appendAction": "Append Action"
+  },
+  "views": {
+    "dashboard": {
+      "welcomeCard": {
+        "text": "There is no such thing as failure. Failure is not fatal until you stop trying.",
+        "temperature": "Monday, 12:30 PM, 27°"
+      }
+    },
+    "alerts": {
+      "baseStyle": "Base Style",
+      "default": "Default",
+      "outlined": "Outlined",
+      "tonal": "Tonal",
+      "differentType": "Different Type",
+      "primary": "Primary",
+      "success": "Success",
+      "warning": "Warning",
+      "error": "Error",
+      "timeoutClose": "Timeout Close",
+      "autoClose": "Auto Close in 3 seconds",
+      "clearAll": "Clear All Alerts",
+      "close": "Close",
+      "demoDescription": "This page is a demo of v-alert using function calls.",
+      "documentationLink": "For more settings, refer to the Vuetify documentation."
+    },
+    "form": {
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Please enter your email address",
+        "validation": {
+          "required": "Please enter your email address",
+          "invalid": "Please enter a valid email address"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Please enter your password",
+        "validation": {
+          "required": "Please enter your password",
+          "length": "Password must be at least 6 characters long"
+        }
+      },
+      "frontEnd": {
+        "label": "Front-end",
+        "placeholder": "Please select your preferred front-end framework",
+        "validation": {
+          "required": "Please select at least one framework"
+        }
+      },
+      "skills": {
+        "label": "Skills",
+        "placeholder": "Please select your skills",
+        "validation": {
+          "required": "Please select at least one skill"
+        }
+      },
+      "reminderTime": {
+        "label": "Reminder Time",
+        "placeholder": "Please select a time"
+      },
+      "birthDate": {
+        "label": "Birth Date",
+        "placeholder": "Please select a date"
+      },
+      "gender": {
+        "label": "Gender",
+        "male": "Male",
+        "female": "Female",
+        "validation": {
+          "required": "Please select your gender"
+        }
+      },
+      "ageRange": {
+        "label": "Age Range",
+        "validation": {
+          "required": "Please select an age range"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Please enter a description"
+      },
+      "memo": {
+        "label": "Memo",
+        "placeholder": "Please enter a memo",
+        "customContent": {
+          "cardTitle": "Custom Card",
+          "cardContent": [
+            "This is a custom DIV element",
+            "You can avoid complex HTML structures this way.",
+            "Simply set the form options to create the form."
+          ]
+        }
+      },
+      "agreeTerms": {
+        "label": "Agree to Terms",
+        "checkboxLabel": "I agree to the terms and conditions",
+        "validation": {
+          "required": "You must agree to the terms and conditions"
+        }
+      },
+      "newsletter": {
+        "label": "Newsletter"
+      },
+      "submitButton": {
+        "label": "Submit",
+        "alert": {
+          "message": "Alert timeout!",
+          "type": "success",
+          "closable": true,
+          "border": "start",
+          "borderColor": "white"
+        }
+      }
+    },
+    "pdf": {
+      "prevPage": "Previous Page",
+      "nextPage": "Next Page",
+      "singlePageView": "Single Page View",
+      "allPagesView": "All Pages View",
+      "zoomOut": "Zoom Out",
+      "zoomIn": "Zoom In",
+      "download": "Download",
+      "reset": "Reset",
+      "rotateLeft": "Rotate Left",
+      "rotateRight": "Rotate Right",
+      "alertText": "Message",
+      "totalPages": "Total Pages: {count}",
+      "pageInfo": "Page {current} / {total}"
+    },
+    "modal": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "mainTitle": "Vuetify 3 Dialog Encapsulation [Function Call]",
+      "basicUsage": "Component Call - Basic Usage",
+      "attributesSlotsCallbacks": "Component Call - Attributes/Slots/Callback Methods",
+      "basicModalTsx": "TSX Writing",
+      "basicModalVNode": "VNode Writing",
+      "withForm": "Combination with Form",
+      "noMaskModal": "No Mask Modal",
+      "fullScreen": "Full Screen",
+      "nested": "Nested",
+      "customHeader": "Custom Header",
+      "customFooter": "Custom Footer",
+      "preventOutsideClose": "Prevent Outside Close",
+      "closeCallback": "Close Callback",
+      "moreUsage": "More Usages",
+      "tsxModal": {
+        "title": "TSX Modal"
+      },
+      "vnodeModal": {
+        "title": "VNode Modal"
+      },
+      "formModal": {
+        "title": "Form Modal"
+      },
+      "opacityModal": {
+        "title": "No Mask Modal",
+        "note": "A modal with 0 transparency is invisible."
+      },
+      "fullscreenModal": {
+        "title": "Full Screen Modal"
+      },
+      "nestingModal": {
+        "title": "Nesting Modal",
+        "buttonText": "Add a New Modal"
+      },
+      "titleModal": {
+        "title": "Custom Header Modal",
+        "customHeader": "Custom Header",
+        "alertMessage": "Custom header was clicked"
+      },
+      "footModal": {
+        "title": "Custom Footer Modal",
+        "customFooter": "Custom Footer",
+        "alertMessage": "Custom footer was clicked"
+      },
+      "persistentModal": {
+        "title": "Persistent Modal"
+      },
+      "callbackModal": {
+        "title": "Default Callback Modal",
+        "confirmAlert": "Confirm button clicked"
+      },
+      "formOptions": {
+        "name": {
+          "required": "Please enter your name",
+          "label": "Name",
+          "placeholder": "Please enter your name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Please enter your email address"
+        }
+      }
+    }
+  }
 }

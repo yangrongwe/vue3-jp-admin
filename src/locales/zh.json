@@ -1,0 +1,223 @@
+{
+  "title": {
+    "dashboard": "仪表盘",
+    "user": {
+      "manage": "用户管理",
+      "list": "用户列表",
+      "profile": "用户资料"
+    },
+    "components": {
+      "manage": "组件管理",
+      "table": "表格",
+      "form": "表单",
+      "pdf": "PDF",
+      "alert": "警报",
+      "modal": "模态框"
+    },
+    "methods": {
+      "manage": "常用函数管理",
+      "time": "日期格式化",
+      "text": "文本格式化",
+      "money": "金额格式化"
+    }
+  },
+  "input": {
+    "appendAction": "追加操作"
+  },
+  "views": {
+    "dashboard": {
+      "welcomeCard": {
+        "text": "没有所谓的失败。失败并不可怕，直到你停止尝试。",
+        "temperature": "星期一，下午12:30，27°"
+      }
+    },
+    "alerts": {
+      "baseStyle": "基础样式",
+      "default": "默认",
+      "outlined": "描边",
+      "tonal": "音调",
+      "differentType": "不同类型",
+      "primary": "主要",
+      "success": "成功",
+      "warning": "警告",
+      "error": "错误",
+      "timeoutClose": "超时关闭",
+      "autoClose": "3秒后自动关闭",
+      "clearAll": "清除所有警报",
+      "close": "关闭",
+      "demoDescription": "此页面是通过函数调用v-alert的演示页面。",
+      "documentationLink": "更多设置，请参阅Vuetify文档。"
+    },
+    "form": {
+      "email": {
+        "label": "电子邮件地址",
+        "placeholder": "请输入您的电子邮件地址",
+        "validation": {
+          "required": "请输入您的电子邮件地址",
+          "invalid": "请输入有效的电子邮件地址"
+        }
+      },
+      "password": {
+        "label": "密码",
+        "placeholder": "请输入您的密码",
+        "validation": {
+          "required": "请输入您的密码",
+          "length": "密码长度至少为6个字符"
+        }
+      },
+      "frontEnd": {
+        "label": "前端",
+        "placeholder": "请选择您喜欢的前端框架",
+        "validation": {
+          "required": "请至少选择一个框架"
+        }
+      },
+      "skills": {
+        "label": "技能",
+        "placeholder": "请选择您的技能",
+        "validation": {
+          "required": "请至少选择一项技能"
+        }
+      },
+      "reminderTime": {
+        "label": "提醒时间",
+        "placeholder": "请选择时间"
+      },
+      "birthDate": {
+        "label": "出生日期",
+        "placeholder": "请选择日期"
+      },
+      "gender": {
+        "label": "性别",
+        "male": "男",
+        "female": "女",
+        "validation": {
+          "required": "请选择您的性别"
+        }
+      },
+      "ageRange": {
+        "label": "年龄范围",
+        "validation": {
+          "required": "请选择年龄范围"
+        }
+      },
+      "description": {
+        "label": "描述",
+        "placeholder": "请输入描述"
+      },
+      "memo": {
+        "label": "备注",
+        "placeholder": "请输入备注",
+        "customContent": {
+          "cardTitle": "自定义卡片",
+          "cardContent": [
+            "这是一个自定义DIV元素",
+            "您可以通过这种方式避免复杂的HTML结构。",
+            "只需设置表单选项即可创建表单。"
+          ]
+        }
+      },
+      "agreeTerms": {
+        "label": "同意条款",
+        "checkboxLabel": "我同意条款和条件",
+        "validation": {
+          "required": "您必须同意条款和条件"
+        }
+      },
+      "newsletter": {
+        "label": "通讯"
+      },
+      "submitButton": {
+        "label": "提交",
+        "alert": {
+          "message": "警报超时！",
+          "type": "成功",
+          "closable": true,
+          "border": "开始",
+          "borderColor": "白色"
+        }
+      }
+    },
+    "pdf": {
+      "prevPage": "上一页",
+      "nextPage": "下一页",
+      "singlePageView": "单页视图",
+      "allPagesView": "全页视图",
+      "zoomOut": "缩小",
+      "zoomIn": "放大",
+      "download": "下载",
+      "reset": "重置",
+      "rotateLeft": "向左旋转",
+      "rotateRight": "向右旋转",
+      "alertText": "消息",
+      "totalPages": "总页数：{count}",
+      "pageInfo": "第 {current} 页 / 共 {total} 页"
+    },
+    "modal": {
+      "cancel": "取消",
+      "confirm": "确认",
+      "mainTitle": "Vuetify 3 对话框封装[函数调用]",
+      "basicUsage": "组件调用 - 基本用法",
+      "attributesSlotsCallbacks": "组件调用 - 属性/插槽/回调方法",
+      "basicModalTsx": "TSX 写法",
+      "basicModalVNode": "VNode 写法",
+      "withForm": "与表单结合",
+      "noMaskModal": "无蒙版模态框",
+      "fullScreen": "全屏",
+      "nested": "嵌套",
+      "customHeader": "自定义头部",
+      "customFooter": "自定义页脚",
+      "preventOutsideClose": "防止外部关闭",
+      "closeCallback": "关闭回调",
+      "moreUsage": "更多用法",
+      "tsxModal": {
+        "title": "TSX模态框"
+      },
+      "vnodeModal": {
+        "title": "VNode模态框"
+      },
+      "formModal": {
+        "title": "表单模态框"
+      },
+      "opacityModal": {
+        "title": "无蒙版模态框",
+        "note": "透明度为0的模态框是不可见的。"
+      },
+      "fullscreenModal": {
+        "title": "全屏模态框"
+      },
+      "nestingModal": {
+        "title": "嵌套模态框",
+        "buttonText": "添加一个新的模态框"
+      },
+      "titleModal": {
+        "title": "自定义头部模态框",
+        "customHeader": "自定义头部",
+        "alertMessage": "自定义头部被点击"
+      },
+      "footModal": {
+        "title": "自定义页脚模态框",
+        "customFooter": "自定义页脚",
+        "alertMessage": "自定义页脚被点击"
+      },
+      "persistentModal": {
+        "title": "持久模态框"
+      },
+      "callbackModal": {
+        "title": "默认回调模态框",
+        "confirmAlert": "确认按钮被点击"
+      },
+      "formOptions": {
+        "name": {
+          "required": "请输入您的姓名",
+          "label": "姓名",
+          "placeholder": "请输入您的姓名"
+        },
+        "email": {
+          "label": "电子邮件",
+          "placeholder": "请输入您的电子邮件地址"
+        }
+      }
+    }
+  }
+}

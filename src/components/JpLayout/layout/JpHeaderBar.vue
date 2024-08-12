@@ -22,12 +22,31 @@
     </template>
 
     <template v-slot:append>
-      <v-btn icon="mdi-heart"></v-btn>
+      <v-icon icon="mdi-heart" class="tw-mr-2"></v-icon>
 
-      <v-btn icon="mdi-magnify"></v-btn>
-      <v-menu>
+      <v-menu class="tw-mr-2">
         <template v-slot:activator="{ props }">
-          <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
+          <v-icon icon="mdi-earth" v-bind="props"></v-icon>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in localeItems"
+            :key="index"
+            :value="index"
+            @click="
+              () => {
+                changeLocale(item.value);
+              }
+            "
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <v-menu class="tw-mr-2">
+        <template v-slot:activator="{ props }">
+          <v-icon icon="mdi-dots-vertical" v-bind="props"></v-icon>
         </template>
         <v-list>
           <v-list-item
@@ -48,7 +67,7 @@
         <v-tabs
           v-model="tab"
           show-arrows
-          align-tabs="left"
+          align-tabs="start"
           color="tab-color"
           bg-color="tab-bg-color"
           slider-color="tab-slider-color"
@@ -86,6 +105,8 @@ import MenuList from '../menu/index.vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useTabsStore } from '@/store/tabsStore';
 import { computed, ref } from 'vue';
+import { setLanguageToLocalStorage } from '@/plugins/i18n/i18nUtils';
+import { useI18n } from 'vue-i18n';
 
 const tabsStore = useTabsStore(); // カスタムのタブストアを使用
 const router = useRouter(); // Vue Router を使用
@@ -141,6 +162,28 @@ const items = ref([
     title: '設定',
   },
 ]);
+
+const localeItems = ref([
+  {
+    title: 'Japan',
+    value: 'ja',
+  },
+  {
+    title: 'China',
+    value: 'zh',
+  },
+  {
+    title: 'English',
+    value: 'en',
+  },
+]);
+// const { locale } = useI18n();
+const changeLocale = (lang: string) => {
+  // locale.value = lang; // 更新 i18n 实例的语言
+  // i18n.
+  setLanguageToLocalStorage(lang); // 更新 localStorage 中的语言设置
+  window.location.reload();
+};
 </script>
 
 <style lang="scss" scoped>

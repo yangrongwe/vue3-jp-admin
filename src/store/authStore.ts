@@ -32,6 +32,7 @@ export const useAuthStore = defineStore('auth', {
   },
   getters: {
     filteredMenuRoutes: (state) => {
+      state.menuRoutes = JSON.parse(localStorage.getItem('menuRoutes'));
       return filterRoutesByRole(state.menuRoutes, state.user.role);
     },
   },
