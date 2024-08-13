@@ -75,11 +75,22 @@ const mainMenuRoutes: RouteRecordRaw[] = [
         name: 'modal',
         meta: {
           title: $t('title.components.modal'),
-          icon: 'mdi-file-pdf-box',
+          icon: 'mdi-forum-outline',
           unShow: false,
           roles: ['admin', 'user'],
         },
         component: () => import('@/views/componentsDemo/modal/index.vue'),
+      },
+      {
+        path: 'drawer',
+        name: 'drawer',
+        meta: {
+          title: $t('title.components.drawer'),
+          icon: 'mdi-book-open-outline',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/drawer/index.vue'),
       },
     ],
   },

@@ -54,7 +54,39 @@ export const useTabsStore = defineStore('tabs', {
   },
   getters: {
     getTabs: (state): Tab[] => {
-      return state.tabs;
+      let menuRoutes = JSON.parse(localStorage.getItem('menuRoutes')) || [];
+
+      // 定义一个递归函数用于从嵌套的children中查找路径
+      function findTitleByPath(routes, path: string): string | null {
+        for (const route of routes) {
+          if (route.path === path) {
+            return route.meta?.title || null;
+          }
+          if (route.children) {
+            const title = findTitleByPath(route.children, path);
+            if (title) {
+              return title;
+            }
+          }
+        }
+        return null;
+      }
+
+      let tabs = state.tabs.map((tab) => {
+        console.log('tab', tab);
+        const title = findTitleByPath(
+          menuRoutes,
+          tab.value.substring(tab.value.lastIndexOf('/') + 1)
+        );
+
+        return {
+          ...tab,
+          title: title || tab.title, // 如果没有找到title则保持原有title
+        };
+      });
+
+      // 遍历tabs并更新title
+      return tabs;
     },
   },
 });
