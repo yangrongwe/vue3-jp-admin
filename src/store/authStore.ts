@@ -22,7 +22,6 @@ export const useAuthStore = defineStore('auth', {
     login(user) {
       this.isAuthenticated = true;
       this.user = user;
-      this.menuRoutes = JSON.parse(localStorage.getItem('menuRoutes'));
     },
     logout() {
       this.isAuthenticated = false;

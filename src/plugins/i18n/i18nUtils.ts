@@ -8,7 +8,13 @@ function setLanguageToLocalStorage(locale: string): void {
 }
 
 function getLanguageFromLocalStorage(): string {
-  return localStorage.getItem('app-lang') || 'ja';
+  let userLanguage = navigator.language || navigator.languages[0];
+
+  if (userLanguage != 'ja' && userLanguage != 'zh-CN' && userLanguage != 'en') {
+    userLanguage = 'ja';
+  }
+
+  return localStorage.getItem('app-lang') || userLanguage || 'ja';
 }
 
 export { $t, setLanguageToLocalStorage, getLanguageFromLocalStorage };

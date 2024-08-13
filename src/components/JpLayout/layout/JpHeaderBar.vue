@@ -106,7 +106,6 @@ import { useRouter, useRoute } from 'vue-router';
 import { useTabsStore } from '@/store/tabsStore';
 import { computed, ref } from 'vue';
 import { setLanguageToLocalStorage } from '@/plugins/i18n/i18nUtils';
-import { useI18n } from 'vue-i18n';
 
 const tabsStore = useTabsStore(); // カスタムのタブストアを使用
 const router = useRouter(); // Vue Router を使用
