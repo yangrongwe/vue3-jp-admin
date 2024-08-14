@@ -106,23 +106,23 @@ const handleConfirmClick = async () => {
 }
 
 .drawer-top {
-  ::v-deep .v-overlay__content {
+  :deep(.v-overlay__content) {
     top: 0 !important;
   }
 }
 .drawer-left {
-  ::v-deep .v-overlay__content {
+  :deep(.v-overlay__content) {
     left: 0 !important;
   }
 }
 .drawer-bottom {
-  ::v-deep .v-overlay__content {
+  :deep(.v-overlay__content) {
     top: auto !important;
     bottom: 0 !important;
   }
 }
 .drawer-right {
-  ::v-deep .v-overlay__content {
+  :deep(.v-overlay__content) {
     left: auto !important;
     right: 0 !important;
   }
