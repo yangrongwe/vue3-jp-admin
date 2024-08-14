@@ -207,6 +207,12 @@
         "title": "Default Callback Modal",
         "confirmAlert": "Confirm button clicked"
       },
+      "drawerModal": {
+        "left": "drawer left",
+        "top": "drawer top",
+        "right": "drawer right",
+        "bottom": "drawer bottom"
+      },
       "formOptions": {
         "name": {
           "required": "Please enter your name",

@@ -73,7 +73,6 @@ export const useTabsStore = defineStore('tabs', {
       }
 
       let tabs = state.tabs.map((tab) => {
-        console.log('tab', tab);
         const title = findTitleByPath(
           menuRoutes,
           tab.value.substring(tab.value.lastIndexOf('/') + 1)

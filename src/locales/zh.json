@@ -207,6 +207,12 @@
         "title": "默认回调模态框",
         "confirmAlert": "确认按钮被点击"
       },
+      "drawerModal": {
+        "left": "抽屉 左",
+        "top": "抽屉 上",
+        "right": "抽屉 右",
+        "bottom": "抽屉 下"
+      },
       "formOptions": {
         "name": {
           "required": "请输入您的姓名",

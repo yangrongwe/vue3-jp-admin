@@ -207,6 +207,12 @@
         "title": "デフォルト コールバック モーダル",
         "confirmAlert": "確認ボタンがクリックされました"
       },
+      "drawerModal": {
+        "left": "ドロワー 左",
+        "top": "ドロワー 上",
+        "right": "ドロワー 右",
+        "bottom": "ドロワー 下"
+      },
       "formOptions": {
         "name": {
           "required": "名前を入力してください",

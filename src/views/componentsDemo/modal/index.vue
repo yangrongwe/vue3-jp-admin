@@ -39,6 +39,20 @@ import { useOpenModal, mainTitle } from './hook';
         $t('views.modal.closeCallback')
       }}</v-btn>
     </div>
+    <div class="tw-btn">
+      <v-btn @click="useOpenModal(11)">{{
+        $t('views.modal.drawerModal.top')
+      }}</v-btn>
+      <v-btn @click="useOpenModal(12)">{{
+        $t('views.modal.drawerModal.right')
+      }}</v-btn>
+      <v-btn @click="useOpenModal(13)">{{
+        $t('views.modal.drawerModal.bottom')
+      }}</v-btn>
+      <v-btn @click="useOpenModal(14)">{{
+        $t('views.modal.drawerModal.left')
+      }}</v-btn>
+    </div>
     <v-divider class="tw-mb-2"></v-divider>
     <div>
       {{ $t('views.modal.moreUsage') }}:

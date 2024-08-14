@@ -164,6 +164,46 @@ const callbackCode = `
     });
 `;
 
+const drawerTop = ` openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: $t('views.modal.fullscreenModal.title'),
+          fullscreen: true,
+          height: 400,
+          transition: 'slide-x-reverse-transition',
+          class: 'drawer-top',
+        },
+      });`;
+const drawerRight = `openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: $t('views.modal.fullscreenModal.title'),
+          fullscreen: true,
+          width: 600,
+          transition: 'slide-x-reverse-transition',
+          class: 'drawer-right',
+        },
+      });`;
+const drawerBottom = `openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: $t('views.modal.fullscreenModal.title'),
+          fullscreen: true,
+          height: 400,
+          transition: 'slide-x-reverse-transition',
+          class: 'drawer-bottom',
+        },
+      });`;
+const drawerLeft = ` openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: $t('views.modal.fullscreenModal.title'),
+          fullscreen: true,
+          width: 600,
+          transition: 'slide-x-reverse-transition',
+          class: 'drawer-left',
+        },
+      });`;
 const formRef = ref(null);
 const newModal = () => {
   openModal({
@@ -333,6 +373,54 @@ const useOpenModal = (action: number) => {
             alert($t('views.modal.callbackModal.confirmAlert'));
             return false;
           },
+        },
+      });
+      break;
+    case 11:
+      openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: $t('views.modal.drawerModal.top'),
+          fullscreen: true,
+          height: 400,
+          transition: 'slide-x-reverse-transition',
+          drawerClass: 'drawer-top',
+        },
+      });
+      break;
+    case 12:
+      openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: $t('views.modal.drawerModal.right'),
+          fullscreen: true,
+          width: 600,
+          transition: 'slide-x-reverse-transition',
+          drawerClass: 'drawer-right',
+        },
+      });
+      break;
+    case 13:
+      openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: $t('views.modal.drawerModal.bottom'),
+          fullscreen: true,
+          height: 400,
+          transition: 'slide-x-reverse-transition',
+          drawerClass: 'drawer-bottom',
+        },
+      });
+      break;
+    case 14:
+      openModal({
+        component: <HighlightCode code={fullscreenCode} />,
+        props: {
+          title: $t('views.modal.drawerModal.left'),
+          fullscreen: true,
+          width: 600,
+          transition: 'slide-x-reverse-transition',
+          drawerClass: 'drawer-left',
         },
       });
       break;

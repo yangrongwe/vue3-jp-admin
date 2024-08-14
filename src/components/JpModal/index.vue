@@ -4,6 +4,7 @@
     :style="{ zIndex: modal?.zIndex }"
     v-bind="modal?.props"
     :fullscreen="isFullscreen"
+    :class="modal?.props?.drawerClass"
   >
     <v-card v-if="modal">
       <v-card-title>
@@ -13,9 +14,13 @@
         <div class="tw-flex tw-justify-between tw-items-center" v-else>
           <div class="tw-flex-shrink-0">{{ modal?.props.title }}</div>
           <div class="tw-flex tw-space-x-2">
-            <v-icon @click="toggleFullscreen" v-if="modal?.props.fullscreen">{{
-              isFullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'
-            }}</v-icon>
+            <v-icon
+              @click="toggleFullscreen"
+              v-if="modal?.props.fullscreen && !modal?.props?.drawerClass"
+              >{{
+                isFullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'
+              }}</v-icon
+            >
             <v-icon @click="closeModal(modal.id)" class="tw-place-items-end">{{
               'mdi-window-close'
             }}</v-icon>
@@ -98,5 +103,28 @@ const handleConfirmClick = async () => {
 <style scoped lang="scss">
 .v-dialog {
   transition: none;
+}
+
+.drawer-top {
+  ::v-deep .v-overlay__content {
+    top: 0 !important;
+  }
+}
+.drawer-left {
+  ::v-deep .v-overlay__content {
+    left: 0 !important;
+  }
+}
+.drawer-bottom {
+  ::v-deep .v-overlay__content {
+    top: auto !important;
+    bottom: 0 !important;
+  }
+}
+.drawer-right {
+  ::v-deep .v-overlay__content {
+    left: auto !important;
+    right: 0 !important;
+  }
 }
 </style>
