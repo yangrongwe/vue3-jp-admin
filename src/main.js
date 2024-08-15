@@ -12,7 +12,7 @@ import i18n from './plugins/i18n/i18n.ts';
 
 import './styles/index.css';
 // import 'vxe-table/lib/style.css';
-import { VxeTable } from '@/plugins/VxeTable/index.ts';
+import { VxeTable } from '@/plugins/vxeTable/index.ts';
 
 const app = createApp(App);
 
