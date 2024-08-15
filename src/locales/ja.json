@@ -224,6 +224,43 @@
           "placeholder": "メールアドレスを入力してください"
         }
       }
+    },
+    "table": {
+      "documentationLink": "詳細はAPIドキュメントをご参照ください。",
+      "tabs": {
+        "basicTable": "基本テーブル",
+        "paginationTable": "ページネーションテーブル",
+        "treeTable": "ツリーテーブル",
+        "editableTable": "編集可能なテーブル",
+        "customColumnTable": "カスタムカラムテーブル",
+        "mergeCellTable": "セル結合テーブル",
+        "rightClickMenuTable": "右クリックメニューテーブル",
+        "dataExport": "データエクスポート"
+      },
+      "export": {
+        "txt": "TXT形式でエクスポート",
+        "xml": "XML形式でエクスポート",
+        "html": "HTML形式でエクスポート",
+        "csv": "CSV形式でエクスポート"
+      },
+      "nickname": "ニックネーム",
+      "role": "役割",
+      "age": "年齢",
+      "address": "住所",
+      "name": "名前",
+      "size": "サイズ",
+      "type": "タイプ",
+      "date": "日付",
+      "checkbox": "チェックボックス",
+      "seq": "番号",
+      "sex": "性別",
+      "category": "カテゴリ",
+      "number": "番号",
+      "exportAll": "全てエクスポート.csv",
+      "copy": "コピー",
+      "clear": "クリア",
+      "reload": "テーブルを再読み込み",
+      "print": "印刷"
     }
   }
 }

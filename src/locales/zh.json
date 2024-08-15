@@ -224,6 +224,44 @@
           "placeholder": "请输入您的电子邮件地址"
         }
       }
+    },
+
+    "table": {
+      "documentationLink": "详细请参见API文档。",
+      "tabs": {
+        "basicTable": "基本表格",
+        "paginationTable": "分页表格",
+        "treeTable": "树形表格",
+        "editableTable": "可编辑表格",
+        "customColumnTable": "自定义列表格",
+        "mergeCellTable": "合并单元格表格",
+        "rightClickMenuTable": "右键菜单表格",
+        "dataExport": "数据导出"
+      },
+      "export": {
+        "txt": "导出为TXT",
+        "xml": "导出为XML",
+        "html": "导出为HTML",
+        "csv": "导出为CSV"
+      },
+      "nickname": "昵称",
+      "role": "角色",
+      "age": "年龄",
+      "address": "地址",
+      "name": "姓名",
+      "size": "尺寸",
+      "type": "类型",
+      "date": "日期",
+      "checkbox": "复选框",
+      "seq": "序号",
+      "sex": "性别",
+      "category": "类别",
+      "number": "编号",
+      "exportAll": "全部导出.csv",
+      "copy": "复制",
+      "clear": "清空",
+      "reload": "重新加载表格",
+      "print": "打印"
     }
   }
 }

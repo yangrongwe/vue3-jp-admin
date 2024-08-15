@@ -224,6 +224,43 @@
           "placeholder": "Please enter your email address"
         }
       }
+    },
+    "table": {
+      "documentationLink": "Please refer to the API documentation for details.",
+      "tabs": {
+        "basicTable": "Basic Table",
+        "paginationTable": "Pagination Table",
+        "treeTable": "Tree Table",
+        "editableTable": "Editable Table",
+        "customColumnTable": "Custom Column Table",
+        "mergeCellTable": "Merge Cell Table",
+        "rightClickMenuTable": "Right Click Menu Table",
+        "dataExport": "Data Export"
+      },
+      "export": {
+        "txt": "Export as TXT",
+        "xml": "Export as XML",
+        "html": "Export as HTML",
+        "csv": "Export as CSV"
+      },
+      "nickname": "Nickname",
+      "role": "Role",
+      "age": "Age",
+      "address": "Address",
+      "name": "Name",
+      "size": "Size",
+      "type": "Type",
+      "date": "Date",
+      "checkbox": "Checkbox",
+      "seq": "Sequence",
+      "sex": "Sex",
+      "category": "Category",
+      "number": "Number",
+      "exportAll": "Export All.csv",
+      "copy": "Copy",
+      "clear": "Clear",
+      "reload": "Reload Table",
+      "print": "Print"
     }
   }
 }

@@ -378,7 +378,7 @@ const useOpenModal = (action: number) => {
       break;
     case 11:
       openModal({
-        component: <HighlightCode code={fullscreenCode} />,
+        component: <HighlightCode code={drawerTop} />,
         props: {
           title: $t('views.modal.drawerModal.top'),
           fullscreen: true,
@@ -390,7 +390,7 @@ const useOpenModal = (action: number) => {
       break;
     case 12:
       openModal({
-        component: <HighlightCode code={fullscreenCode} />,
+        component: <HighlightCode code={drawerRight} />,
         props: {
           title: $t('views.modal.drawerModal.right'),
           fullscreen: true,
@@ -402,7 +402,7 @@ const useOpenModal = (action: number) => {
       break;
     case 13:
       openModal({
-        component: <HighlightCode code={fullscreenCode} />,
+        component: <HighlightCode code={drawerBottom} />,
         props: {
           title: $t('views.modal.drawerModal.bottom'),
           fullscreen: true,
@@ -414,7 +414,7 @@ const useOpenModal = (action: number) => {
       break;
     case 14:
       openModal({
-        component: <HighlightCode code={fullscreenCode} />,
+        component: <HighlightCode code={drawerLeft} />,
         props: {
           title: $t('views.modal.drawerModal.left'),
           fullscreen: true,
