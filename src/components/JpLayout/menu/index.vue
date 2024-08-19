@@ -58,7 +58,7 @@ const emits = defineEmits(['railChange']);
 const router = useRouter();
 const authStore = useAuthStore();
 const tabsStore = useTabsStore();
-const expandedMenuItem = ref<string[]>([]);
+const expandedMenuItem = ref<string[]>(['/components']);
 const selectedMenu = ref<string[]>(['/dashboard']);
 const menuItems: RouteRecordRaw[] = authStore.filteredMenuRoutes;
 

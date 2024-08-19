@@ -38,28 +38,6 @@ const mainMenuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/componentsDemo/table/index.vue'),
       },
       {
-        path: 'form',
-        name: 'form',
-        meta: {
-          title: $t('title.components.form'),
-          icon: 'mdi-list-box',
-          unShow: false,
-          roles: ['admin', 'user'],
-        },
-        component: () => import('@/views/componentsDemo/form/index.vue'),
-      },
-      {
-        path: 'pdf',
-        name: 'pdf',
-        meta: {
-          title: $t('title.components.pdf'),
-          icon: 'mdi-file-pdf-box',
-          unShow: false,
-          roles: ['admin', 'user'],
-        },
-        component: () => import('@/views/componentsDemo/pdf/index.vue'),
-      },
-      {
         path: 'alert',
         name: 'alert',
         meta: {
@@ -80,6 +58,39 @@ const mainMenuRoutes: RouteRecordRaw[] = [
           roles: ['admin', 'user'],
         },
         component: () => import('@/views/componentsDemo/modal/index.vue'),
+      },
+      {
+        path: 'gantt',
+        name: 'gantt',
+        meta: {
+          title: $t('title.components.gantt'),
+          icon: 'mdi-forum-outline',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/gantt/index.vue'),
+      },
+      {
+        path: 'form',
+        name: 'form',
+        meta: {
+          title: $t('title.components.form'),
+          icon: 'mdi-list-box',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/form/index.vue'),
+      },
+      {
+        path: 'pdf',
+        name: 'pdf',
+        meta: {
+          title: $t('title.components.pdf'),
+          icon: 'mdi-file-pdf-box',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/pdf/index.vue'),
       },
     ],
   },
