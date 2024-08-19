@@ -4,7 +4,7 @@
     :rail="rail"
     :permanent="!mobile"
   >
-    <v-img :src="logo" class="tw-h-[90px]"></v-img>
+    <v-img :src="logo" class="tw-h-[50px]"></v-img>
     <v-divider></v-divider>
 
     <menu-list
