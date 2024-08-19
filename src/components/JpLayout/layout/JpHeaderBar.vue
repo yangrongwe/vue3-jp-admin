@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="app-bar-primary" height="60" extension-height="40">
+  <v-app-bar color="app-bar-primary" height="50" extension-height="40">
     <template v-slot:prepend>
       <div v-if="mobile">
         <v-menu width="200">
@@ -22,11 +22,11 @@
     </template>
 
     <template v-slot:append>
-      <v-icon icon="mdi-heart" class="tw-mr-2"></v-icon>
+      <v-icon icon="mdi-heart" class="tw-mr-4"></v-icon>
 
-      <v-menu class="tw-mr-2">
+      <v-menu>
         <template v-slot:activator="{ props }">
-          <v-icon icon="mdi-earth" v-bind="props"></v-icon>
+          <v-icon icon="mdi-translate" v-bind="props" class="tw-mr-4"></v-icon>
         </template>
         <v-list>
           <v-list-item
@@ -44,9 +44,20 @@
         </v-list>
       </v-menu>
 
-      <v-menu class="tw-mr-2">
+      <v-menu>
         <template v-slot:activator="{ props }">
-          <v-icon icon="mdi-dots-vertical" v-bind="props"></v-icon>
+          <div
+            v-bind="props"
+            class="tw-mr-4 tw-flex tw-items-center tw-justify-center tw-gap-2 tw-cursor-pointer"
+          >
+            <v-avatar color="primary" size="x-small">
+              <v-img
+                alt="John"
+                src="https://cdn.vuetifyjs.com/images/john.jpg"
+              ></v-img>
+            </v-avatar>
+            <div class="tw-text-sm">田中　太郎</div>
+          </div>
         </template>
         <v-list>
           <v-list-item

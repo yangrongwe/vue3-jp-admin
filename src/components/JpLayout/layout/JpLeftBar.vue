@@ -4,14 +4,7 @@
     :rail="rail"
     :permanent="!mobile"
   >
-    <v-list class="tw-h-[60px]">
-      <v-list-item
-        prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-        subtitle="sandra_a88@gmailcom"
-        title="Sandra Adams"
-      ></v-list-item>
-    </v-list>
-
+    <v-img :src="logo" class="tw-h-[90px]"></v-img>
     <v-divider></v-divider>
 
     <menu-list
@@ -34,6 +27,8 @@
 import { ref } from 'vue';
 import MenuList from '../menu/index.vue';
 import { useDisplay } from 'vuetify';
+import logo from '@/assets/logo/facebook_cover_photo_1.png';
+
 const { mobile } = useDisplay();
 const rail = ref<boolean>(false);
 const changeRail = (type?: string) => {
