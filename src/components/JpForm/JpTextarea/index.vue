@@ -1,8 +1,5 @@
 <template>
-  <div class="tw-flex">
-    <div v-if="item.label" class="tw-mr-6" :style="{ width: item.labelWidth }">
-      {{ item.label }}
-    </div>
+  <div>
     <v-textarea
       v-bind="item.props"
       v-model="textareaValue"

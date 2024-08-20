@@ -1,12 +1,5 @@
 <template>
-  <div class="tw-flex">
-    <div
-      v-if="item.label"
-      class="tw-mr-6 tw-mt-[12px]"
-      :style="{ width: item.labelWidth }"
-    >
-      {{ item.label }}
-    </div>
+  <div>
     <v-date-picker v-bind="item.props" v-model="dateValue"></v-date-picker>
   </div>
 </template>

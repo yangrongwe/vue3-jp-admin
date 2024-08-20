@@ -1,15 +1,22 @@
 <template>
   <v-form ref="formRef" v-bind="$attrs" class="tw-px-8 tw-pt-1 tw-py-12">
     <template v-for="item in formOptions.formItems" :key="item.itemName">
-      <component
-        :is="getComponent(item.itemType)"
-        :item="item"
-        v-bind="item.props"
-        v-on="item.eventHandlers ? item.eventHandlers : {}"
-        :rules="formOptions.rules[item.itemName] || []"
-        class="tw-flex-grow"
-        @update:modelValue="handleModelValueUpdate"
-      />
+      <div class="tw-flex tw-flex-wrap tw-items-start">
+        <div class="tw-mr-2" :style="{ width: item.labelWidth }">
+          {{ item.label }}
+        </div>
+        <div class="tw-flex-1 tw-min-w-[300px]">
+          <component
+            :is="getComponent(item.itemType)"
+            :item="item"
+            v-bind="item.props"
+            v-on="item.eventHandlers ? item.eventHandlers : {}"
+            :rules="formOptions.rules[item.itemName] || []"
+            class="tw-flex-grow"
+            @update:modelValue="handleModelValueUpdate"
+          />
+        </div>
+      </div>
     </template>
   </v-form>
 </template>

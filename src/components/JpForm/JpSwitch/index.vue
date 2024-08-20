@@ -1,12 +1,5 @@
 <template>
-  <div class="tw-flex">
-    <div
-      v-if="item.label"
-      class="tw-mr-6 tw-mt-[16px]"
-      :style="{ width: item.labelWidth }"
-    >
-      {{ item.label }}
-    </div>
+  <div>
     <v-switch
       v-bind="item.props"
       v-model="switchValue"

@@ -1,13 +1,6 @@
 <template>
   <!-- select -->
-  <div class="tw-flex">
-    <div
-      v-if="item.label"
-      class="tw-mr-6 tw-mt-[12px]"
-      :style="{ width: item.labelWidth }"
-    >
-      {{ item.label }}
-    </div>
+  <div>
     <v-select
       :id="item.itemName"
       v-bind="item.props"

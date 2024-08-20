@@ -1,13 +1,6 @@
 <!-- JpDateTimePicker.vue -->
 <template>
   <div class="tw-flex">
-    <div
-      v-if="item.label"
-      class="tw-mr-6 tw-mt-[12px]"
-      :style="{ width: item.labelWidth }"
-    >
-      {{ item.label }}
-    </div>
     <div class="tw-flex tw-gap-2">
       <v-text-field
         v-bind="item.props"
