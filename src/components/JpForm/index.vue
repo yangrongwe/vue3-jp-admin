@@ -5,7 +5,7 @@
         <div class="tw-mr-2" :style="{ width: item.labelWidth }">
           {{ item.label }}
         </div>
-        <div class="tw-flex-1 tw-min-w-[300px]">
+        <div class="tw-flex-1 tw-min-w-[250px]">
           <component
             :is="getComponent(item.itemType)"
             :item="item"

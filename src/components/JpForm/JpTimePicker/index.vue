@@ -1,7 +1,7 @@
 <!-- JpDateTimePicker.vue -->
 <template>
   <div class="tw-flex">
-    <div class="tw-flex tw-gap-2">
+    <div class="tw-flex tw-gap-2 tw-flex-wrap">
       <v-text-field
         v-bind="item.props"
         v-model="dateValue"
