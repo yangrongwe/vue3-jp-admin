@@ -5,7 +5,7 @@
         :is="getComponent(item.itemType)"
         :item="item"
         v-bind="item.props"
-        v-on="item.eventHandlers"
+        v-on="item.eventHandlers ? item.eventHandlers : {}"
         :rules="formOptions.rules[item.itemName] || []"
         class="tw-flex-grow"
         @update:modelValue="handleModelValueUpdate"

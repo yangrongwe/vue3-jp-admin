@@ -236,7 +236,7 @@ const useOpenModal = (action: number) => {
       break;
     case 3:
       openModal({
-        component: (
+        component: () => (
           <JpForm
             ref={formRef.value}
             form-options={formOptions}

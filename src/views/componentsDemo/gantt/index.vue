@@ -28,11 +28,13 @@
             :selected-date="selectedDate"
             :time-from="8 * 60"
             :time-to="19 * 60"
+            :snap-to-time="0"
             :split-days="demoExample.splits"
             sticky-split-labels
             :editable-events="demoExample.editable"
             :events="demoExample.events"
-            @cell-click="calendarDateDbClick"
+            @event-click="handleEventClick"
+            @event-drag-create="handleEventCreate"
           >
             <template #split-label="{ split, view }">
               <v-icon :color="split.color" size="20">person</v-icon>
@@ -48,7 +50,7 @@
 </template>
 
 <script setup lang="tsx">
-import { ref, reactive } from 'vue';
+import { ref, reactive, nextTick } from 'vue';
 import VueCal from 'vue-cal';
 import 'vue-cal/dist/vuecal.css';
 import JpMainArea from '@/components/JpLayout/layout/JpMainArea.vue';
@@ -82,26 +84,39 @@ function handleDateClick(date) {
 const formRef = ref(null);
 const formOptions = reactive<JpFormOptions>({
   formItems: [
-    // メールアドレス用の入力項目
     {
       itemType: 'input',
       itemName: 'title',
-      label: 'title',
-      labelWidth: '50px',
       props: {
         type: 'text',
-        placeholder: $t('views.form.email.placeholder'),
+        label: '标题',
         validateOn: 'blur',
-        density: 'compact',
-        class: 'tw-mb-1',
       },
-      eventHandlers: {
-        input: (event) => {
-          // 入力イベントを処理
-        },
-        change: (el) => {
-          // 変更イベントを処理
-        },
+    },
+    {
+      itemType: 'input',
+      itemName: 'startTime',
+      props: {
+        type: 'text',
+        label: '开始时间',
+        validateOn: 'blur',
+      },
+    },
+    {
+      itemType: 'input',
+      itemName: 'endTime',
+      props: {
+        type: 'text',
+        label: '结束时间',
+        validateOn: 'blur',
+      },
+    },
+    {
+      itemType: 'textarea',
+      itemName: 'context',
+      props: {
+        label: 'task内容',
+        validateOn: 'blur',
       },
     },
   ],
@@ -109,40 +124,36 @@ const formOptions = reactive<JpFormOptions>({
 });
 
 // calendarDateClick
-const calendarDateDbClick = (obj) => {
-  //   if (obj instanceof Date) {
-  //   } else {
-  //     console.log(' obj.split', obj.split);
-  //     if (obj.split && obj.split == 2) {
-  //       console.log('日期');
-  //     } else {
-  //       console.log('月份');
-  //     }
-  //   }
+const handleEventClick = (obj) => {
   console.log('obj', obj);
+};
+
+const handleEventCreate = (event) => {
+  // 处理事件创建逻辑
+  console.log('drag Info', event);
   openModal({
-    component: (
-      <JpForm
-        ref={formRef.value}
-        form-options={formOptions}
-        class="tw-pb-0"
-      ></JpForm>
-    ),
+    component: () => <JpForm ref={formRef} form-options={formOptions}></JpForm>,
     props: {
       title: '新建task',
-      width: '700',
+      width: '400',
+    },
+    callbackMethod: {
+      //    console.log(formRef.value.formData);
+      onCloseCallback: () => {
+        return true;
+      },
+      onConfirmCallback: () => {
+        console.log('formRef.value', formRef.value);
+        return false;
+      },
     },
   });
-  //   demoExample.value.events.push({
-  //     start: `2024/8/21 14:00`,
-  //     end: `$2024/8/21 16:00`,
-  //     title: 'test',
-  //     background: true,
-  //     content:"123"
-  //     deletable: false,
-  //     resizable: false,
-  //     split: 1,
-  //   });
+  // 示例: 将新事件添加到事件列表中
+  // demoExample.value.events.push(event);
+
+  return event;
+  // 示例: 将新事件添加到事件列表中
+  //   events.value.push(event);
 };
 
 // Format selected date
