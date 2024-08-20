@@ -1,7 +1,7 @@
 <template>
   <div class="tw-container tw-mx-auto tw-p-4">
-    <div class="tw-flex tw-justify-between tw-mb-4">
-      <div class="tw-flex tw-gap-2">
+    <div class="tw-flex tw-justify-between tw-flex-wrap tw-mb-4">
+      <div class="tw-flex tw-gap-2 tw-flex-wrap tw-mb-2">
         <v-btn @click="prevPage" :disabled="isAllPages">
           {{ $t('views.pdf.prevPage') }}
         </v-btn>
@@ -16,7 +16,7 @@
           }}
         </v-btn>
       </div>
-      <div class="tw-flex tw-items-center tw-gap-2">
+      <div class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap tw-mb-2">
         <v-btn @click="zoomOut" :disabled="zoomOutDisabled">
           {{ $t('views.pdf.zoomOut') }}
         </v-btn>
@@ -32,7 +32,7 @@
           {{ $t('views.pdf.zoomIn') }}
         </v-btn>
       </div>
-      <div class="tw-flex tw-gap-2">
+      <div class="tw-flex tw-gap-2 tw-flex-wrap">
         <v-btn @click="downloadPDF">{{ $t('views.pdf.download') }}</v-btn>
         <v-btn @click="reset">{{ $t('views.pdf.reset') }}</v-btn>
 
