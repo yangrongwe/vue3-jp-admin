@@ -148,21 +148,8 @@ const handleEventCreate = (event) => {
       },
     },
   });
-  // 示例: 将新事件添加到事件列表中
-  // demoExample.value.events.push(event);
 
   return event;
-  // 示例: 将新事件添加到事件列表中
-  //   events.value.push(event);
-};
-
-// Format selected date
-const formatSelectedDate = (date) => {
-  if (date) {
-    const d = new Date(date);
-    return `${d.getFullYear()}-${('0' + (d.getMonth() + 1)).slice(-2)}-${('0' + d.getDate()).slice(-2)}`;
-  }
-  return 'Not selected';
 };
 
 // Setup initial events

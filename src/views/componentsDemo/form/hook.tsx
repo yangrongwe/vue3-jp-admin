@@ -105,7 +105,7 @@ const formOptions = reactive<JpFormOptions>({
       itemType: 'timePicker',
       itemName: 'reminderTime',
       label: $t('views.form.reminderTime.label'),
-      labelWidth: '200px',
+      labelWidth: '150px',
       props: {
         placeholder: $t('views.form.reminderTime.placeholder'),
         class: 'tw-mb-1',
