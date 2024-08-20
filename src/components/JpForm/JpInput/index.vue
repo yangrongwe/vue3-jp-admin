@@ -16,8 +16,6 @@
       @click:append-inner="passwordVisible = !passwordVisible"
       :type="passwordVisible ? 'text' : 'password'"
       :append-inner-icon="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'"
-      variant="outlined"
-      density="comfortable"
     >
     </v-text-field>
   </div>
@@ -35,8 +33,6 @@
       v-bind="item.props"
       v-model="inputValue"
       :rules="rules"
-      variant="outlined"
-      density="comfortable"
     >
     </v-text-field>
   </div>

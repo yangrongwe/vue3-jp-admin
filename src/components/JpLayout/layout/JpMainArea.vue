@@ -1,5 +1,8 @@
 <template>
-  <v-card variant="flat" :class="hFull ? 'tw-h-full' : ''">
+  <v-card
+    variant="flat"
+    :class="hFull ? 'tw-flex tw-flex-col tw-h-full' : 'tw-flex tw-flex-col'"
+  >
     <div class="tw-px-4 tw-py-6 tw-min-h-16">
       <!-- 自定义title -->
       <div v-if="$slots.title">
@@ -19,7 +22,7 @@
       </div>
     </div>
     <v-divider></v-divider>
-    <div class="tw-p-6">
+    <div class="tw-p-6 tw-flex-1">
       <slot></slot>
     </div>
   </v-card>

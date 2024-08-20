@@ -14,8 +14,6 @@
       v-model="selectedValue"
       :items="item.props.items"
       :rules="rules"
-      variant="outlined"
-      density="comfortable"
     >
     </v-select>
   </div>

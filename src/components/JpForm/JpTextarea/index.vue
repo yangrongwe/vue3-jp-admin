@@ -7,8 +7,6 @@
       v-bind="item.props"
       v-model="textareaValue"
       :rules="rules"
-      variant="outlined"
-      density="comfortable"
     ></v-textarea>
   </div>
 </template>
