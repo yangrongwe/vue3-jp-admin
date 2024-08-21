@@ -2,7 +2,10 @@
   <div
     class="tw-bg-[url('@/assets/login/bg.jpg')] tw-bg-cover tw-h-screen tw-w-full tw-flex tw-justify-center tw-items-center"
   >
-    <v-card class="tw-w-[480px] tw-mx-auto login-card" elevation="2">
+    <v-card
+      class="tw-w-[480px] tw-mx-auto tw-pb-12 tw-px-8 login-card"
+      elevation="2"
+    >
       <jp-form
         ref="formRef"
         :form-options="formOptions"
