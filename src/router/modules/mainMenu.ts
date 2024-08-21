@@ -60,10 +60,10 @@ const mainMenuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/componentsDemo/modal/index.vue'),
       },
       {
-        path: 'gantt',
-        name: 'gantt',
+        path: 'calender',
+        name: 'calender',
         meta: {
-          title: $t('title.components.gantt'),
+          title: $t('title.components.calender'),
           icon: 'mdi-forum-outline',
           unShow: false,
           roles: ['admin', 'user'],

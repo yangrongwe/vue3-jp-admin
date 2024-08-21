@@ -12,7 +12,8 @@
       "form": "フォーム",
       "pdf": "PDF",
       "alert": "アラート",
-      "modal": "モーダル"
+      "modal": "モーダル",
+      "calender": "カレンダー"
     },
     "methods": {
       "manage": "共通関数管理",

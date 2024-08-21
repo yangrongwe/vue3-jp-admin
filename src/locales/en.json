@@ -12,7 +12,8 @@
       "form": "Form",
       "pdf": "PDF",
       "alert": "Alert",
-      "modal": "Modal"
+      "modal": "Modal",
+      "calender": "Calender"
     },
     "methods": {
       "manage": "Common Functions Management",

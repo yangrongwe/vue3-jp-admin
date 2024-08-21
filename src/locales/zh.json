@@ -12,7 +12,8 @@
       "form": "表单",
       "pdf": "PDF",
       "alert": "警报",
-      "modal": "模态框"
+      "modal": "模态框",
+      "calender": "日历"
     },
     "methods": {
       "manage": "常用函数管理",
