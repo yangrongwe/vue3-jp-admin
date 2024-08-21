@@ -93,22 +93,18 @@ const formOptions = reactive<JpFormOptions>({
         validateOn: 'blur',
       },
     },
+    // 時間選択用の項目
     {
-      itemType: 'input',
-      itemName: 'startTime',
+      itemType: 'timePicker',
+      itemName: 'time',
       props: {
-        type: 'text',
-        label: '开始时间',
-        validateOn: 'blur',
+        type: 'timeRange',
+        placeholder: $t('views.form.reminderTime.placeholder'),
       },
-    },
-    {
-      itemType: 'input',
-      itemName: 'endTime',
-      props: {
-        type: 'text',
-        label: '结束时间',
-        validateOn: 'blur',
+      eventHandlers: {
+        change: (value) => {
+          // 変更イベントを処理
+        },
       },
     },
     {
@@ -135,7 +131,7 @@ const handleEventCreate = (event) => {
     component: () => <JpForm ref={formRef} form-options={formOptions}></JpForm>,
     props: {
       title: '新建task',
-      width: '400',
+      width: '500',
     },
     callbackMethod: {
       //    console.log(formRef.value.formData);

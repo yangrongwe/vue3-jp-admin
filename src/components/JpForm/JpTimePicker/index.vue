@@ -1,7 +1,10 @@
 <!-- JpDateTimePicker.vue -->
 <template>
   <div class="tw-flex">
-    <div class="tw-flex tw-gap-2 tw-flex-wrap">
+    <div
+      class="tw-flex tw-gap-2 tw-flex-wrap"
+      v-if="item.props.type == 'dateTime'"
+    >
       <v-text-field
         v-bind="item.props"
         v-model="dateValue"
@@ -11,6 +14,27 @@
       <v-text-field
         v-bind="item.props"
         v-model="timeValue"
+        type="time"
+        class="tw-flex-none"
+      ></v-text-field>
+    </div>
+
+    <div
+      class="tw-flex tw-gap-2 tw-flex-wrap"
+      v-if="item.props.type == 'timeRange'"
+    >
+      <v-text-field
+        label="开始时间"
+        v-bind="item.props"
+        v-model="startTime"
+        type="time"
+        class="tw-flex-none"
+      ></v-text-field>
+      <div>-</div>
+      <v-text-field
+        label="结束时间"
+        v-bind="item.props"
+        v-model="endTime"
         type="time"
         class="tw-flex-none"
       ></v-text-field>
@@ -33,10 +57,20 @@ const emit = defineEmits(['update:modelValue']);
 const dateValue = ref(props.item.props.modelValue?.date || null);
 const timeValue = ref(props.item.props.modelValue?.time || null);
 
+const startTime = ref(props.item.props.modelValue?.startTime || null);
+const endTime = ref(props.item.props.modelValue?.endTime || null);
+
 watch([dateValue, timeValue], ([newDate, newTime]) => {
   emit('update:modelValue', {
     itemName: props.item.itemName,
     value: { date: newDate, time: newTime },
+  });
+});
+
+watch([startTime, endTime], ([newStartTime, newEndTime]) => {
+  emit('update:modelValue', {
+    itemName: props.item.itemName,
+    value: { startTime: newStartTime, endTime: newEndTime },
   });
 });
 </script>

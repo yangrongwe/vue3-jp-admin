@@ -107,6 +107,7 @@ const formOptions = reactive<JpFormOptions>({
       label: $t('views.form.reminderTime.label'),
       labelWidth: '150px',
       props: {
+        type: 'dateTime',
         placeholder: $t('views.form.reminderTime.placeholder'),
         class: 'tw-mb-1',
       },
@@ -116,6 +117,7 @@ const formOptions = reactive<JpFormOptions>({
         },
       },
     },
+
     // 日付選択用の項目
     {
       itemType: 'datePicker',

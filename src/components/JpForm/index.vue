@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="formRef" v-bind="$attrs" class="tw-px-8 tw-pt-1 tw-py-12">
+  <v-form ref="formRef" v-bind="$attrs" class="tw-px-4">
     <template v-for="item in formOptions.formItems" :key="item.itemName">
       <div class="tw-flex tw-flex-wrap tw-items-start">
         <div class="tw-mr-2" :style="{ width: item.labelWidth }">
