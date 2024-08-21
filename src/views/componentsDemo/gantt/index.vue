@@ -124,9 +124,19 @@ const handleEventClick = (obj) => {
   console.log('obj', obj);
 };
 
-const handleEventCreate = (event) => {
+const handleEventCreate = (data) => {
   // 处理事件创建逻辑
-  console.log('drag Info', event);
+  console.log('drag Info', data);
+  console.log('demoExample Info', demoExample.value.events);
+
+  // 默认值设定
+  formOptions.formItems[0].props.modelValue = '';
+  formOptions.formItems[1].props.modelValue = {
+    startTime: data.start.formatTime(),
+    endTime: data.end.formatTime(),
+  };
+  formOptions.formItems[2].props.modelValue = '';
+
   openModal({
     component: () => <JpForm ref={formRef} form-options={formOptions}></JpForm>,
     props: {
@@ -139,13 +149,25 @@ const handleEventCreate = (event) => {
         return true;
       },
       onConfirmCallback: () => {
-        console.log('formRef.value', formRef.value);
-        return false;
+        console.log('formRef.value', formRef.value.formData);
+        demoExample.value.events.push({
+          id: '1001',
+          start: data.start,
+          end: data.end,
+          title: formRef.value.formData.title,
+          content: formRef.value.formData.context,
+          //   class: 'lunch',
+          background: true,
+          deletable: false,
+          resizable: false,
+          split: data.split,
+        });
+        return true;
       },
     },
   });
 
-  return event;
+  return data;
 };
 
 // Setup initial events
@@ -196,6 +218,7 @@ function setupEvents() {
 
   demoExample.value.events.push(
     {
+      id: '1001',
       start: `${monday} 15:30`,
       end: `${monday} 17:30`,
       title: 'Tennis',
@@ -204,34 +227,11 @@ function setupEvents() {
       split: 1,
     },
     {
+      id: '1002',
       start: `${monday} 15:30`,
       end: `${monday} 17:30`,
       title: 'Tennis',
       content: '<i class="v-icon material-icons mt1">sports_tennis</i>',
-      resizable: false,
-      split: 2,
-    },
-    {
-      start: `${tuesdayStr} 08:00`,
-      end: `${tuesdayStr} 10:00`,
-      title: 'Volleyball',
-      content: '<i class="v-icon material-icons mt1">sports_volleyball</i>',
-      resizable: false,
-      split: 2,
-    },
-    {
-      start: `${thursdayStr} 09:00`,
-      end: `${thursdayStr} 11:30`,
-      title: 'Golf',
-      content: '<i class="v-icon material-icons mt2">golf_course</i>',
-      resizable: false,
-      split: 1,
-    },
-    {
-      start: `${fridayStr} 16:45`,
-      end: `${fridayStr} 18:45`,
-      title: 'Movie',
-      content: '<i class="v-icon material-icons mt1">local_play</i>',
       resizable: false,
       split: 2,
     }

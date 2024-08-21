@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue';
+import { ref, defineAsyncComponent, onMounted } from 'vue';
 import type { JpFormOptions } from './type.ts';
 
 // コンポーネントを動的にインポートする関数
@@ -63,7 +63,6 @@ const props = defineProps({
 
 const formRef = ref(null); // フォームの参照
 const formData = ref<{ [key: string]: any }>({}); // フォームデータを格納
-
 // モデル値の更新を処理する関数
 const handleModelValueUpdate = ({ itemName, value }) => {
   formData.value[itemName] = value;
@@ -83,6 +82,17 @@ const validateForm = async () => {
   }
 };
 
+const initData = () => {
+  props.formOptions.formItems.map((item) => {
+    handleModelValueUpdate({
+      itemName: item.itemName,
+      value: item.props.modelValue ? item.props.modelValue : null,
+    });
+  });
+};
+onMounted(() => {
+  initData();
+});
 // formRef のインスタンスメソッドを公開
 defineExpose({
   validateForm,
