@@ -1,63 +1,60 @@
 <template>
-  <jp-main-area :h-full="true">
-    <div class="main-demo">
-      <div
-        class="tw-flex tw-flex-wrap tw-items-center tw-justify-center tw-gap-4"
-      >
-        <div class="tw-h-[210px] tw-w-[220px]">
-          <!-- Date picker -->
-          <vue-cal
-            class="vuecal--blue-theme vuecal--date-picker demo"
-            xsmall
-            :selected-date="selectedDate"
-            hide-view-selector
-            :time="false"
-            :transitions="false"
-            active-view="month"
-            :events="demoExample.events"
-            :disable-views="['week', 'day']"
-            @cell-click="handleDateClick"
-          />
-        </div>
+  <div class="main-demo">
+    <div
+      class="tw-flex tw-flex-wrap tw-items-center tw-justify-center tw-gap-4"
+    >
+      <div class="tw-h-[210px] tw-w-[220px]">
+        <!-- Date picker -->
+        <vue-cal
+          class="vuecal--blue-theme vuecal--date-picker demo"
+          xsmall
+          :selected-date="selectedDate"
+          hide-view-selector
+          :time="false"
+          :transitions="false"
+          active-view="month"
+          :events="demoExample.events"
+          :disable-views="['week', 'day']"
+          @cell-click="handleDateClick"
+        />
+      </div>
 
-        <div class="tw-flex-1">
-          <!-- Full-power calendar -->
-          <vue-cal
-            class="demo tw-min-h-[500px]"
-            hide-weekends
-            :selected-date="selectedDate"
-            :time-from="8 * 60"
-            :time-to="19 * 60"
-            :snap-to-time="0"
-            :split-days="demoExample.splits"
-            sticky-split-labels
-            :editable-events="demoExample.editable"
-            :events="demoExample.events"
-            @event-click="handleEventClick"
-            @event-drag-create="handleEventCreate"
-          >
-            <template #split-label="{ split, view }">
-              <v-icon :color="split.color" size="20">person</v-icon>
-              <strong :style="`color: ${split.color}`">{{
-                split.label
-              }}</strong>
-            </template>
-          </vue-cal>
-        </div>
+      <div class="tw-flex-1">
+        <!-- Full-power calendar -->
+        <vue-cal
+          class="demo tw-min-h-[500px]"
+          hide-weekends
+          :selected-date="selectedDate"
+          :time-from="8 * 60"
+          :time-to="19 * 60"
+          :snap-to-time="0"
+          :split-days="demoExample.splits"
+          sticky-split-labels
+          :editable-events="demoExample.editable"
+          :events="demoExample.events"
+          @event-click="handleEventClick"
+          @event-drag-create="handleEventCreate"
+        >
+          <template #split-label="{ split, view }">
+            <v-icon :color="split.color" size="20">person</v-icon>
+            <strong :style="`color: ${split.color}`">{{ split.label }}</strong>
+          </template>
+        </vue-cal>
       </div>
     </div>
-  </jp-main-area>
+  </div>
 </template>
 
 <script setup lang="tsx">
-import { ref, reactive, nextTick } from 'vue';
+import { ref, reactive } from 'vue';
 import VueCal from 'vue-cal';
 import 'vue-cal/dist/vuecal.css';
-import JpMainArea from '@/components/JpLayout/layout/JpMainArea.vue';
 import { openModal } from '@/utils/modalUtils';
 import { $t } from '@/plugins/i18n/i18nUtils';
 import JpForm from '@/components/JpForm/index.vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
+import { v4 as uuidv4 } from 'uuid';
+import { useDateFormat } from '@vueuse/core';
 
 const demoExample = ref({
   splits: [
@@ -115,6 +112,29 @@ const formOptions = reactive<JpFormOptions>({
         validateOn: 'blur',
       },
     },
+    {
+      itemType: 'chipGroup',
+      itemName: 'chipGroup',
+      props: {
+        // modelValue: [],
+        defaultValue: [],
+        chipGroupArr: [
+          {
+            text: 'unDelete',
+            value: 1,
+          },
+          {
+            text: 'unDrag',
+            value: 2,
+          },
+        ],
+        filter: true,
+        multiple: true,
+      },
+      eventHandlers: {
+        //
+      },
+    },
   ],
   rules: {},
 });
@@ -130,13 +150,14 @@ const handleEventCreate = (data) => {
   console.log('demoExample Info', demoExample.value.events);
 
   // 默认值设定
-  formOptions.formItems[0].props.modelValue = '';
-  formOptions.formItems[1].props.modelValue = {
+  formOptions.formItems[0].props.defaultValue = '';
+  formOptions.formItems[1].props.defaultValue = {
     startTime: data.start.formatTime(),
     endTime: data.end.formatTime(),
   };
-  formOptions.formItems[2].props.modelValue = '';
+  formOptions.formItems[2].props.defaultValue = '';
 
+  // 打开新建事件弹出框
   openModal({
     component: () => <JpForm ref={formRef} form-options={formOptions}></JpForm>,
     props: {
@@ -149,11 +170,19 @@ const handleEventCreate = (data) => {
         return true;
       },
       onConfirmCallback: () => {
-        console.log('formRef.value', formRef.value.formData);
+        const formattedDate = useDateFormat(new Date(data.start), 'YYYY-MM-DD');
+        const createTaskData = formRef.value.formData;
+        console.log('createTaskData', createTaskData);
         demoExample.value.events.push({
-          id: '1001',
-          start: data.start,
-          end: data.end,
+          id: uuidv4(),
+          start: useDateFormat(
+            formattedDate.value + createTaskData.time.startTime,
+            'YYYY-MM-DD HH:mm'
+          ),
+          end: useDateFormat(
+            formattedDate.value + createTaskData.time.endTime,
+            'YYYY-MM-DD HH:mm'
+          ),
           title: formRef.value.formData.title,
           content: formRef.value.formData.context,
           //   class: 'lunch',
@@ -162,6 +191,8 @@ const handleEventCreate = (data) => {
           resizable: false,
           split: data.split,
         });
+
+        console.log(' demoExample.value.events', demoExample.value.events);
         return true;
       },
     },
@@ -172,66 +203,27 @@ const handleEventCreate = (data) => {
 
 // Setup initial events
 function setupEvents() {
-  const previousFirstDayOfWeek = new Date(
-    new Date().setDate(new Date().getDate() - ((new Date().getDay() + 6) % 7))
-  );
-
-  for (let i = 0; i < 5; i++) {
-    const day = new Date(previousFirstDayOfWeek);
-    day.setDate(day.getDate() + i);
-    const dayStr = `${day.getFullYear()}-${('0' + (day.getMonth() + 1)).slice(-2)}-${('0' + day.getDate()).slice(-2)}`;
-
-    demoExample.value.events.push(
-      {
-        start: `${dayStr} 12:00`,
-        end: `${dayStr} 13:00`,
-        title: 'LUNCH',
-        class: 'lunch',
-        background: true,
-        deletable: false,
-        resizable: false,
-        split: 1,
-      },
-      {
-        start: `${dayStr} 12:00`,
-        end: `${dayStr} 13:00`,
-        title: 'LUNCH',
-        class: 'lunch',
-        background: true,
-        deletable: false,
-        resizable: false,
-        split: 2,
-      }
-    );
-  }
-
-  const monday = previousFirstDayOfWeek.toISOString().split('T')[0];
-  const tuesday = new Date(previousFirstDayOfWeek);
-  tuesday.setDate(tuesday.getDate() + 1);
-  const tuesdayStr = tuesday.toISOString().split('T')[0];
-  const thursday = new Date(previousFirstDayOfWeek);
-  thursday.setDate(thursday.getDate() + 3);
-  const thursdayStr = thursday.toISOString().split('T')[0];
-  const friday = new Date(previousFirstDayOfWeek);
-  friday.setDate(friday.getDate() + 4);
-  const fridayStr = friday.toISOString().split('T')[0];
-
+  const formattedDate = useDateFormat(new Date(), 'YYYY-MM-DD');
   demoExample.value.events.push(
     {
-      id: '1001',
-      start: `${monday} 15:30`,
-      end: `${monday} 17:30`,
-      title: 'Tennis',
-      content: '<i class="v-icon material-icons mt1">sports_tennis</i>',
+      id: uuidv4(),
+      start: `${formattedDate.value} 12:00`,
+      end: `${formattedDate.value} 13:00`,
+      title: 'LUNCH',
+      class: 'lunch',
+      background: true,
+      deletable: false,
       resizable: false,
       split: 1,
     },
     {
-      id: '1002',
-      start: `${monday} 15:30`,
-      end: `${monday} 17:30`,
-      title: 'Tennis',
-      content: '<i class="v-icon material-icons mt1">sports_tennis</i>',
+      id: uuidv4(),
+      start: `${formattedDate.value} 12:00`,
+      end: `${formattedDate.value} 13:00`,
+      title: 'LUNCH',
+      class: 'lunch',
+      background: true,
+      deletable: false,
       resizable: false,
       split: 2,
     }

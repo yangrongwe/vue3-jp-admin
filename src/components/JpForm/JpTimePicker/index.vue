@@ -54,11 +54,11 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
-const dateValue = ref(props.item.props.modelValue?.date || null);
-const timeValue = ref(props.item.props.modelValue?.time || null);
+const dateValue = ref(props.item.props.defaultValue?.date || null);
+const timeValue = ref(props.item.props.defaultValue?.time || null);
 
-const startTime = ref(props.item.props.modelValue?.startTime || null);
-const endTime = ref(props.item.props.modelValue?.endTime || null);
+const startTime = ref(props.item.props.defaultValue?.startTime || null);
+const endTime = ref(props.item.props.defaultValue?.endTime || null);
 
 watch([dateValue, timeValue], ([newDate, newTime]) => {
   emit('update:modelValue', {

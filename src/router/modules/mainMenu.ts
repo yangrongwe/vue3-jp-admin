@@ -68,7 +68,7 @@ const mainMenuRoutes: RouteRecordRaw[] = [
           unShow: false,
           roles: ['admin', 'user'],
         },
-        component: () => import('@/views/componentsDemo/gantt/index.vue'),
+        component: () => import('@/views/componentsDemo/calender/index.vue'),
       },
       {
         path: 'form',

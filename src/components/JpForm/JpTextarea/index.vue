@@ -24,7 +24,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
-const textareaValue = ref(props.item.props.modelValue || '');
+const textareaValue = ref(props.item.props.defaultValue || '');
 
 watch(textareaValue, (newValue) => {
   emit('update:modelValue', { itemName: props.item.itemName, value: newValue });

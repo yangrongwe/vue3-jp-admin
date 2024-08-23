@@ -13,7 +13,7 @@ interface Modal {
 export const useModalStore = defineStore('modalStore', {
   state: () => ({
     modals: [] as Modal[],
-    zIndexCounter: 9999,
+    zIndexCounter: 2000,
   }),
   actions: {
     openModal(

@@ -26,7 +26,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const rangeValue = ref(props.item.props.modelValue || [0, 100]);
+const rangeValue = ref(props.item.props.defaultValue || [0, 100]);
 
 watch(rangeValue, (newValue) => {
   emit('update:modelValue', { itemName: props.item.itemName, value: newValue });

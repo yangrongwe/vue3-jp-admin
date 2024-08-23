@@ -33,7 +33,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const selectedValue = ref(props.item.props.modelValue || '');
+const selectedValue = ref(props.item.props.defaultValue || '');
 
 watch(selectedValue, (newValue) => {
   emit('update:modelValue', { itemName: props.item.itemName, value: newValue });

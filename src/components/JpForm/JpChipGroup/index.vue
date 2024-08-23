@@ -1,13 +1,11 @@
 <template>
-  <!-- checkbox -->
-  <div>
-    <v-checkbox
-      :id="item.itemName"
-      v-bind="item.props"
-      v-model="isChecked"
-      :rules="rules"
-    />
-  </div>
+  <v-chip-group v-bind="item.props" v-model="chipGroupValue">
+    <v-chip
+      v-for="chip in item.props.chipGroupArr"
+      :text="chip.text"
+      :value="chip.value"
+    ></v-chip>
+  </v-chip-group>
 </template>
 
 <script setup lang="ts">
@@ -26,10 +24,9 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
+const chipGroupValue = ref(props.item.props.defaultValue || []);
 
-const isChecked = ref(props.item.props.defaultValue || false);
-
-watch(isChecked, (newValue) => {
+watch(chipGroupValue, (newValue) => {
   emit('update:modelValue', { itemName: props.item.itemName, value: newValue });
 });
 </script>

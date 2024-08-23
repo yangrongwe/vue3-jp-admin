@@ -24,7 +24,6 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent, onMounted } from 'vue';
 import type { JpFormOptions } from './type.ts';
-
 // コンポーネントを動的にインポートする関数
 const getComponent = (type: string) => {
   const components = {
@@ -45,6 +44,7 @@ const getComponent = (type: string) => {
     select: defineAsyncComponent(() => import('./JpSelect/index.vue')),
     switch: defineAsyncComponent(() => import('./JpSwitch/index.vue')),
     textarea: defineAsyncComponent(() => import('./JpTextarea/index.vue')),
+    chipGroup: defineAsyncComponent(() => import('./JpChipGroup/index.vue')),
   };
   return components[type] || null;
 };
@@ -86,7 +86,7 @@ const initData = () => {
   props.formOptions.formItems.map((item) => {
     handleModelValueUpdate({
       itemName: item.itemName,
-      value: item.props.modelValue ? item.props.modelValue : null,
+      value: item.props.defaultValue ? item.props.defaultValue : null,
     });
   });
 };

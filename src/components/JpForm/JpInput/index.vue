@@ -41,7 +41,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const inputValue = ref(props.item.props.modelValue || '');
+const inputValue = ref(props.item.props.defaultValue || '');
 
 const passwordVisible = ref(false);
 

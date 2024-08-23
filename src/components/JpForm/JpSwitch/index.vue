@@ -24,7 +24,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
-const switchValue = ref(props.item.props.modelValue || false);
+const switchValue = ref(props.item.props.defaultValue || false);
 
 watch(switchValue, (newValue) => {
   emit('update:modelValue', { itemName: props.item.itemName, value: newValue });

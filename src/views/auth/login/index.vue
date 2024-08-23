@@ -73,7 +73,7 @@ const formOptions = reactive<JpFormOptions>({
       itemName: 'email',
       props: {
         type: 'email',
-        modelValue: 'admin@gmail.com',
+        defaultValue: 'admin@gmail.com',
         // label: 'email',
         variant: 'outlined',
         placeholder: 'Enter your email',
@@ -89,7 +89,7 @@ const formOptions = reactive<JpFormOptions>({
       itemName: 'password',
       props: {
         type: 'password',
-        modelValue: '123456',
+        defaultValue: '123456',
         variant: 'outlined',
         placeholder: 'Enter your password',
         prependInnerIcon: 'mdi-lock-outline',
