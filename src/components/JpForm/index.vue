@@ -1,6 +1,6 @@
 <template>
   <v-form ref="formRef" v-bind="$attrs" class="tw-px-4">
-    <template v-for="item in formOptions.formItems" :key="item.itemName">
+    <template v-for="item in formOptions.formItems" :key="item.itemName" >
       <div class="tw-flex tw-flex-wrap tw-items-start">
         <div class="tw-mr-2" :style="{ width: item.labelWidth }">
           {{ item.label }}
@@ -45,6 +45,9 @@ const getComponent = (type: string) => {
     switch: defineAsyncComponent(() => import('./JpSwitch/index.vue')),
     textarea: defineAsyncComponent(() => import('./JpTextarea/index.vue')),
     chipGroup: defineAsyncComponent(() => import('./JpChipGroup/index.vue')),
+    colorPicker: defineAsyncComponent(
+      () => import('./JpColorPicker/index.vue')
+    ),
   };
   return components[type] || null;
 };

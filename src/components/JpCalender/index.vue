@@ -55,11 +55,14 @@ import JpForm from '@/components/JpForm/index.vue';
 import { JpFormOptions } from '@/components/JpForm/type.ts';
 import { v4 as uuidv4 } from 'uuid';
 import { useDateFormat } from '@vueuse/core';
+import { useAddCustomStyle } from '@/utils/common';
 
 const demoExample = ref({
   splits: [
-    { label: 'John', class: 'john' },
-    { label: 'Kate', class: 'kate' },
+    // { label: 'John', class: 'john' },
+    // { label: 'Kate', class: 'kate' },
+    { label: 'John' },
+    { label: 'Kate' },
   ],
   editable: {
     title: false,
@@ -77,7 +80,20 @@ const selectedDate = ref(new Date());
 function handleDateClick(date) {
   selectedDate.value = date;
 }
-
+const chipGroup = [
+  {
+    text: 'deletable',
+    value: 'deletable',
+  },
+  {
+    text: 'draggable',
+    value: 'draggable',
+  },
+  {
+    text: 'resizable',
+    value: 'resizable',
+  },
+];
 const formRef = ref(null);
 const formOptions = reactive<JpFormOptions>({
   formItems: [
@@ -106,7 +122,7 @@ const formOptions = reactive<JpFormOptions>({
     },
     {
       itemType: 'textarea',
-      itemName: 'context',
+      itemName: 'content',
       props: {
         label: 'task内容',
         validateOn: 'blur',
@@ -118,18 +134,21 @@ const formOptions = reactive<JpFormOptions>({
       props: {
         // modelValue: [],
         defaultValue: [],
-        chipGroupArr: [
-          {
-            text: 'unDelete',
-            value: 1,
-          },
-          {
-            text: 'unDrag',
-            value: 2,
-          },
-        ],
+        chipGroupArr: chipGroup,
         filter: true,
         multiple: true,
+      },
+      eventHandlers: {
+        //
+      },
+    },
+    {
+      itemType: 'colorPicker',
+      itemName: 'colorPicker',
+      props: {
+        // modelValue: [],
+        defaultValue: '#27A779',
+        hideInputs: true,
       },
       eventHandlers: {
         //
@@ -144,11 +163,13 @@ const handleEventClick = (obj) => {
   console.log('obj', obj);
 };
 
+const getActionStatus = (arr: Array<string>, val: string) => {
+  return arr.some((item) => item === val);
+};
+
 const handleEventCreate = (data) => {
   // 处理事件创建逻辑
-  console.log('drag Info', data);
-  console.log('demoExample Info', demoExample.value.events);
-
+  let oldEvents = demoExample.value.events;
   // 默认值设定
   formOptions.formItems[0].props.defaultValue = '';
   formOptions.formItems[1].props.defaultValue = {
@@ -165,40 +186,43 @@ const handleEventCreate = (data) => {
       width: '500',
     },
     callbackMethod: {
-      //    console.log(formRef.value.formData);
       onCloseCallback: () => {
+        demoExample.value.events = [...oldEvents];
         return true;
       },
       onConfirmCallback: () => {
-        const formattedDate = useDateFormat(new Date(data.start), 'YYYY-MM-DD');
+        const formattedDate = useDateFormat(
+          new Date(data.start),
+          'YYYY-MM-DD'
+        ).value;
         const createTaskData = formRef.value.formData;
-        console.log('createTaskData', createTaskData);
+        // 添加自定义样式
+        const uniqueClassName = useAddCustomStyle(
+          `{ background-color:${createTaskData.colorPicker};color:white }`
+        );
         demoExample.value.events.push({
           id: uuidv4(),
           start: useDateFormat(
-            formattedDate.value + createTaskData.time.startTime,
+            formattedDate + createTaskData.time.startTime,
             'YYYY-MM-DD HH:mm'
-          ),
+          ).value,
           end: useDateFormat(
-            formattedDate.value + createTaskData.time.endTime,
+            formattedDate + createTaskData.time.endTime,
             'YYYY-MM-DD HH:mm'
-          ),
-          title: formRef.value.formData.title,
-          content: formRef.value.formData.context,
-          //   class: 'lunch',
+          ).value,
+          title: createTaskData.title,
+          content: `<div>${createTaskData.content}<div>`,
+          class: uniqueClassName,
           background: true,
-          deletable: false,
-          resizable: false,
+          deletable: getActionStatus(createTaskData.chipGroup, 'deletable'),
+          draggable: getActionStatus(createTaskData.chipGroup, 'draggable'),
+          resizable: getActionStatus(createTaskData.chipGroup, 'resizable'),
           split: data.split,
         });
-
-        console.log(' demoExample.value.events', demoExample.value.events);
         return true;
       },
     },
   });
-
-  return data;
 };
 
 // Setup initial events
@@ -362,6 +386,10 @@ $kate: #ff7fc3;
     color: transparentize(darken($kate, 10), 0.4);
   }
   // ------------------------------------------------------
+}
+
+.blue-event {
+  background-color: #42b983 !important;
 }
 
 // Media queries.
