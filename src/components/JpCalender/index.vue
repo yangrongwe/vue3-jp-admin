@@ -13,7 +13,7 @@
           :time="false"
           :transitions="false"
           active-view="month"
-          :events="demoExample.events"
+          :events="configInfo.events"
           :disable-views="['week', 'day']"
           @cell-click="handleDateClick"
         />
@@ -28,10 +28,10 @@
           :time-from="8 * 60"
           :time-to="19 * 60"
           :snap-to-time="0"
-          :split-days="demoExample.splits"
+          :split-days="configInfo.splits"
           sticky-split-labels
-          :editable-events="demoExample.editable"
-          :events="demoExample.events"
+          :editable-events="configInfo.editable"
+          :events="configInfo.events"
           @event-click="handleEventClick"
           @event-drag-create="handleEventCreate"
         >
@@ -57,22 +57,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDateFormat } from '@vueuse/core';
 import { useAddCustomStyle } from '@/utils/common';
 
-const demoExample = ref({
-  splits: [
-    // { label: 'John', class: 'john' },
-    // { label: 'Kate', class: 'kate' },
-    { label: 'John' },
-    { label: 'Kate' },
-  ],
-  editable: {
-    title: false,
-    drag: true,
-    resize: true,
-    create: true,
-    delete: true,
+const props = defineProps({
+  calenderConfig: {
+    type: Object,
+    required: true,
   },
-  events: [],
 });
+
+const configInfo = ref(props.calenderConfig);
 
 const selectedDate = ref(new Date());
 
@@ -169,7 +161,7 @@ const getActionStatus = (arr: Array<string>, val: string) => {
 
 const handleEventCreate = (data) => {
   // 处理事件创建逻辑
-  let oldEvents = demoExample.value.events;
+  let oldEvents = configInfo.value.events;
   // 默认值设定
   formOptions.formItems[0].props.defaultValue = '';
   formOptions.formItems[1].props.defaultValue = {
@@ -187,7 +179,7 @@ const handleEventCreate = (data) => {
     },
     callbackMethod: {
       onCloseCallback: () => {
-        demoExample.value.events = [...oldEvents];
+        configInfo.value.events = [...oldEvents];
         return true;
       },
       onConfirmCallback: async () => {
@@ -200,7 +192,7 @@ const handleEventCreate = (data) => {
         const uniqueClassName = useAddCustomStyle(
           `{ background-color:${createTaskData.colorPicker};color:white }`
         );
-        demoExample.value.events.push({
+        configInfo.value.events.push({
           id: uuidv4(),
           start: useDateFormat(
             formattedDate + createTaskData.time.startTime,
@@ -225,38 +217,6 @@ const handleEventCreate = (data) => {
   });
 };
 
-// Setup initial events
-function setupEvents() {
-  const formattedDate = useDateFormat(new Date(), 'YYYY-MM-DD');
-  demoExample.value.events.push(
-    {
-      id: uuidv4(),
-      start: `${formattedDate.value} 12:00`,
-      end: `${formattedDate.value} 13:00`,
-      title: 'LUNCH',
-      class: 'lunch',
-      background: true,
-      deletable: false,
-      resizable: false,
-      split: 1,
-    },
-    {
-      id: uuidv4(),
-      start: `${formattedDate.value} 12:00`,
-      end: `${formattedDate.value} 13:00`,
-      title: 'LUNCH',
-      class: 'lunch',
-      background: true,
-      deletable: false,
-      resizable: false,
-      split: 2,
-    }
-  );
-}
-
-// Setup events on component mount
-setupEvents();
-
 const emit = defineEmits(['customTitle', 'customContent']);
 const getCustomTitle = (titleData: string) => {
   return new Promise((resolve) => {
@@ -275,8 +235,9 @@ const getCustomContent = (contentData: string) => {
 </script>
 
 <style lang="scss">
-$john: #42b983;
-$kate: #ff7fc3;
+$green: #42b983;
+$pink: #ff7fc3;
+$yellow: rgb(234, 234, 52);
 
 .main-demo {
   font-size: 12px;
@@ -301,7 +262,7 @@ $kate: #ff7fc3;
     padding: 0;
     margin-top: 4px;
     color: transparent;
-    background-color: $john;
+    background-color: $green;
   }
   &.vuecal--date-picker .vuecal__cell--selected .vuecal__cell-events-count {
     background-color: #fff;
@@ -348,7 +309,7 @@ $kate: #ff7fc3;
     background-color: transparent;
   }
   &:not(.vuecal--day-view).full-cal .vuecal__cell--selected:before {
-    border: 1px solid rgba($john, 0.8);
+    border: 1px solid rgba($green, 0.8);
   }
 
   .vuecal__event-time {
@@ -358,48 +319,69 @@ $kate: #ff7fc3;
     line-height: 1.2;
   }
 
-  // John.
-  .vuecal__header .john {
-    color: darken($john, 5);
+  // green.
+  .vuecal__header .green {
+    color: darken($green, 5);
   }
-  .vuecal__body .john {
-    background-color: rgba($john, 0.08);
+  .vuecal__body .green {
+    background-color: rgba($green, 0.08);
   }
-  .john .vuecal__event {
-    background-color: rgba(lighten($john, 5), 0.85);
+  .green .vuecal__event {
+    background-color: rgba(lighten($green, 5), 0.85);
     color: #fff;
   }
-  .john .lunch {
+  .green .lunch {
     background: repeating-linear-gradient(
       45deg,
       transparent,
       transparent 10px,
-      rgba($john, 0.15) 10px,
-      rgba($john, 0.15) 20px
+      rgba($green, 0.15) 10px,
+      rgba($green, 0.15) 20px
     );
-    color: transparentize(darken($john, 10), 0.4);
+    color: transparentize(darken($green, 10), 0.4);
   }
 
-  // Kate.
-  .vuecal__header .kate {
-    color: darken($kate, 5);
+  // pink.
+  .vuecal__header .pink {
+    color: darken($pink, 5);
   }
-  .vuecal__body .kate {
-    background-color: rgba($kate, 0.08);
+  .vuecal__body .pink {
+    background-color: rgba($pink, 0.08);
   }
-  .kate .vuecal__event {
-    background-color: rgba(lighten($kate, 5), 0.85);
+  .pink .vuecal__event {
+    background-color: rgba(lighten($pink, 5), 0.85);
     color: #fff;
   }
-  .kate .lunch {
+  .pink .lunch {
     background: repeating-linear-gradient(
       45deg,
       transparent,
       transparent 10px,
-      rgba($kate, 0.15) 10px,
-      rgba($kate, 0.15) 20px
+      rgba($pink, 0.15) 10px,
+      rgba($pink, 0.15) 20px
     );
-    color: transparentize(darken($kate, 10), 0.4);
+    color: transparentize(darken($pink, 10), 0.4);
+  }
+  // yellow
+  .vuecal__header .yellow {
+    color: darken($yellow, 5);
+  }
+  .vuecal__body .yellow {
+    background-color: rgba($yellow, 0.08);
+  }
+  .yellow .vuecal__event {
+    background-color: rgba(lighten($yellow, 5), 0.85);
+    color: #fff;
+  }
+  .yellow .lunch {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba($yellow, 0.15) 10px,
+      rgba($yellow, 0.15) 20px
+    );
+    color: transparentize(darken($yellow, 10), 0.4);
   }
   // ------------------------------------------------------
 }
