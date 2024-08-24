@@ -190,7 +190,7 @@ const handleEventCreate = (data) => {
         demoExample.value.events = [...oldEvents];
         return true;
       },
-      onConfirmCallback: () => {
+      onConfirmCallback: async () => {
         const formattedDate = useDateFormat(
           new Date(data.start),
           'YYYY-MM-DD'
@@ -210,8 +210,8 @@ const handleEventCreate = (data) => {
             formattedDate + createTaskData.time.endTime,
             'YYYY-MM-DD HH:mm'
           ).value,
-          title: createTaskData.title,
-          content: `<div>${createTaskData.content}<div>`,
+          title: await getCustomTitle(createTaskData.title),
+          content: await getCustomContent(createTaskData.content),
           class: uniqueClassName,
           background: true,
           deletable: getActionStatus(createTaskData.chipGroup, 'deletable'),
@@ -256,6 +256,22 @@ function setupEvents() {
 
 // Setup events on component mount
 setupEvents();
+
+const emit = defineEmits(['customTitle', 'customContent']);
+const getCustomTitle = (titleData: string) => {
+  return new Promise((resolve) => {
+    emit('customTitle', titleData, (result) => {
+      resolve(result);
+    });
+  });
+};
+const getCustomContent = (contentData: string) => {
+  return new Promise((resolve) => {
+    emit('customContent', contentData, (result) => {
+      resolve(result);
+    });
+  });
+};
 </script>
 
 <style lang="scss">

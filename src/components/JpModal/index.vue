@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="tsx">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useModalStore } from '@/store/modalStore';
 
 const modalStore = useModalStore();
@@ -60,7 +60,11 @@ const props = defineProps<{ modalId: string }>();
 const modal = computed(() =>
   modalStore.modals.find((m) => m.id === props.modalId)
 );
-
+watch(isVisible, (val) => {
+  if (!val) {
+    handleCloseClick();
+  }
+});
 const closeModal = (id: string) => {
   // isVisible を false に設定し、トランジション終了時に DOM 要素を削除
   isVisible.value = false;
