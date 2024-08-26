@@ -199,7 +199,7 @@ const handleEventClick = (obj) => {
         const createTaskData = formRef.value.formData;
         // 添加自定义样式
         const uniqueClassName = useAddCustomStyle(
-          `{ background-color:${createTaskData.colorPicker};color:white }`
+          `{ background-color:${createTaskData.colorPicker}!important;color:white!important }`
         );
         configInfo.value.events.map(async (item) => {
           if (item.id == obj.id) {
@@ -269,7 +269,7 @@ const handleEventCreate = (data) => {
         const createTaskData = formRef.value.formData;
         // 添加自定义样式
         const uniqueClassName = useAddCustomStyle(
-          `{ background-color:${createTaskData.colorPicker};color:white }`
+          `{ background-color:${createTaskData.colorPicker}!important;color:white!important; }`
         );
         configInfo.value.events.push({
           id: uuidv4(),
