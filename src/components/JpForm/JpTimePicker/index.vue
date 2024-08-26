@@ -16,6 +16,7 @@
         v-model="timeValue"
         type="time"
         class="tw-flex-none"
+        step="60"
       ></v-text-field>
     </div>
 

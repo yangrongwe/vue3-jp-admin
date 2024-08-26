@@ -68,10 +68,6 @@ const configInfo = ref(props.calenderConfig);
 
 const selectedDate = ref(new Date());
 
-// Handle date click
-function handleDateClick(date) {
-  selectedDate.value = date;
-}
 const chipGroup = [
   {
     text: 'deletable',
@@ -149,14 +145,97 @@ const formOptions = reactive<JpFormOptions>({
   ],
   rules: {},
 });
+const getActionStatus = (arr: Array<string>, val: string) => {
+  return arr.some((item) => item === val);
+};
+// Handle date click
+function handleDateClick(date) {
+  selectedDate.value = date;
+}
 
 // calendarDateClick
 const handleEventClick = (obj) => {
-  console.log('obj', obj);
-};
+  // 处理事件创建逻辑
+  let oldEvents = configInfo.value.events;
+  const oldEvent = configInfo.value.events.find((item) => {
+    return item.id == obj.id;
+  });
+  formOptions.formItems[0].props.defaultValue = oldEvent.titleText;
+  formOptions.formItems[1].props.defaultValue = {
+    startTime: useDateFormat(new Date(oldEvent.start), 'HH:mm').value,
+    endTime: useDateFormat(new Date(oldEvent.end), 'HH:mm').value,
+  };
+  formOptions.formItems[2].props.defaultValue = oldEvent.contentText;
 
-const getActionStatus = (arr: Array<string>, val: string) => {
-  return arr.some((item) => item === val);
+  let chipGroupArr: string[] = [];
+  if (oldEvent.deletable) {
+    chipGroupArr.push('deletable');
+  }
+  if (oldEvent.draggable) {
+    chipGroupArr.push('draggable');
+  }
+  if (oldEvent.resizable) {
+    chipGroupArr.push('resizable');
+  }
+  formOptions.formItems[3].props.defaultValue = chipGroupArr;
+  formOptions.formItems[4].props.defaultValue = oldEvent.bgColor;
+  // 打开新建事件弹出框
+  openModal({
+    component: () => <JpForm ref={formRef} form-options={formOptions}></JpForm>,
+    props: {
+      title: '编辑task',
+      width: '500',
+    },
+    callbackMethod: {
+      onCloseCallback: () => {
+        configInfo.value.events = [...oldEvents];
+        return true;
+      },
+      onConfirmCallback: () => {
+        const formattedDate = useDateFormat(
+          new Date(oldEvent.start),
+          'YYYY-MM-DD'
+        ).value;
+        const createTaskData = formRef.value.formData;
+        // 添加自定义样式
+        const uniqueClassName = useAddCustomStyle(
+          `{ background-color:${createTaskData.colorPicker};color:white }`
+        );
+        configInfo.value.events.map(async (item) => {
+          if (item.id == obj.id) {
+            item.start = useDateFormat(
+              formattedDate + createTaskData.time.startTime,
+              'YYYY-MM-DD HH:mm'
+            ).value;
+            item.end = useDateFormat(
+              formattedDate + createTaskData.time.endTime,
+              'YYYY-MM-DD HH:mm'
+            ).value;
+            item.titleText = createTaskData.title;
+            item.contentText = createTaskData.content;
+            item.title = await getCustomTitle(createTaskData.title);
+            item.content = await getCustomContent(createTaskData.content);
+            item.class = uniqueClassName;
+            item.background = true;
+            (item.bgColor = createTaskData.colorPicker),
+              (item.deletable = getActionStatus(
+                createTaskData.chipGroup,
+                'deletable'
+              ));
+            item.draggable = getActionStatus(
+              createTaskData.chipGroup,
+              'draggable'
+            );
+            item.resizable = getActionStatus(
+              createTaskData.chipGroup,
+              'resizable'
+            );
+          }
+        });
+        return true;
+      },
+    },
+  });
 };
 
 const handleEventCreate = (data) => {
@@ -202,9 +281,12 @@ const handleEventCreate = (data) => {
             formattedDate + createTaskData.time.endTime,
             'YYYY-MM-DD HH:mm'
           ).value,
+          titleText: createTaskData.title,
+          contentText: createTaskData.content,
           title: await getCustomTitle(createTaskData.title),
           content: await getCustomContent(createTaskData.content),
           class: uniqueClassName,
+          bgColor: createTaskData.colorPicker,
           background: true,
           deletable: getActionStatus(createTaskData.chipGroup, 'deletable'),
           draggable: getActionStatus(createTaskData.chipGroup, 'draggable'),
