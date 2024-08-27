@@ -1,4 +1,10 @@
 {
+  "components": {
+    "timePcker": {
+      "begin": "beginTime",
+      "end": "endTime"
+    }
+  },
   "title": {
     "dashboard": "Dashboard",
     "user": {
@@ -262,6 +268,30 @@
       "clear": "Clear",
       "reload": "Reload Table",
       "print": "Print"
+    },
+    "calendar": {
+      "weekDays": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday",
+      "months": "January,February,March,April,May,June,July,August,September,October,November,December",
+      "years": "Years",
+      "year": "Year",
+      "month": "Month",
+      "week": "Week",
+      "day": "Day",
+      "today": "Today",
+      "noEvent": "No event",
+      "allDay": "All day",
+      "deleteEvent": "Delete",
+      "createEvent": "Create an event",
+      "dateFormat": "dddd, D MMMM YYYY",
+      "deletable": "deletable",
+      "draggable": "draggable",
+      "resizable": "resizable",
+      "form": {
+        "title": "Title",
+        "content": "Content",
+        "create": "Create",
+        "edit": "Edit"
+      }
     }
   }
 }

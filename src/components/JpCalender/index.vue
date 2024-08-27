@@ -1,10 +1,11 @@
 <template>
+  <!-- メインのデモ用の div 要素 -->
   <div class="main-demo">
     <div
       class="tw-flex tw-flex-wrap tw-items-center tw-justify-center tw-gap-4"
     >
       <div class="tw-h-[210px] tw-w-[220px]">
-        <!-- Date picker -->
+        <!-- 日付ピッカー -->
         <vue-cal
           class="vuecal--blue-theme vuecal--date-picker demo"
           xsmall
@@ -18,25 +19,24 @@
           @cell-click="handleDateClick"
         />
       </div>
-
       <div class="tw-flex-1">
-        <!-- Full-power calendar -->
+        <!-- フル機能のカレンダー -->
         <vue-cal
-          class="demo tw-min-h-[500px]"
-          hide-weekends
+          class="demo tw-min-h-[500px] tw-max-w-[1000px]"
           :selected-date="selectedDate"
-          :time-from="8 * 60"
-          :time-to="19 * 60"
-          :snap-to-time="0"
-          :split-days="configInfo.splits"
-          sticky-split-labels
           :editable-events="configInfo.editable"
+          :locale="locale"
+          v-bind="calenderConfig.props"
           :events="configInfo.events"
           @event-click="handleEventClick"
           @event-drag-create="handleEventCreate"
         >
           <template #split-label="{ split, view }">
-            <v-icon :color="split.color" size="20">person</v-icon>
+            <!-- <v-icon
+                :color="split.color"
+                size="20"
+                icon=" mdi-account-outline"
+              ></v-icon> -->
             <strong :style="`color: ${split.color}`">{{ split.label }}</strong>
           </template>
         </vue-cal>
@@ -56,7 +56,12 @@ import { JpFormOptions } from '@/components/JpForm/type.ts';
 import { v4 as uuidv4 } from 'uuid';
 import { useDateFormat } from '@vueuse/core';
 import { useAddCustomStyle } from '@/utils/common';
+import { useI18n } from 'vue-i18n';
 
+// 国際化関数を取得
+const { t } = useI18n();
+
+// プロップスの定義
 const props = defineProps({
   calenderConfig: {
     type: Object,
@@ -64,33 +69,55 @@ const props = defineProps({
   },
 });
 
+// ロケール情報を管理するリアクティブな参照
+const locale = ref({
+  weekDays: t('views.calendar.weekDays').split(','),
+  months: t('views.calendar.months').split(','),
+  years: t('views.calendar.years'),
+  year: t('views.calendar.year'),
+  month: t('views.calendar.month'),
+  week: t('views.calendar.week'),
+  day: t('views.calendar.day'),
+  today: t('views.calendar.today'),
+  noEvent: t('views.calendar.noEvent'),
+  allDay: t('views.calendar.allDay'),
+  deleteEvent: t('views.calendar.deleteEvent'),
+  createEvent: t('views.calendar.createEvent'),
+  dateFormat: t('views.calendar.dateFormat'),
+});
+// カレンダー設定情報を管理する参照
 const configInfo = ref(props.calenderConfig);
 
+// 選択された日付を管理するリアクティブな参照
 const selectedDate = ref(new Date());
 
+// チップグループの定義
 const chipGroup = [
   {
-    text: 'deletable',
+    text: t('views.calendar.deletable'),
     value: 'deletable',
   },
   {
-    text: 'draggable',
+    text: t('views.calendar.draggable'),
     value: 'draggable',
   },
   {
-    text: 'resizable',
+    text: t('views.calendar.resizable'),
     value: 'resizable',
   },
 ];
+// JpForm コンポーネントへの参照
 const formRef = ref(null);
+// フォームのオプションを管理するリアクティブなオブジェクト
 const formOptions = reactive<JpFormOptions>({
   formItems: [
     {
+      // 入力項目の定義
       itemType: 'input',
       itemName: 'title',
       props: {
         type: 'text',
-        label: '标题',
+        label: t('views.calendar.form.title'),
         validateOn: 'blur',
       },
     },
@@ -109,14 +136,16 @@ const formOptions = reactive<JpFormOptions>({
       },
     },
     {
+      // テキストエリア項目の定義
       itemType: 'textarea',
       itemName: 'content',
       props: {
-        label: 'task内容',
+        label: t('views.calendar.form.content'),
         validateOn: 'blur',
       },
     },
     {
+      // チップグループ項目の定義
       itemType: 'chipGroup',
       itemName: 'chipGroup',
       props: {
@@ -131,6 +160,7 @@ const formOptions = reactive<JpFormOptions>({
       },
     },
     {
+      // カラーピッカー項目の定義
       itemType: 'colorPicker',
       itemName: 'colorPicker',
       props: {
@@ -145,17 +175,17 @@ const formOptions = reactive<JpFormOptions>({
   ],
   rules: {},
 });
+// 配列内に特定の値が含まれているかを判定する関数
 const getActionStatus = (arr: Array<string>, val: string) => {
   return arr.some((item) => item === val);
 };
-// Handle date click
+// 日付クリック時のハンドラ関数
 function handleDateClick(date) {
   selectedDate.value = date;
 }
-
-// calendarDateClick
+// カレンダーイベントクリック時のハンドラ関数
 const handleEventClick = (obj) => {
-  // 处理事件创建逻辑
+  // イベント作成のロジックを処理
   let oldEvents = configInfo.value.events;
   const oldEvent = configInfo.value.events.find((item) => {
     return item.id == obj.id;
@@ -179,11 +209,11 @@ const handleEventClick = (obj) => {
   }
   formOptions.formItems[3].props.defaultValue = chipGroupArr;
   formOptions.formItems[4].props.defaultValue = oldEvent.bgColor;
-  // 打开新建事件弹出框
+  // 新規イベントポップアップを開く
   openModal({
     component: () => <JpForm ref={formRef} form-options={formOptions}></JpForm>,
     props: {
-      title: '编辑task',
+      title: t('views.calendar.form.edit'),
       width: '500',
     },
     callbackMethod: {
@@ -197,7 +227,7 @@ const handleEventClick = (obj) => {
           'YYYY-MM-DD'
         ).value;
         const createTaskData = formRef.value.formData;
-        // 添加自定义样式
+        // カスタムスタイルを追加
         const uniqueClassName = useAddCustomStyle(
           `{ background-color:${createTaskData.colorPicker}!important;color:white!important }`
         );
@@ -238,10 +268,12 @@ const handleEventClick = (obj) => {
   });
 };
 
+// イベントドラッグ作成時のハンドラ関数
 const handleEventCreate = (data) => {
-  // 处理事件创建逻辑
+  console.log('****');
+  // イベント作成のロジックを処理
   let oldEvents = configInfo.value.events;
-  // 默认值设定
+  // デフォルト値を設定
   formOptions.formItems[0].props.defaultValue = '';
   formOptions.formItems[1].props.defaultValue = {
     startTime: data.start.formatTime(),
@@ -249,11 +281,11 @@ const handleEventCreate = (data) => {
   };
   formOptions.formItems[2].props.defaultValue = '';
 
-  // 打开新建事件弹出框
+  // 新規イベントポップアップを開く
   openModal({
     component: () => <JpForm ref={formRef} form-options={formOptions}></JpForm>,
     props: {
-      title: '新建task',
+      title: t('views.calendar.form.create'),
       width: '500',
     },
     callbackMethod: {
@@ -267,7 +299,7 @@ const handleEventCreate = (data) => {
           'YYYY-MM-DD'
         ).value;
         const createTaskData = formRef.value.formData;
-        // 添加自定义样式
+        // カスタムスタイルを追加
         const uniqueClassName = useAddCustomStyle(
           `{ background-color:${createTaskData.colorPicker}!important;color:white!important; }`
         );
@@ -299,7 +331,9 @@ const handleEventCreate = (data) => {
   });
 };
 
+// カスタムイベントを発行するための関数を定義
 const emit = defineEmits(['customTitle', 'customContent']);
+// カスタムタイトルを取得する非同期関数
 const getCustomTitle = (titleData: string) => {
   return new Promise((resolve) => {
     emit('customTitle', titleData, (result) => {
@@ -307,6 +341,7 @@ const getCustomTitle = (titleData: string) => {
     });
   });
 };
+// カスタムコンテンツを取得する非同期関数
 const getCustomContent = (contentData: string) => {
   return new Promise((resolve) => {
     emit('customContent', contentData, (result) => {
@@ -321,6 +356,10 @@ $green: #42b983;
 $pink: #ff7fc3;
 $yellow: rgb(234, 234, 52);
 
+.vuecal--view-with-time .vuecal__weekdays-headings,
+.vuecal--view-with-time .vuecal__all-day {
+  padding-right: 0px !important;
+}
 .main-demo {
   font-size: 12px;
   .tagline {

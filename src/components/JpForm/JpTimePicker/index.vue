@@ -25,7 +25,7 @@
       v-if="item.props.type == 'timeRange'"
     >
       <v-text-field
-        label="开始时间"
+        :label="t('components.timePcker.begin')"
         v-bind="item.props"
         v-model="startTime"
         type="time"
@@ -33,7 +33,7 @@
       ></v-text-field>
       <div>-</div>
       <v-text-field
-        label="结束时间"
+        :label="t('components.timePcker.end')"
         v-bind="item.props"
         v-model="endTime"
         type="time"
@@ -45,7 +45,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const props = defineProps({
   item: {
     type: Object,
