@@ -7,6 +7,7 @@
       <div class="tw-h-[210px] tw-w-[220px]">
         <!-- 日付ピッカー -->
         <vue-cal
+          v-if="configInfo.smallCalShowFlag"
           class="vuecal--blue-theme vuecal--date-picker demo"
           xsmall
           :selected-date="selectedDate"
@@ -97,10 +98,10 @@ const chipGroup = [
     text: t('views.calendar.deletable'),
     value: 'deletable',
   },
-  {
-    text: t('views.calendar.draggable'),
-    value: 'draggable',
-  },
+  // {
+  //   text: t('views.calendar.draggable'),
+  //   value: 'draggable',
+  // },
   {
     text: t('views.calendar.resizable'),
     value: 'resizable',
@@ -201,9 +202,9 @@ const handleEventClick = (obj) => {
   if (oldEvent.deletable) {
     chipGroupArr.push('deletable');
   }
-  if (oldEvent.draggable) {
-    chipGroupArr.push('draggable');
-  }
+  // if (oldEvent.draggable) {
+  //   chipGroupArr.push('draggable');
+  // }
   if (oldEvent.resizable) {
     chipGroupArr.push('resizable');
   }
@@ -252,10 +253,10 @@ const handleEventClick = (obj) => {
                 createTaskData.chipGroup,
                 'deletable'
               ));
-            item.draggable = getActionStatus(
-              createTaskData.chipGroup,
-              'draggable'
-            );
+            // item.draggable = getActionStatus(
+            //   createTaskData.chipGroup,
+            //   'draggable'
+            // );
             item.resizable = getActionStatus(
               createTaskData.chipGroup,
               'resizable'
@@ -321,7 +322,7 @@ const handleEventCreate = (data) => {
           bgColor: createTaskData.colorPicker,
           background: true,
           deletable: getActionStatus(createTaskData.chipGroup, 'deletable'),
-          draggable: getActionStatus(createTaskData.chipGroup, 'draggable'),
+          // draggable: getActionStatus(createTaskData.chipGroup, 'draggable'),
           resizable: getActionStatus(createTaskData.chipGroup, 'resizable'),
           split: data.split,
         });

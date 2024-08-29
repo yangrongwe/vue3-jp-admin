@@ -1,6 +1,6 @@
 <template>
   <!-- jp-main-area コンポーネントを表示し、高さを最大に設定 -->
-  <jp-main-area :h-full="true">
+  <jp-main-area :h-full="true" :mainTitle="mainTitle">
     <div></div>
     <!-- JpCalender コンポーネントを表示 -->
     <JpCalender
@@ -16,7 +16,14 @@ import JpMainArea from '@/components/JpLayout/layout/JpMainArea.vue';
 import JpCalender from '@/components/JpCalender/index.vue';
 import { v4 as uuidv4 } from 'uuid';
 import { getWeekDates } from '@/utils/common';
+import { MainTitle } from '@/types/index';
+import { $t } from '@/plugins/i18n/i18nUtils';
 
+const mainTitle: MainTitle = {
+  title: $t('views.calendar.mainTitle'),
+  linkText: 'src/views/componentsDemo/calendar/index.vue',
+  path: 'https://github.com/yangrongwe/vue3-jp-admin/blob/main/src/views/componentsDemo/calendar/index.vue',
+};
 // 一週間の日付リストを取得する関数
 const getWeekEventList = () => {
   // 一週間の日付を取得
@@ -54,6 +61,7 @@ const getWeekEventList = () => {
 
 // カレンダーの設定オブジェクト
 const calenderConfig = {
+  smallCalShowFlag: true,
   editable: {
     title: false,
     drag: true,
