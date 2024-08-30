@@ -19,7 +19,8 @@
       "pdf": "PDF",
       "alert": "アラート",
       "modal": "モーダル",
-      "calender": "カレンダー"
+      "calender": "カレンダー",
+      "ocr": "OCR"
     },
     "methods": {
       "manage": "共通関数管理",

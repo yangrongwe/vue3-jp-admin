@@ -19,7 +19,8 @@
       "pdf": "PDF",
       "alert": "警报",
       "modal": "模态框",
-      "calender": "日历"
+      "calender": "日历",
+      "ocr": "OCR"
     },
     "methods": {
       "manage": "常用函数管理",

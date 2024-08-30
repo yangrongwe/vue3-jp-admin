@@ -92,6 +92,17 @@ const mainMenuRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/componentsDemo/pdf/index.vue'),
       },
+      {
+        path: 'OCR',
+        name: 'ocr',
+        meta: {
+          title: $t('title.components.ocr'),
+          icon: 'mdi-ocr',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/components/JpOcr/index.vue'),
+      },
     ],
   },
   {

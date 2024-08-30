@@ -19,7 +19,8 @@
       "pdf": "PDF",
       "alert": "Alert",
       "modal": "Modal",
-      "calender": "Calender"
+      "calender": "Calender",
+      "ocr": "OCR"
     },
     "methods": {
       "manage": "Common Functions Management",
