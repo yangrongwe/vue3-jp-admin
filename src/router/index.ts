@@ -1,15 +1,17 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/store/authStore';
+import { useTabsStore } from '@/store/tabsStore';
+import { $t } from '@/plugins/i18n/i18nUtils';
 
 // モジュールのルートファイルをロードする
-const modules = import.meta.glob<{ default: RouteRecordRaw[] }>(
-  './modules/*.ts'
-);
+const modules: Record<string, any> = import.meta.glob('./modules/*.ts', {
+  eager: true,
+});
 let routes: RouteRecordRaw[] = [];
 async function loadModules() {
   const childrenRoutes: RouteRecordRaw[] = [];
   const promises = Object.keys(modules).map(async (path) => {
-    const mod = await modules[path]();
+    const mod = await modules[path];
     if (path.includes('auth')) {
       routes.push(...mod.default);
     } else {
@@ -29,7 +31,7 @@ async function loadModules() {
   localStorage.setItem('menuRoutes', JSON.stringify(childrenRoutes));
   routes.push({
     path: '/',
-    redirect: '/dashboard',
+    redirect: '/login',
     component: () => import('@/components/JpLayout/index.vue'),
     children: childrenRoutes,
   });
@@ -46,15 +48,28 @@ const router = createRouter({
 // ルートガードを設定する
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
+  const tabsStore = useTabsStore();
   // ログインしているかどうかを判断する
   if (authStore.isAuthenticated) {
     if (to.path === '/login') {
+      authStore.isAuthenticated = false;
+      authStore.user = null;
+      tabsStore.selectedTab = '/dashboard';
+      tabsStore.tabs = [
+        {
+          value: '/dashboard',
+          title: $t('title.dashboard'),
+        },
+      ];
       next();
     } else {
       // ユーザーがURLにアクセスできるかどうかを確認します。
       const role = authStore.user.role as string;
       const roles = to.meta.roles as string[];
       if (roles?.indexOf(role) > -1) {
+        if (tabsStore.selectedTab != to.path) {
+          tabsStore.selectedTab = to.path;
+        }
         next();
       } else {
         // アクセス権がない、アクセス権がないプロンプトボックスをポップアップします。

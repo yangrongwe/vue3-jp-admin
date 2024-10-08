@@ -1,6 +1,7 @@
 #app {
   width: 100%;
   height: 100%;
+  font-size: 14px;
 }
 
 html {
@@ -10,6 +11,7 @@ html {
   line-height: 1.5;
   tab-size: 4;
   text-size-adjust: 100%;
+  overflow-y: auto;
 }
 
 body {
@@ -20,4 +22,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
+}
+$title-color: #409eff;
+$sub-title-color: #409eff;
+
+.jp-title {
+  color: $title-color;
+}
+.jp-sub-title {
+  color: $sub-title-color;
 }

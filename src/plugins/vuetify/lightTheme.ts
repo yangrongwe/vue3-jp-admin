@@ -3,26 +3,27 @@ const lightTheme: ThemeDefinition = {
   dark: false,
   colors: {
     background: '#FFFFFF',
-    'navigation-drawer-background': '#FFFFFF',
-    'app-bar-primary': '#FFFFFF',
     surface: '#FFFFFF',
-    'surface-bright': '#FFFFFF',
-    'surface-light': '#EEEEEE',
-    'surface-variant': '#424242',
-    'on-surface-variant': '#EEEEEE',
     primary: '#409eff',
-
-    'primary-darken-1': '#1F5592',
     secondary: '#48A9A6',
-    'secondary-darken-1': '#018786',
     error: '#B00020',
     info: '#409eff',
     success: '#4CAF50',
     warning: '#FB8C00',
+    // surface
+    'surface-variant': '#424242',
+    // 导航栏
+    'navigation-drawer-background': '#FFFFFF',
+    'app-bar-primary': '#FFFFFF',
+    // 主界面tab标签颜色
+    'tab-color': '#409eff',
+    'tab-bg-color': '#FFFFFF',
+    'tab-slider-color': '#409eff',
+    'tab-selected-bg-color': '#f5f5f5',
   },
   variables: {
     'border-color': '#000000',
-    'border-opacity': 0.12,
+    'border-opacity': 0.85,
     'high-emphasis-opacity': 0.87,
     'medium-emphasis-opacity': 0.6,
     'disabled-opacity': 0.38,

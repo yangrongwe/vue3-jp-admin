@@ -1,19 +1,16 @@
-type FormItems = {
-  itemName: string;
-  itemType: string;
-  imagePath?: string;
-  labelPosition?: string;
-  visible?: boolean;
-  appendInnerIcon?: string;
-  prependInnerIcon?: string;
-  width?: number;
-  clickMethod?: () => void;
-};
+// import { VNode } from 'vue';
+export interface JpFormOptions {
+  formItems: Array<{
+    itemType: string;
+    itemName?: string;
+    itemSubType?: string;
 
-type JpFormOptions = {
-  type: string;
-  formItems: Array<FormItems>;
-  rules: Array<any>;
-};
-
-export default JpFormOptions;
+    label?: string;
+    labelWidth?: string;
+    labelPosition?: string;
+    props?: Record<string, any>; // Component props
+    eventHandlers?: Record<string, Function>; // Event handlers
+    // customContent?: VNode | JSX.Element;
+  }>;
+  rules: Record<string, any>;
+}

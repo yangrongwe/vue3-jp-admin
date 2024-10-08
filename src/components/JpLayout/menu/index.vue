@@ -1,32 +1,33 @@
 <template>
   <v-list
+    v-model:selected="selectedMenu"
     v-model:opened="expandedMenuItem"
     density="compact"
     nav
     color="primary"
+    open-strategy="multiple"
   >
     <template v-for="menuItem in menuItems">
       <v-list-item
         v-if="!menuItem.children && !menuItem.meta.unShow"
         :prepend-icon="menuItem.meta.icon"
-        :title="menuItem.name"
-        :value="menuItem.name"
+        :title="menuItem.meta.title"
+        :value="menuItem.path"
         color="primary"
-        @click="router.push(menuItem.path)"
+        @click="toPage(1, menuItem)"
       ></v-list-item>
 
       <template v-else>
         <v-list-group
-          :value="menuItem.name"
           v-if="menuItem.children && menuItem.children.length != 0"
+          :value="menuItem.path"
         >
           <template v-slot:activator="{ props }">
             <v-list-item
+              v-if="!menuItem.meta.unShow"
               v-bind="props"
               :prepend-icon="menuItem.meta.icon"
-              :title="menuItem.name"
-              v-if="!menuItem.meta.unShow"
-              @click.stop="rail = false"
+              :title="menuItem.meta.title"
             ></v-list-item>
           </template>
           <template v-for="(subMenuItem, i) in menuItem.children" :key="i">
@@ -34,9 +35,9 @@
               v-if="!subMenuItem.meta.unShow"
               class="sub-menu-pl"
               :prepend-icon="subMenuItem.meta.icon"
-              :title="subMenuItem.name"
-              :value="subMenuItem.name"
-              @click="router.push(menuItem.path + '/' + subMenuItem.path)"
+              :title="subMenuItem.meta.title"
+              :value="menuItem.path + '/' + subMenuItem.path"
+              @click.stop="toPage(2, menuItem, subMenuItem)"
             ></v-list-item
           ></template>
         </v-list-group>
@@ -46,14 +47,79 @@
 </template>
 
 <script setup lang="tsx">
-import { ref } from 'vue';
+import { ref, watchEffect, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/store/auth';
-const expandedMenuItem = ref<string[]>([]);
+import { useAuthStore } from '@/store/authStore';
+import { useTabsStore } from '@/store/tabsStore';
+import { RouteRecordRaw } from 'vue-router';
+
+const emits = defineEmits(['railChange']);
+
 const router = useRouter();
 const authStore = useAuthStore();
-const rail = ref(false);
-const menuItems = authStore.filteredMenuRoutes;
+const tabsStore = useTabsStore();
+const expandedMenuItem = ref<string[]>(['/components']);
+const selectedMenu = ref<string[]>(['/dashboard']);
+const menuItems: RouteRecordRaw[] = authStore.filteredMenuRoutes;
+
+watch(
+  () => tabsStore.selectedTab,
+  () => {
+    emits('railChange');
+  },
+  { deep: true }
+);
+
+// tabの変化に伴いメニューも変化する
+watchEffect(() => {
+  const newTab = tabsStore.selectedTab;
+  if (selectedMenu.value[0] == newTab) {
+    return;
+  }
+  selectedMenu.value[0] = newTab;
+
+  // newTabが1階層目のメニューか2階層目のメニューかを判断する
+  let isFirstLevel = false;
+  let parentPath = '';
+
+  for (const menuItem of menuItems) {
+    if (menuItem.path === newTab) {
+      isFirstLevel = true;
+      break;
+    }
+    if (menuItem.children) {
+      for (const subMenuItem of menuItem.children) {
+        if (menuItem.path + '/' + subMenuItem.path === newTab) {
+          isFirstLevel = false;
+          parentPath = menuItem.path;
+          break;
+        }
+      }
+    }
+  }
+  // 2階層目のメニューの場合、自動的に展開する
+  if (!isFirstLevel) {
+    if (!expandedMenuItem.value.includes(parentPath)) {
+      expandedMenuItem.value.push(parentPath);
+    }
+  }
+});
+
+// 指定された画面に移動する タブが存在しない場合はタブを追加する
+const toPage = (
+  level: number,
+  menuInfo: RouteRecordRaw,
+  subMenuInfo?: RouteRecordRaw
+) => {
+  if (level === 1) {
+    router.push(menuInfo.path);
+    tabsStore.setTabs(menuInfo.meta.title as string, menuInfo.path);
+  } else {
+    const path = menuInfo.path + '/' + subMenuInfo.path;
+    router.push(path);
+    tabsStore.setTabs(subMenuInfo.meta.title as string, path);
+  }
+};
 </script>
 <style lang="scss" scoped>
 .sub-menu-pl {

@@ -1,5 +1,304 @@
 {
+  "components": {
+    "timePcker": {
+      "begin": "開始時間",
+      "end": "終わり時間"
+    }
+  },
+  "title": {
+    "dashboard": "ダッシュボード",
+    "user": {
+      "manage": "ユーザー管理",
+      "list": "ユーザーリスト",
+      "profile": "ユーザープロファイル"
+    },
+    "components": {
+      "manage": "コンポーネント管理",
+      "table": "テーブル",
+      "form": "フォーム",
+      "pdf": "PDF",
+      "alert": "アラート",
+      "modal": "モーダル",
+      "calender": "カレンダー",
+      "ocr": "OCR",
+      "search": "検索"
+    },
+    "methods": {
+      "manage": "共通関数管理",
+      "time": "日付フォーマット",
+      "text": "文字列フォーマット",
+      "money": "金額フォーマット"
+    }
+  },
   "input": {
     "appendAction": "追加アクション"
+  },
+  "views": {
+    "dashboard": {
+      "welcomeCard": {
+        "text": "世の中に失敗というものはない。チャレンジしているうちは失敗はない。あきらめた時が失敗である。",
+        "temperature": "月曜日、午後12時30分、昼 27°"
+      }
+    },
+    "alerts": {
+      "baseStyle": "基本スタイル",
+      "default": "デフォルト",
+      "outlined": "アウトライン",
+      "tonal": "トナル",
+      "differentType": "異なるタイプ",
+      "primary": "プライマリ",
+      "success": "成功",
+      "warning": "警告",
+      "error": "エラー",
+      "timeoutClose": "タイムアウトクローズ",
+      "autoClose": "3秒後自動クローズ",
+      "clearAll": "すべてのアラートを閉じる",
+      "close": "閉じる",
+      "demoDescription": "この画面は関数呼び出しによるv-alertのデモ画面です。",
+      "documentationLink": "その他の設定については、vuetifyのドキュメントを参照してください。"
+    },
+    "form": {
+      "email": {
+        "label": "メールアドレス",
+        "placeholder": "メールアドレスを入力してください",
+        "validation": {
+          "required": "メールアドレスを入力してください",
+          "invalid": "有効なメールアドレスを入力してください"
+        }
+      },
+      "password": {
+        "label": "パスワード",
+        "placeholder": "パスワードを入力してください",
+        "validation": {
+          "required": "パスワードを入力してください",
+          "length": "パスワードは6文字以上でなければなりません"
+        }
+      },
+      "frontEnd": {
+        "label": "フロントエンド",
+        "placeholder": "得意なフロントエンドフレームワークを選択してください",
+        "validation": {
+          "required": "少なくとも1つのフレームワークを選択してください"
+        }
+      },
+      "skills": {
+        "label": "スキル",
+        "placeholder": "スキルを選択してください",
+        "validation": {
+          "required": "少なくとも1つのスキルを選択してください"
+        }
+      },
+      "reminderTime": {
+        "label": "時間",
+        "placeholder": "時間を選択してください"
+      },
+      "birthDate": {
+        "label": "生年月日",
+        "placeholder": "日付を選択してください"
+      },
+      "gender": {
+        "label": "性別",
+        "male": "男性",
+        "female": "女性",
+        "validation": {
+          "required": "性別を選択してください"
+        }
+      },
+      "ageRange": {
+        "label": "年齢範囲",
+        "validation": {
+          "required": "年齢範囲を選択してください"
+        }
+      },
+      "description": {
+        "label": "説明",
+        "placeholder": "説明を入力してください"
+      },
+      "memo": {
+        "label": "メモ",
+        "placeholder": "メモを入力してください",
+        "customContent": {
+          "cardTitle": "カスタムカード",
+          "cardContent": [
+            "これはカスタム DIV 要素です",
+            "この方法で複雑な HTML 構造を回避できます。",
+            "formOptions を設定するだけでフォームが作成できます"
+          ]
+        }
+      },
+      "agreeTerms": {
+        "label": "利用規約に同意する",
+        "checkboxLabel": "利用規約に同意します",
+        "validation": {
+          "required": "利用規約に同意する必要があります"
+        }
+      },
+      "newsletter": {
+        "label": "ニュースレター"
+      },
+      "submitButton": {
+        "label": "送信",
+        "alert": {
+          "message": "アラートタイムアウトです！",
+          "type": "success",
+          "closable": true,
+          "border": "start",
+          "borderColor": "white"
+        }
+      }
+    },
+    "pdf": {
+      "prevPage": "前のページ",
+      "nextPage": "次のページ",
+      "singlePageView": "単一ページ表示",
+      "allPagesView": "全ページ表示",
+      "zoomOut": "縮小",
+      "zoomIn": "拡大",
+      "download": "ダウンロード",
+      "reset": "リセット",
+      "rotateLeft": "左に回転",
+      "rotateRight": "右に回転",
+      "alertText": "メッセージ",
+      "totalPages": "全ページ数: {count}",
+      "pageInfo": "ページ {current} / {total}"
+    },
+    "modal": {
+      "cancel": "キャンセル",
+      "confirm": "確定",
+      "mainTitle": "Vuetify3 ダイアログ　カプセル化【関数式呼び出し】",
+      "basicUsage": "コンポーネント呼び出し - 基本的な使用法",
+      "attributesSlotsCallbacks": "コンポーネント呼び出し - 属性/スロット/コールバックメソッド",
+      "basicModalTsx": "TSXの書き方",
+      "basicModalVNode": "VNodeの書き方",
+      "withForm": "フォームとの組み合わせ",
+      "noMaskModal": "マスクなしモーダル",
+      "fullScreen": "全画面表示",
+      "nested": "ネスト",
+      "customHeader": "カスタムヘッダー",
+      "customFooter": "カスタムフッター",
+      "preventOutsideClose": "外部クリックによる閉じる操作を防止",
+      "closeCallback": "閉じた後のコールバック",
+      "moreUsage": "その他の使用法",
+      "tsxModal": {
+        "title": "TSX モーダル"
+      },
+      "vnodeModal": {
+        "title": "VNode モーダル"
+      },
+      "formModal": {
+        "title": "フォーム モーダル"
+      },
+      "opacityModal": {
+        "title": "マスクなしモーダル",
+        "note": "透明度が 0 のモーダルは目に見えません。"
+      },
+      "fullscreenModal": {
+        "title": "全画面モーダル"
+      },
+      "nestingModal": {
+        "title": "ネスト モーダル",
+        "buttonText": "新しいモーダルを追加"
+      },
+      "titleModal": {
+        "title": "カスタム ヘッダー モーダル",
+        "customHeader": "カスタム ヘッダー",
+        "alertMessage": "カスタム ヘッダーがクリックされました"
+      },
+      "footModal": {
+        "title": "カスタム フッター モーダル",
+        "customFooter": "カスタム フッター",
+        "alertMessage": "カスタム フッターがクリックされました"
+      },
+      "persistentModal": {
+        "title": "永続モーダル"
+      },
+      "callbackModal": {
+        "title": "デフォルト コールバック モーダル",
+        "confirmAlert": "確認ボタンがクリックされました"
+      },
+      "drawerModal": {
+        "left": "ドロワー 左",
+        "top": "ドロワー 上",
+        "right": "ドロワー 右",
+        "bottom": "ドロワー 下"
+      },
+      "formOptions": {
+        "name": {
+          "required": "名前を入力してください",
+          "label": "名前",
+          "placeholder": "名前を入力してください"
+        },
+        "email": {
+          "label": "メール",
+          "placeholder": "メールアドレスを入力してください"
+        }
+      }
+    },
+    "table": {
+      "documentationLink": "詳細はAPIドキュメントをご参照ください。",
+      "tabs": {
+        "basicTable": "基本テーブル",
+        "paginationTable": "ページネーションテーブル",
+        "treeTable": "ツリーテーブル",
+        "editableTable": "編集可能なテーブル",
+        "customColumnTable": "カスタムカラムテーブル",
+        "mergeCellTable": "セル結合テーブル",
+        "rightClickMenuTable": "右クリックメニューテーブル",
+        "dataExport": "データエクスポート"
+      },
+      "export": {
+        "txt": "TXT形式でエクスポート",
+        "xml": "XML形式でエクスポート",
+        "html": "HTML形式でエクスポート",
+        "csv": "CSV形式でエクスポート"
+      },
+      "nickname": "ニックネーム",
+      "role": "役割",
+      "age": "年齢",
+      "address": "住所",
+      "name": "名前",
+      "size": "サイズ",
+      "type": "タイプ",
+      "date": "日付",
+      "checkbox": "チェックボックス",
+      "seq": "番号",
+      "sex": "性別",
+      "category": "カテゴリ",
+      "number": "番号",
+      "exportAll": "全てエクスポート.csv",
+      "copy": "コピー",
+      "clear": "クリア",
+      "reload": "テーブルを再読み込み",
+      "print": "印刷"
+    },
+    "calendar": {
+      "mainTitle": "VueCalカレンダーのカプセル化",
+      "weekDays": "月曜日,火曜日,水曜日,木曜日,金曜日,土曜日,日曜日",
+      "months": "1 月,2 月,3 月,4 月,5 月,6 月,7 月,8 月,9 月,10 月,11 月,12 月",
+      "years": "年",
+      "year": "年",
+      "month": "月",
+      "week": "週",
+      "day": "日",
+      "today": "今日",
+      "noEvent": "イベントなし",
+      "allDay": "終日",
+      "deleteEvent": "削除",
+      "createEvent": "イベントを作成",
+      "dateFormat": "YYYY 年 M 月 D 日（dddd）",
+      "deletable": "削除可能",
+      "draggable": "ドラッグ可能",
+      "resizable": "サイズ変更可能",
+      "form": {
+        "title": "タイトル",
+        "content": "内容",
+        "create": "新規",
+        "edit": "編集"
+      }
+    },
+    "search": {
+      "searchBtn": "検索",
+      "reset": "リセット"
+    }
   }
 }

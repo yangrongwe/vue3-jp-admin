@@ -23,6 +23,31 @@ const vuetify = createVuetify({
     // VCard: {
     //   VBtn: { variant: 'outlined' },
     // },
+    // VDialog: {},
+    VBtn: {
+      color: 'primary',
+      variant: 'outlined',
+    },
+    VTextField: {
+      variant: 'outlined',
+      density: 'compact',
+    },
+    VSelect: {
+      variant: 'outlined',
+      density: 'compact',
+    },
+    VAutocomplete: {
+      variant: 'outlined',
+      density: 'compact',
+    },
+    VDatePicker: {
+      variant: 'outlined',
+      density: 'compact',
+    },
+    VTextarea: {
+      variant: 'outlined',
+      density: 'compact',
+    },
   },
   components,
   directives,

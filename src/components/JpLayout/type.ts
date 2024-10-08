@@ -1,23 +1,23 @@
-type menu = {
+type Menu = {
   name: string;
   path?: string;
   expanded?: boolean;
-  meta?:routeMeta,
-  children?: Array<subMenu>;
+  meta?: RouteMeta;
+  children?: Array<SubMenu>;
 };
 
-type subMenu = {
+type SubMenu = {
   title: string;
   name: string;
   path: string;
-  meta?:routeMeta,
+  meta?: RouteMeta;
 };
 
-type routeMeta = {
+type RouteMeta = {
   icon?: string;
-  unShow?:boolean;
-  roles?:Array<string>;
-  rank?:number;
-}
+  unShow?: boolean;
+  roles?: Array<string>;
+  rank?: number;
+};
 
-export type { menu, subMenu,routeMeta };
+export type { Menu, SubMenu, RouteMeta };
