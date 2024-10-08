@@ -3,6 +3,7 @@
 const home = 0,
   dashboard = 1,
   components = 2,
-  methods = 3;
+  methods = 3,
+  user = 4;
 
-export { home, dashboard, components, methods };
+export { home, dashboard, components, methods, user };
