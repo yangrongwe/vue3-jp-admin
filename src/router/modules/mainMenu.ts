@@ -82,6 +82,17 @@ const mainMenuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/componentsDemo/form/index.vue'),
       },
       {
+        path: 'search',
+        name: 'search',
+        meta: {
+          title: $t('title.components.search'),
+          icon: 'mdi-list-box',
+          unShow: false,
+          roles: ['admin', 'user'],
+        },
+        component: () => import('@/views/componentsDemo/search/index.vue'),
+      },
+      {
         path: 'pdf',
         name: 'pdf',
         meta: {

@@ -37,15 +37,25 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  resetFlag: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['update:modelValue']);
 
 const inputValue = ref(props.item.props.defaultValue || '');
-
+const resetFlag = ref(props.resetFlag);
 const passwordVisible = ref(false);
 
 watch(inputValue, (newValue) => {
   emit('update:modelValue', { itemName: props.item.itemName, value: newValue });
+});
+
+watch(resetFlag, (newValue) => {
+  if (newValue) {
+    inputValue.value = '';
+  }
 });
 </script>

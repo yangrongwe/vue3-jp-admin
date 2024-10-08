@@ -20,7 +20,8 @@
       "alert": "アラート",
       "modal": "モーダル",
       "calender": "カレンダー",
-      "ocr": "OCR"
+      "ocr": "OCR",
+      "search": "検索"
     },
     "methods": {
       "manage": "共通関数管理",
@@ -88,7 +89,7 @@
         }
       },
       "reminderTime": {
-        "label": "リマインダー時間",
+        "label": "時間",
         "placeholder": "時間を選択してください"
       },
       "birthDate": {
@@ -294,6 +295,10 @@
         "create": "新規",
         "edit": "編集"
       }
+    },
+    "search": {
+      "searchBtn": "検索",
+      "reset": "リセット"
     }
   }
 }

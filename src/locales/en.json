@@ -20,7 +20,8 @@
       "alert": "Alert",
       "modal": "Modal",
       "calender": "Calender",
-      "ocr": "OCR"
+      "ocr": "OCR",
+      "search": "Search"
     },
     "methods": {
       "manage": "Common Functions Management",
@@ -294,6 +295,10 @@
         "create": "Create",
         "edit": "Edit"
       }
+    },
+    "search": {
+      "searchBtn": "Search",
+      "reset": "Reset"
     }
   }
 }

@@ -20,7 +20,8 @@
       "alert": "警报",
       "modal": "模态框",
       "calender": "日历",
-      "ocr": "OCR"
+      "ocr": "OCR",
+      "search": "检索"
     },
     "methods": {
       "manage": "常用函数管理",
@@ -233,7 +234,6 @@
         }
       }
     },
-
     "table": {
       "documentationLink": "详细请参见API文档。",
       "tabs": {
@@ -295,6 +295,10 @@
         "create": "创建",
         "edit": "编辑"
       }
+    },
+    "search": {
+      "searchBtn": "搜索",
+      "reset": "重置"
     }
   }
 }
